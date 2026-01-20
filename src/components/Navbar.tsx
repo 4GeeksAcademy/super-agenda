@@ -1,20 +1,21 @@
 import { Link } from "react-router"
+import { InteractiveButton } from "./InteractiveButton"
 
 export const Navbar = () =>{
     return(
         <div>
         <nav>
             <Link to="/">
-            <button className="bg-slate-500 hover:bg-slate-400 active:bg-slate-600 hover:cursor-pointer p-2 m-2 rounded-lg text-white">Home</button>
+            <InteractiveButton color="slate" text="Home"/>
             </Link>
             <Link to="/user">
-            <button className="bg-slate-500 hover:bg-slate-400 active:bg-slate-600 hover:cursor-pointer p-2 m-2 rounded-lg text-white">User</button>
+            <InteractiveButton color="slate" text="User"/>
             </Link>
             <Link to="/contacts">
-            <button className="bg-slate-500 hover:bg-slate-400 active:bg-slate-600 hover:cursor-pointer p-2 m-2 rounded-lg text-white">Contacts</button>
+            <InteractiveButton color="slate" text="Contacts"/>
             </Link>
             <Link to="/contact-form">
-            <button className="bg-slate-500 hover:bg-slate-400 active:bg-slate-600 hover:cursor-pointer p-2 m-2 rounded-lg text-white">ContactForm</button>
+            <InteractiveButton color="slate" text="ContactForm"/>
             </Link>
         </nav>
         </div>
