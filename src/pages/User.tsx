@@ -1,10 +1,19 @@
-import { useEffect } from "react"
-import { getAllAgendas } from "../services/userServices"
+import { useEffect, useState } from "react"
+import { getAllAgendas, type GetAgendasErrorType } from "../services/userServices"
+import { InteractiveButton } from "../components/InteractiveButton"
 
 export const User = () => {
 
+    type AgendaType = {
+        slug: string
+        id: number
+    }
+
+    const [agendas, setAgendas] =  useState<AgendaType[] | GetAgendasErrorType>([])
+
     const getAgendas = async() =>{
-        console.log(await getAllAgendas())
+        const fetchAgendas = await getAllAgendas()
+        setAgendas(fetchAgendas)
     }
 
     useEffect(()=>{
@@ -15,10 +24,12 @@ export const User = () => {
 
     return (
         <div>
+            <button onClick={()=> console.log(agendas)} type="button">Ver agendas en console</button>
             For a fresh start, you need to choose one of us registered users
             <ul>
-                <li>User 1</li>
-                <li>User 2</li>
+                {Array.isArray(agendas) && agendas?.map((agenda)=>{
+                    return <li>{agenda.slug.toUpperCase()}</li>
+                })}
             </ul>
         </div>
     )

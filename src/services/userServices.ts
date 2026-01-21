@@ -3,13 +3,13 @@ type AgendaType = {
     "id": number
 } 
 
-type ErrorType = {
+export type GetAgendasErrorType = {
     "details": string
 }
 
-export const getAllAgendas = async(): Promise<AgendaType[] |ErrorType>  => {
+export const getAllAgendas = async(): Promise<AgendaType[] | GetAgendasErrorType>  => {
     const response = await fetch("https://playground.4geeks.com/contact/agendas?offset=0&limit=100")
 
     const data = await response.json()
-    return data
+    return data.agendas
 }

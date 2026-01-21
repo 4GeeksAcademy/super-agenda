@@ -7,18 +7,22 @@ import { Layout } from './layouts/Layout.tsx';
 import { ContactForm } from './pages/ContactForm.tsx';
 import { Contacts } from './pages/Contacts.tsx';
 import { User } from './pages/User.tsx';
+import { ContactProvider } from './hooks/useContactReducer.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <BrowserRouter>
-    <Routes>
-      <Route element={<Layout/>}>
-        <Route path="/" element={<Home/>}></Route>
-        <Route path="/user" element={<User/>}></Route>
-        <Route path="/contacts" element={<Contacts/>}></Route>
-        <Route path="/contact-form" element={<ContactForm/>}></Route>
-      </Route>
-    </Routes>
-    </BrowserRouter>
+    <ContactProvider>
+
+      <BrowserRouter>
+        <Routes>
+          <Route element={<Layout />}>
+            <Route path="/" element={<Home />}></Route>
+            <Route path="/user" element={<User />}></Route>
+            <Route path="/contacts" element={<Contacts />}></Route>
+            <Route path="/contact-form" element={<ContactForm />}></Route>
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </ContactProvider>
   </StrictMode>,
 )

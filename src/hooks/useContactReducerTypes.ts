@@ -1,12 +1,15 @@
+
+
+
 export type ContactContextType = {
-    user: FullUserType | null,
-    users: UserType[] | null
+    store: StoreType | undefined
+    dispatch: React.Dispatch<any> | undefined
 }
 
 
-type FullUserType = {
-    slug: string,
-    contacts: ContactType[]
+export type StoreType = {
+    slug: string | null
+    contacts: ContactType[] | null
 }
 
 type UserType = {
