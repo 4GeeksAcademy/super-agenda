@@ -21,3 +21,14 @@ export const getAgenda = async(agenda:string): Promise<StoreType | GetAgendasErr
     const data = await response.json()
     return data
 }
+
+
+export const deleteContact = async(agenda:string, contactId: number)=>{
+    const response = await fetch(`https://playground.4geeks.com/contact/agendas/${agenda}/contacts/${contactId}`,
+        {
+            method: "DELETE"
+        })
+
+    return response.status == 204
+ 
+}

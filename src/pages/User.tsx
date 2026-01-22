@@ -4,6 +4,16 @@ import { InteractiveButton } from "../components/InteractiveButton"
 import { useContactReducer } from "../hooks/useContactReducer"
 import { useNavigate } from "react-router"
 
+export const saveAgenda = async (agenda: string, dispatch: any) => {
+
+    if (!dispatch) throw new Error("dispatch is not defined")
+
+    const agendaFromFetch = await getAgenda(agenda)
+
+    dispatch({ type: "SET_AGENDA", payload: agendaFromFetch })
+
+}
+
 export const User = () => {
 
     type AgendaType = {
@@ -22,19 +32,10 @@ export const User = () => {
 
 
 
-    const saveAgenda = async (agenda: string) => {
-
-        if (!dispatch) throw new Error("dispatch is not defined")
-
-        const agendaFromFetch = await getAgenda(agenda)
-
-        dispatch({ type: "SET_AGENDA", payload: agendaFromFetch })
-
-    }
 
 
     const agendaHandleClick = async(agenda: string) => {
-        await saveAgenda(agenda)
+        await saveAgenda(agenda, dispatch)
         navigate("/contacts")
     }
 

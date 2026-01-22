@@ -14,13 +14,13 @@ export const Contacts= () =>{
         }
     },[])
 
+
     return(
         <>
         <ul>
         {
-            Array.isArray(store?.contacts)  && store.contacts.map((contact)=>{
-                console.log(contact)
-                return <li><Card item={contact}/></li>
+            Array.isArray(store?.contacts)  && store.slug && store.contacts.map((contact, index)=>{
+                return <li key={index} ><Card agenda={store.slug!} item={contact}/></li>
             })
         }
         </ul>
