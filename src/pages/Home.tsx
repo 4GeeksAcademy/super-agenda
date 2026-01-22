@@ -1,11 +1,9 @@
-import { useState } from 'react'
 import { Link } from 'react-router'
 import { InteractiveButton } from '../components/InteractiveButton'
 
 
 
 function Home() {
-  const [count, setCount] = useState(0)
 
   return (
     <>

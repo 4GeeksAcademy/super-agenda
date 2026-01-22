@@ -7,14 +7,15 @@ export const initialStore = {
 
 export type ActionType = {
     type: string,
-    payload: string
+    payload: StoreType
 }
+
 
 export const reducer = (store:StoreType,action:ActionType)=>{
     switch (action.type) {
-        case "SET_USER":
+        case "SET_AGENDA":
             
-            return {...store, slug: action.payload }
+            return action.payload
     
         default:
             return store

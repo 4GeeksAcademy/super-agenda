@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
-import { getAllAgendas, type GetAgendasErrorType } from "../services/userServices"
+import { getAgenda, getAllAgendas, type GetAgendasErrorType } from "../services/userServices"
 import { InteractiveButton } from "../components/InteractiveButton"
+import { useContactReducer } from "../hooks/useContactReducer"
 
 export const User = () => {
 
@@ -10,11 +11,24 @@ export const User = () => {
     }
 
     const [agendas, setAgendas] =  useState<AgendaType[] | GetAgendasErrorType>([])
+    const {dispatch} = useContactReducer()
 
     const getAgendas = async() =>{
         const fetchAgendas = await getAllAgendas()
         setAgendas(fetchAgendas)
     }
+
+
+
+    const saveAgenda = async(agenda: string) =>{
+
+        if(!dispatch)throw new Error("dispatch is not defined")
+        
+        const agendaFromFetch = await getAgenda(agenda) 
+
+        dispatch({type: "SET_AGENDA", payload: agendaFromFetch})
+    }
+
 
     useEffect(()=>{
 
@@ -28,7 +42,7 @@ export const User = () => {
             For a fresh start, you need to choose one of us registered users
             <ul>
                 {Array.isArray(agendas) && agendas?.map((agenda)=>{
-                    return <li>{agenda.slug.toUpperCase()}</li>
+                    return <li><InteractiveButton  color="red" text={agenda.slug.toUpperCase()}/></li>
                 })}
             </ul>
         </div>
