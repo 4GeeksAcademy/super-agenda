@@ -21,7 +21,7 @@ type ContactType = {
     name: string,
     phone: string,
     email: string,
-    addres: string,
+    address: string,
     id: number
 
 }
