@@ -14,6 +14,13 @@ export const updateContact = async(agenda:string, contactId: number, formData: I
 
 export const createContact = async(agenda:string, formData: ItemType) =>{
 
-    
+    const response = await fetch(`https://playground.4geeks.com/contact/agendas/${agenda}/contacts`,{
+        method: "POST",
+        headers:{
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
+    })
+
 
 }

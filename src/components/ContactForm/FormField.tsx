@@ -12,7 +12,6 @@ export const FormField = ({field, handleChange, formData}:FormFieldType) =>{
 
     const fieldCapitalized = field[0].toUpperCase() + field.slice(1)
 
-
     return(
         <>
          <label htmlFor="name">{fieldCapitalized}</label>

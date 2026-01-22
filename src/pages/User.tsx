@@ -9,7 +9,6 @@ export const saveAgenda = async (agenda: string, dispatch: any) => {
     if (!dispatch) throw new Error("dispatch is not defined")
 
     const agendaFromFetch = await getAgenda(agenda)
-
     dispatch({ type: "SET_AGENDA", payload: agendaFromFetch })
 
 }
