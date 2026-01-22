@@ -36,7 +36,7 @@ export const User = () => {
 
     const agendaHandleClick = async(agenda: string) => {
         await saveAgenda(agenda, dispatch)
-        navigate("/contacts")
+        navigate(`/${agenda}/contacts`)
     }
 
     useEffect(() => {

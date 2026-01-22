@@ -10,7 +10,7 @@ export type ItemType = {
     phone: string, 
     email: string,
     address: string,
-    id: number
+    id?: number
 }
 
 
@@ -22,7 +22,7 @@ type CardType = {
 
 export const Card = ({item, item: {name, phone, email, address, id}, agenda} : CardType) =>{
 
-
+    console.log(item)
     const {dispatch} = useContactReducer()
 
     const handleDelete = () => {
@@ -35,7 +35,7 @@ export const Card = ({item, item: {name, phone, email, address, id}, agenda} : C
             denyButtonText: "Cancel"
         }).then((resp)=>{
             if(resp.isConfirmed){
-                deleteContact(agenda, id).then((resp)=>{
+                deleteContact(agenda, id!).then((resp)=>{
                     if(resp){
                         saveAgenda(agenda, dispatch)
                     }
@@ -47,7 +47,7 @@ export const Card = ({item, item: {name, phone, email, address, id}, agenda} : C
     return(
         <div>
             <p className="text-4xl">{name.toUpperCase()}</p>
-            <Link to="/contact-form" state={{item}}>
+            <Link to="/contact-form" state={{item, agenda}}>
             <i className="fa-solid fa-pen"/>
             </Link>
             <i onClick={handleDelete} className="text-red-500 hover:cursor-pointer fa-solid fa-xmark"/>
