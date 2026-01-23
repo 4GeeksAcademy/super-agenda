@@ -31,8 +31,7 @@ export const User = () => {
 
 
     const handleCreateUserBtn = ()=>{
-        openModal()
-      
+        openModal("createUser")
     }
 
 

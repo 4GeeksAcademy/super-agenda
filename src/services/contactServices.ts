@@ -1,4 +1,15 @@
-import type { ItemType } from "../Card"
+import type { ItemType } from "../components/Card"
+
+export const deleteContact = async(agenda:string, contactId: number)=>{
+    const response = await fetch(`https://playground.4geeks.com/contact/agendas/${agenda}/contacts/${contactId}`,
+        {
+            method: "DELETE"
+        })
+
+    return response.status == 204
+ 
+}
+
 
 export const updateContact = async(agenda:string, contactId: number, formData: ItemType)=>{
 

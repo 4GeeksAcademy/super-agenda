@@ -1,10 +1,11 @@
+import type { TypesType } from "../components/Modal"
 
 
 
 export type ContactContextType = {
     store: StoreType | undefined
     dispatch: React.Dispatch<any> | undefined,
-    openModal: ()=> void
+    openModal: (type:(keyof TypesType))=> void
     closeModal: ()=> void
 }
 

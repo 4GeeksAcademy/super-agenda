@@ -1,8 +1,8 @@
 import Swal from "sweetalert2"
-import { deleteContact } from "../services/userServices"
 import { saveAgenda } from "../pages/User"
 import { useContactReducer } from "../hooks/useContactReducer"
 import { Link } from "react-router"
+import { deleteContact } from "../services/contactServices"
 
 
 export type ItemType = {

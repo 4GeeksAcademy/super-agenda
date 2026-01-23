@@ -1,12 +1,14 @@
 import { useEffect, useState, type ChangeEvent, type FormEvent } from "react"
 import { useLocation, useNavigate, useParams } from "react-router"
-import { FormField } from "../components/ContactForm/FormField"
+
 import type { ItemType } from "../components/Card"
 import { InteractiveButton } from "../components/InteractiveButton"
-import { createContact, updateContact } from "../components/ContactForm/utils"
+
 import { saveAgenda } from "./User"
 import { useContactReducer } from "../hooks/useContactReducer"
 import Swal from "sweetalert2"
+import { createContact, updateContact } from "../services/contactServices"
+import { fields, FormField } from "../components/FormField"
 
 
 export const ContactForm= () =>{
@@ -25,7 +27,7 @@ export const ContactForm= () =>{
         address:""
     })
 
-    const fields: (keyof ItemType)[] = ["name", "phone", "email", "address"] 
+  
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) =>{
         setFormData({...formData, [event.target.name] : event.target.value})

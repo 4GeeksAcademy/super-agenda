@@ -4,7 +4,7 @@ import type { StoreType } from "../useContactReducerTypes"
 export const initialStore = {
     slug: null,
     contacts: null,
-    isModal: false,
+    isModal: true,
     modalType: "loading"
 }
 
@@ -12,6 +12,12 @@ export const initialStore = {
 //     type: string,
 //     payload: StoreType | keyof TypesType
 // }
+
+export type ActionType = 
+|{type : "SET_AGENDA"; payload: StoreType}
+|{type : "OPEN_MODAL" | "CLOSE_MODAL"}
+|{type: "SET_MODAL_TYPE"; payload: keyof TypesType}
+
 
 
 export const reducer = (store: StoreType, action: ActionType) => {

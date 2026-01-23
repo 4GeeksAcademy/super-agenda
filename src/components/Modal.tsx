@@ -1,6 +1,9 @@
 import { useContactReducer } from "../hooks/useContactReducer"
-import { InteractiveButton } from "./InteractiveButton"
-import { ModalCreateUser, ModalLoading, ModalNotification } from "./Modal/ModalModels"
+import { ModalCreateUser } from "./ModalModels.tsx/ModalCreateUser"
+import { ModalLoading } from "./ModalModels.tsx/ModalLoading"
+import { ModalNotification } from "./ModalModels.tsx/ModalNotification"
+
+
 
 type ModalType = {
     type: keyof TypesType
@@ -21,7 +24,6 @@ export const Modal = ({type}: ModalType)=>{
     const choosedModal = ()=>{
        switch (type) {
         case "createUser":
-            
             return  <ModalCreateUser closeModal={closeModal}/>
        
         case "loading":
