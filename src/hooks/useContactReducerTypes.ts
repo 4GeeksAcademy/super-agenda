@@ -3,19 +3,18 @@
 
 export type ContactContextType = {
     store: StoreType | undefined
-    dispatch: React.Dispatch<any> | undefined
+    dispatch: React.Dispatch<any> | undefined,
+    openModal: ()=> void
+    closeModal: ()=> void
 }
 
 
 export type StoreType = {
     slug: string | null
     contacts: ContactType[] | null
+    modal: boolean
 }
 
-type UserType = {
-    slug: string,
-    id: number
-}
 
 type ContactType = {
     name: string,

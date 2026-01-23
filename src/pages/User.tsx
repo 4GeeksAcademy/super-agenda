@@ -21,7 +21,7 @@ export const User = () => {
     }
 
     const [agendas, setAgendas] = useState<AgendaType[] | GetAgendasErrorType>([])
-    const { store, dispatch } = useContactReducer()
+    const { store, dispatch, openModal } = useContactReducer()
     const navigate = useNavigate()
 
     const getAgendas = async () => {
@@ -44,6 +44,7 @@ export const User = () => {
 
     return (
         <div>
+           <InteractiveButton text="Create user" color="blue" onClick={()=> openModal()} />
             <InteractiveButton onClick={() => console.log(store)} color="orange" text="Ver store" />
             For a fresh start, you need to choose one of us registered users
             <ul>

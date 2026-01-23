@@ -10,9 +10,16 @@ export const ContactProvider = ({children}: ContactProviderType) =>{
 
     const [store, dispatch] = useReducer<StoreType, any>(reducer, initialStore)
 
+    const openModal = () =>{
+        dispatch({type: "OPEN_MODAL"})
+    }
+
+    const closeModal = () =>{
+        dispatch({type: "CLOSE_MODAL"})
+    }
 
 
-return <ContactContext.Provider value={{store, dispatch}}>
+return <ContactContext.Provider value={{store, dispatch, openModal, closeModal}}>
     {children}
 </ContactContext.Provider>
 } 
@@ -24,7 +31,7 @@ export const useContactReducer = (): ContactContextType =>{
 
     if(!context) throw new Error("useContactReducer must be used inside a ContactProvider")
 
-    const {store, dispatch} = context
+    const {store, dispatch, openModal, closeModal} = context
 
-    return {store, dispatch}
+    return {store, dispatch, openModal, closeModal}
 }
