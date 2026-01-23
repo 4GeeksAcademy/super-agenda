@@ -30,4 +30,11 @@ export const createAgenda = async(agenda:string)=>{
 }
 
 
-// export const deleteAgenda
+export const deleteAgenda = async(agenda:string)=>{
+
+    const url = `https://playground.4geeks.com/contact/agendas/${agenda}?tags=Agenda%20operations&summary=Delete%20Agenda.&description=Deletes%20a%20specific%20agenda%20from%20the%20database.`
+    const response = await fetch(url,{
+    method : "DELETE"
+ })
+ return response.status == 204
+}

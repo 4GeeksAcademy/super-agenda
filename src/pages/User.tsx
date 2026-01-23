@@ -23,10 +23,10 @@ export const User = () => {
 
 
     const handleCreateUserBtn = ()=>{
-        openModal("createUser")
+        openModal({type: "createUser"})
     }
 
-
+    
     const agendaHandleClick = async(agenda: string) => {
         await saveAgenda(agenda, dispatch)
         navigate(`/${agenda}/contacts`)
@@ -42,7 +42,9 @@ export const User = () => {
             For a fresh start, you need to choose one of us registered users
             <ul>
                 {Array.isArray(store?.agendas) && store.agendas?.map((agenda, index) => {
-                    return <li key={index}><InteractiveButton onClick={() => agendaHandleClick(agenda.slug)} color="red" text={agenda.slug.toUpperCase()} /></li>
+                    return <li key={index}><InteractiveButton onClick={() => agendaHandleClick(agenda.slug)} color="red" text={agenda.slug.toUpperCase()} />
+                    <i onClick={()=> openModal({type: "deleteUser", agenda:agenda.slug})} className="fa-solid fa-xmark hover:text-red-500 hover:cursor-pointer"></i>
+                    </li>
                 })}
             </ul>
         </div>
