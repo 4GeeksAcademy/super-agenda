@@ -12,7 +12,10 @@ export type ContactContextType = {
 export type StoreType = {
     slug: string | null
     contacts: ContactType[] | null
-    modal: boolean
+    isModal: boolean
+    modalType: string
+
+
 }
 
 

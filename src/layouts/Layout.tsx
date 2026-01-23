@@ -3,17 +3,18 @@ import { Footer } from "../components/Footer"
 import { Navbar } from "../components/Navbar"
 import { Modal } from "../components/Modal"
 import { useContactReducer } from "../hooks/useContactReducer"
+import { type TypesType } from "../components/Modal"
 
 export const Layout = () =>{
 
     const {store} = useContactReducer()
 
-    const modal = store?.modal
-
+    const isModal = store?.isModal
+    const modalType = store?.modalType
 
     return (
         <>
-        { modal && <Modal/>}
+        { isModal && modalType && <Modal type={modalType as keyof TypesType}/>}
         <Navbar/>
         <Outlet/>
         <Footer/>

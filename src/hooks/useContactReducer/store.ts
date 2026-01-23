@@ -1,30 +1,37 @@
+import type { TypesType } from "../../components/Modal"
 import type { StoreType } from "../useContactReducerTypes"
 
 export const initialStore = {
     slug: null,
     contacts: null,
-    modal: false
+    isModal: false,
+    modalType: "loading"
 }
 
-export type ActionType = {
-    type: string,
-    payload: StoreType
-}
+// export type ActionType = {
+//     type: string,
+//     payload: StoreType | keyof TypesType
+// }
 
 
-export const reducer = (store:StoreType,action:ActionType)=>{
+export const reducer = (store: StoreType, action: ActionType) => {
     switch (action.type) {
         case "SET_AGENDA":
-            const slug =   action.payload.slug  
-            const contacts =  action.payload.contacts
+            const slug = action.payload.slug
+            const contacts = action.payload.contacts
 
-            return {...store, slug,contacts}
-    
+            return { ...store, slug, contacts }
+
         case "OPEN_MODAL":
-            return {...store, modal: true}
+            return { ...store, isModal: true }
 
         case "CLOSE_MODAL":
-            return {...store, modal: false}
+            return { ...store, isModal: false }
+
+        case "SET_MODAL_TYPE":
+            const type = action.payload
+            return { ...store, modalType: type }
+
         default:
             return store
     }

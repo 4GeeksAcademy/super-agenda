@@ -30,6 +30,10 @@ export const User = () => {
     }
 
 
+    const handleCreateUserBtn = ()=>{
+        openModal()
+      
+    }
 
 
 
@@ -44,8 +48,7 @@ export const User = () => {
 
     return (
         <div>
-           <InteractiveButton text="Create user" color="blue" onClick={()=> openModal()} />
-            <InteractiveButton onClick={() => console.log(store)} color="orange" text="Ver store" />
+           <InteractiveButton text="Create user" color="blue" onClick={handleCreateUserBtn} />
             For a fresh start, you need to choose one of us registered users
             <ul>
                 {Array.isArray(agendas) && agendas?.map((agenda, index) => {
