@@ -7,20 +7,25 @@ export type ContactContextType = {
     dispatch: React.Dispatch<any> | undefined,
     openModal: (type:(keyof TypesType))=> void
     closeModal: ()=> void
+    loadAgendas: ()=> void
 }
 
 
 export type StoreType = {
+    agendas: AgendaType[] | null
     slug: string | null
     contacts: ContactType[] | null
     isModal: boolean
     modalType: string
+}
 
-
+export type AgendaType = {
+    slug: string
+    id: number
 }
 
 
-type ContactType = {
+export type ContactType = {
     name: string,
     phone: string,
     email: string,

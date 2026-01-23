@@ -6,14 +6,14 @@ import type { ItemType } from "./Card"
     field: keyof ItemType
     formData?: ItemType 
     userField?: string
+    disabled?: boolean
  }
 
 export const fields: (keyof ItemType)[] = ["name", "phone", "email", "address",]
 
 
-export const FormField = ({field, handleChange, formData, userField}:FormFieldType) =>{
+export const FormField = ({field, handleChange, formData, userField, disabled}:FormFieldType) =>{
 
-    console.log(fields.includes(field))
 
     const value = fields.includes(field) ? formData?.[field] : userField
 
@@ -22,7 +22,7 @@ export const FormField = ({field, handleChange, formData, userField}:FormFieldTy
     return(
         <>
          <label htmlFor="name">{fieldCapitalized}</label>
-        <input onChange={handleChange} value={value} id={field} name={field} className="border-1 "></input>
+        <input disabled={disabled ?? false} onChange={handleChange} value={value} id={field} name={field} className={`border-1 ${disabled && "bg-slate-300 text-slate-400 border-slate-500"}`}></input>
         </>
     )
 }

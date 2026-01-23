@@ -2,6 +2,8 @@ type InteractiveButtonProps = {
     text: string
     color: keyof typeof colors
     onClick?: ()=> void
+    disabled?: boolean
+    buttonType?: "submit" | "reset" | "button"
     
 }
 const colors = {
@@ -21,10 +23,10 @@ const colors = {
     
 } as const
 
-export const InteractiveButton = ({text, color, onClick} : InteractiveButtonProps) =>{
+export const InteractiveButton = ({text, color, onClick, disabled, buttonType} : InteractiveButtonProps) =>{
 
 
     return(
-        <button onClick={onClick} className={`${colors[color]}`}>{text}</button>
+        <button type={buttonType ?? "submit"}  disabled={disabled} onClick={onClick} className={`${colors[color]}`}>{text}</button>
     )
 }

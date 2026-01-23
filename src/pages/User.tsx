@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { getAgenda, getAllAgendas, type GetAgendasErrorType } from "../services/userServices"
+import { getAgenda, getAllAgendas, type GetAgendasErrorType } from "../services/agendaServices"
 import { InteractiveButton } from "../components/InteractiveButton"
 import { useContactReducer } from "../hooks/useContactReducer"
 import { useNavigate } from "react-router"
@@ -15,25 +15,16 @@ export const saveAgenda = async (agenda: string, dispatch: any) => {
 
 export const User = () => {
 
-    type AgendaType = {
-        slug: string
-        id: number
-    }
+  
 
-    const [agendas, setAgendas] = useState<AgendaType[] | GetAgendasErrorType>([])
-    const { store, dispatch, openModal } = useContactReducer()
+    const { store, dispatch, openModal, loadAgendas } = useContactReducer()
     const navigate = useNavigate()
 
-    const getAgendas = async () => {
-        const fetchAgendas = await getAllAgendas()
-        setAgendas(fetchAgendas)
-    }
 
 
     const handleCreateUserBtn = ()=>{
         openModal("createUser")
     }
-
 
 
     const agendaHandleClick = async(agenda: string) => {
@@ -42,7 +33,7 @@ export const User = () => {
     }
 
     useEffect(() => {
-        getAgendas()
+        loadAgendas()
     }, [])
 
     return (
@@ -50,7 +41,7 @@ export const User = () => {
            <InteractiveButton text="Create user" color="blue" onClick={handleCreateUserBtn} />
             For a fresh start, you need to choose one of us registered users
             <ul>
-                {Array.isArray(agendas) && agendas?.map((agenda, index) => {
+                {Array.isArray(store?.agendas) && store.agendas?.map((agenda, index) => {
                     return <li key={index}><InteractiveButton onClick={() => agendaHandleClick(agenda.slug)} color="red" text={agenda.slug.toUpperCase()} /></li>
                 })}
             </ul>

@@ -1,7 +1,6 @@
 import { useEffect, useState, type ChangeEvent, type FormEvent } from "react"
 import { useLocation, useNavigate, useParams } from "react-router"
 
-import type { ItemType } from "../components/Card"
 import { InteractiveButton } from "../components/InteractiveButton"
 
 import { saveAgenda } from "./User"

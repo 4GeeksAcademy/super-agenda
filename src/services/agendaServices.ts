@@ -22,3 +22,12 @@ export const getAgenda = async(agenda:string): Promise<StoreType | GetAgendasErr
     return data
 }
 
+export const createAgenda = async(agenda:string)=>{
+ const response = await fetch(`https://playground.4geeks.com/contact/agendas/${agenda}`,{
+    method : "POST"
+ })
+ return response.status == 201
+}
+
+
+// export const deleteAgenda
