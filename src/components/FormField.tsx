@@ -18,11 +18,11 @@ export const FormField = ({field, handleChange, formData, userField, disabled}:F
     const value = fields.includes(field) ? formData?.[field] : userField
 
     const fieldCapitalized = field[0].toUpperCase() + field.slice(1)
-
+    
     return(
         <>
          <label htmlFor="name">{fieldCapitalized}</label>
-        <input disabled={disabled ?? false} onChange={handleChange} value={value} id={field} name={field} className={`border-1 ${disabled && "bg-slate-300 text-slate-400 border-slate-500"}`}></input>
+        <input disabled={disabled ?? false} type={field == "email" ? "email": "text"} onChange={handleChange} value={value} id={field} name={field} className={`border-1 ${disabled && "bg-slate-300 text-slate-400 border-slate-500"}`} required></input>
         </>
     )
 }
