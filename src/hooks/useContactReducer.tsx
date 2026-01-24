@@ -1,6 +1,6 @@
 import { createContext, useContext, useReducer } from "react";
 import type { StoreType, ContactProviderType, ContactContextType } from "./useContactReducerTypes";
-import { initialStore, reducer } from "./useContactReducer/store";
+import { initialStore, reducer, type FormDataType } from "./useContactReducer/store";
 import type { TypesType } from "../components/Modal";
 import { getAllAgendas } from "../services/agendaServices";
 
@@ -9,7 +9,8 @@ const ContactContext = createContext<ContactContextType | undefined>(undefined)
 
 export type OpenModalTypes =
     | { type: "deleteUser"; agenda: string }
-    | { type: "createUser" | "loading" }
+    | { type: "createContact"; formData: FormDataType }
+    | { type: "createUser" | "loading"}
 
 export const ContactProvider = ({ children }: ContactProviderType) => {
 
@@ -20,6 +21,9 @@ export const ContactProvider = ({ children }: ContactProviderType) => {
         switch (data.type) {
             case "deleteUser":
                 dispatch({ type: "SET_USER_TO_DELETE", payload: data.agenda })
+            
+            case "createContact":
+                dispatch({ type: "SET_MODAL_FORM_DATA", payload: data.formData})
             
         }
         dispatch({ type: "SET_MODAL_TYPE", payload: data.type })

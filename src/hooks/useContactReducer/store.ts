@@ -20,11 +20,19 @@ type UserAgendaType = {
 }
 
 
+export type FormDataType = {
+    name: string
+    address: string
+    phone: string
+    email: string
+}
+
 
 export type ActionType = 
 |{type : "SET_AGENDA"; payload: UserAgendaType}
 |{type : "OPEN_MODAL" | "CLOSE_MODAL"}
 |{type: "SET_MODAL_TYPE"; payload: keyof TypesType}
+|{type: "SET_MODAL_FORM_DATA"; payload:FormData}
 |{type: "SET_AGENDAS"; payload: AgendaType[]}
 |{type: "SET_USER_TO_DELETE"; payload: string}
 
@@ -49,11 +57,13 @@ export const reducer = (store: StoreType, action: ActionType) => {
             return { ...store, modalType: type }
 
         case "SET_AGENDAS":
-
             return {...store, agendas: action.payload}
 
         case "SET_USER_TO_DELETE":
             return {...store, userToDelete: action.payload}
+
+        case "SET_MODAL_FORM_DATA":
+            return {...store, modalFormData: action.payload}
 
         default:
             return store

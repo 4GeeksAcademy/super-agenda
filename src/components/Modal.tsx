@@ -1,4 +1,5 @@
 import { useContactReducer } from "../hooks/useContactReducer"
+import { ModalCreateContact } from "./ModalModels.tsx/ModalCreateContact";
 import { ModalCreateUser } from "./ModalModels.tsx/ModalCreateUser"
 import { ModalDeleteUser } from "./ModalModels.tsx/ModalDeleteUser";
 import { ModalLoading } from "./ModalModels.tsx/ModalLoading"
@@ -16,7 +17,7 @@ export type TypesType = {
     createUser: string
     loading: string
     deleteUser: string
-}
+    createContact: string}
 
 
 
@@ -24,7 +25,7 @@ export const Modal = (props: ModalType) => {
 
 
     const { closeModal } = useContactReducer()
-
+    console.log(props.type)
     const choosedModal = () => {
         switch (props.type) {
             case "createUser":
@@ -35,6 +36,10 @@ export const Modal = (props: ModalType) => {
 
             case "deleteUser":
                 return <ModalDeleteUser closeModal={closeModal} />
+
+            case "createContact":
+               
+                return <ModalCreateContact closeModal={closeModal}/>
             default:
                 return null
         }

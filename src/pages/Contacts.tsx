@@ -6,7 +6,7 @@ import { InteractiveButton } from "../components/InteractiveButton"
 
 export const Contacts= () =>{
 
-    const {store} = useContactReducer()
+    const {store, openModal} = useContactReducer()
     const navigate = useNavigate()
 
     useEffect(()=>{
@@ -18,9 +18,9 @@ export const Contacts= () =>{
 
     return(
         <>
-        <Link to={`/${store?.slug}/contact-form`} >
-        <InteractiveButton text="+" color="red" />
-        </Link>
+      
+        <InteractiveButton onClick={()=> openModal({type:"createContact"})} text="+" color="red" />
+     
         <ul>
         {
             Array.isArray(store?.contacts)  && store.slug && store.contacts.map((contact, index)=>{

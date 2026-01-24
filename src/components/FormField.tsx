@@ -14,7 +14,6 @@ export const fields: (keyof ItemType)[] = ["name", "phone", "email", "address",]
 
 export const FormField = ({field, handleChange, formData, userField, disabled}:FormFieldType) =>{
 
-
     const value = fields.includes(field) ? formData?.[field] : userField
 
     const fieldCapitalized = field[0].toUpperCase() + field.slice(1)

@@ -11,7 +11,7 @@ export const Layout = () =>{
 
     const isModal = store?.isModal
     const modalType = store?.modalType
-
+    
     return (
         <>
         { isModal && modalType && <Modal type={modalType as keyof TypesType}/>}
