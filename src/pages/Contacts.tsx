@@ -4,30 +4,32 @@ import { Link, useNavigate } from "react-router"
 import { Card } from "../components/Card"
 import { InteractiveButton } from "../components/InteractiveButton"
 
-export const Contacts= () =>{
+export const Contacts = () => {
 
-    const {store, openModal} = useContactReducer()
+    const { store, openModal } = useContactReducer()
     const navigate = useNavigate()
 
-    useEffect(()=>{
-        if(!store?.slug){
+    useEffect(() => {
+        if (!store?.slug) {
             navigate("/user")
         }
-    },[])
+    }, [])
 
 
-    return(
+
+    return (
         <>
-      
-        <InteractiveButton onClick={()=> openModal({type:"createContact"})} text="+" color="red" />
-     
-        <ul>
-        {
-            Array.isArray(store?.contacts)  && store.slug && store.contacts.map((contact, index)=>{
-                return <li key={index} ><Card agenda={store.slug!} item={contact}/></li>
-            })
-        }
-        </ul>
+            {store?.modalFormData &&
+                <InteractiveButton onClick={() => openModal({ type: "createContact"})} text="+" color="red" />
+            }
+
+            <ul>
+                {
+                    Array.isArray(store?.contacts) && store.slug && store.contacts.map((contact, index) => {
+                        return <li key={index} ><Card agenda={store.slug!} item={contact} /></li>
+                    })
+                }
+            </ul>
         </>
     )
 }

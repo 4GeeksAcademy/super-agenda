@@ -1,15 +1,25 @@
 import type { TypesType } from "../../components/Modal"
 import type { AgendaType, ContactType, StoreType } from "../useContactReducerTypes"
 
-export const initialStore = {
+
+export const initialModalFormData = {
+    name: "",
+    phone: "",
+    email: "",
+    address: "",
+    id: 0
+}
+
+export const initialStore : StoreType = {
     slug: null,
     agendas: null,
     contacts: null,
     isModal: false,
     modalType: "loading",
-    userToDelete: ""
+    userToDelete: "",
+    modalFormData: initialModalFormData
+    
 }
-
 
 
 type UserAgendaType = {
@@ -25,6 +35,7 @@ export type FormDataType = {
     address: string
     phone: string
     email: string
+    id: number
 }
 
 
@@ -32,7 +43,7 @@ export type ActionType =
 |{type : "SET_AGENDA"; payload: UserAgendaType}
 |{type : "OPEN_MODAL" | "CLOSE_MODAL"}
 |{type: "SET_MODAL_TYPE"; payload: keyof TypesType}
-|{type: "SET_MODAL_FORM_DATA"; payload:FormData}
+|{type: "SET_MODAL_FORM_DATA"; payload:FormDataType}
 |{type: "SET_AGENDAS"; payload: AgendaType[]}
 |{type: "SET_USER_TO_DELETE"; payload: string}
 
@@ -43,7 +54,7 @@ export const reducer = (store: StoreType, action: ActionType) => {
         case "SET_AGENDA":
             const slug = action.payload.slug
             const contacts = action.payload.contacts
-
+        
             return { ...store, slug, contacts }
 
         case "OPEN_MODAL":

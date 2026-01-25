@@ -11,15 +11,20 @@ export const deleteContact = async(agenda:string, contactId: number)=>{
 }
 
 
-export const updateContact = async(agenda:string, contactId: number, formData: ItemType)=>{
+export const updateContact = async(agenda:string,  formData: ItemType)=>{
 
-    const response = await fetch(`https://playground.4geeks.com/contact/agendas/${agenda}/contacts/${contactId}`,{
+    const {id, ...rest} = formData
+    const fetchData =  rest
+
+    const response = await fetch(`https://playground.4geeks.com/contact/agendas/${agenda}/contacts/${id}`,{
         method: "PUT",
         headers: {
             "Content-Type": "application/json"
         },
-        body : JSON.stringify(formData)
+        body : JSON.stringify(fetchData)
     })
+
+    return response.status == 200
 
 }
 

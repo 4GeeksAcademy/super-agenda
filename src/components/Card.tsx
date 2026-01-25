@@ -10,7 +10,7 @@ export type ItemType = {
     phone: string, 
     email: string,
     address: string,
-    id?: number
+    id: number
 }
 
 
@@ -22,7 +22,7 @@ type CardType = {
 
 export const Card = ({item, item: {name, phone, email, address, id}, agenda} : CardType) =>{
 
-    const {dispatch} = useContactReducer()
+    const {dispatch, openModal} = useContactReducer()
 
     const handleDelete = () => {
         Swal.fire({
@@ -43,12 +43,16 @@ export const Card = ({item, item: {name, phone, email, address, id}, agenda} : C
         })
     }
 
+    const handleUpdateContact = () =>{
+        openModal({type: "updateContact", formData: {name, phone, email, address, id}})
+    }
+
     return(
         <div>
             <p className="text-4xl">{name.toUpperCase()}</p>
-            <Link to={`/${agenda}/contact-form`} state={{item}}>
-            <i className="fa-solid fa-pen"/>
-            </Link>
+          
+            <i  onClick={handleUpdateContact} className="fa-solid fa-pen"/>
+            
             <i onClick={handleDelete} className="text-red-500 hover:cursor-pointer fa-solid fa-xmark"/>
             <p>{phone}</p>
             <p>{email}</p>

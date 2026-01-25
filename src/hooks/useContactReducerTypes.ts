@@ -1,14 +1,16 @@
 import type { TypesType } from "../components/Modal"
 import type { OpenModalTypes } from "./useContactReducer"
+import type { ActionType, FormDataType } from "./useContactReducer/store"
 
 
 
 export type ContactContextType = {
     store: StoreType | undefined
-    dispatch: React.Dispatch<any> | undefined,
+    dispatch: React.Dispatch<ActionType> | undefined,
     openModal: (data: OpenModalTypes)=> void
     closeModal: ()=> void
     loadAgendas: ()=> void
+    loadAgenda: (agenda: string)=> void
 }
 
 
@@ -17,8 +19,9 @@ export type StoreType = {
     slug: string | null
     contacts: ContactType[] | null
     isModal: boolean
-    modalType: string
+    modalType: keyof TypesType
     userToDelete: string
+    modalFormData: FormDataType
 }
 
 export type AgendaType = {
