@@ -29,9 +29,10 @@ export const Card = ({item, item: {name, phone, email, address, id}, agenda} : C
             title: "Are you sure?",
             html:`You are about to delete <b>${name.toUpperCase()}</b>'s contact. <br/>Do you want to proceed?`,
             confirmButtonText: "Delete",
-            confirmButtonColor: "grey",
+            confirmButtonColor: "red",
             showDenyButton: true,
-            denyButtonText: "Cancel"
+            denyButtonText: "Cancel",
+            denyButtonColor: "gray"
         }).then((resp)=>{
             if(resp.isConfirmed){
                 deleteContact(agenda, id!).then((resp)=>{

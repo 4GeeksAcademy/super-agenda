@@ -10,25 +10,23 @@ export const Navbar = () => {
 
     return (
         <div>
-            <nav>
-                <button onClick={() => console.log(store?.slug)}>Ver store.slug</button>
+            <nav className="flex justify-center">
+                <div className="flex justify-between">
+                <div className="mr-auto">
+
                 <Link to="/">
-                    <InteractiveButton color="slate" text="Home" />
+                <img  className="w-30" src="https://res.cloudinary.com/dra2cr3uw/image/upload/v1769100140/star-wars-png-46074_fq5ugx.png" alt="" />
                 </Link>
+                </div>
+                
                 <Link to="/user">
                     <InteractiveButton color="slate" text="User" />
                 </Link>
-                <Link to={`/${store?.slug}/contacts`}>
+                {/* <Link to={`/${store?.slug}/contacts`}>
                     <InteractiveButton color="slate" text="Contacts" />
-                </Link>
-                {store?.slug ?
-                    <Link to={`/${store?.slug}/contact-form`}>
-                        <InteractiveButton color="slate" text="ContactForm" />
-                    </Link>
-                    :
-                    <InteractiveButton color="disabled-slate" text="ContactForm" />
+                    </Link> */}
 
-                }
+                </div>
             </nav>
         </div>
     )
