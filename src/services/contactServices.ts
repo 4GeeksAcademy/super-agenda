@@ -38,5 +38,6 @@ export const createContact = async(agenda:string, formData: ItemType) =>{
         body: JSON.stringify(formData)
     })
 
+    return response.status == 201
 
 }

@@ -10,7 +10,7 @@ export type ItemType = {
     phone: string, 
     email: string,
     address: string,
-    id: number
+    id?: number
 }
 
 
@@ -44,7 +44,9 @@ export const Card = ({item, item: {name, phone, email, address, id}, agenda} : C
     }
 
     const handleUpdateContact = () =>{
-        openModal({type: "updateContact", formData: {name, phone, email, address, id}})
+        if(id){
+            openModal({type: "updateContact", formData: {name, phone, email, address, id}})
+        }
     }
 
     return(

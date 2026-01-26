@@ -44,8 +44,6 @@ export const ModalCreateUser = ({ closeModal }: ModalModelType) => {
     }
 
 
-
-
     return (
         <>
             <form onSubmit={handleSubmit}>
