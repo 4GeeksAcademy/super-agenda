@@ -11,6 +11,7 @@ export type ContactContextType = {
     closeModal: ()=> void
     loadAgendas: ()=> void
     loadAgenda: (agenda: string)=> void
+    resetSlugAndContacts : ()=>void
 }
 
 

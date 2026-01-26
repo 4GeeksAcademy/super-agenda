@@ -54,7 +54,7 @@ export const reducer = (store: StoreType, action: ActionType) => {
         case "SET_AGENDA":
             const slug = action.payload.slug
             const contacts = action.payload.contacts
-        
+            
             return { ...store, slug, contacts }
 
         case "OPEN_MODAL":

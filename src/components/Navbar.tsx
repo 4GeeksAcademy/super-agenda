@@ -2,6 +2,7 @@ import { Link } from "react-router"
 import { InteractiveButton } from "./InteractiveButton"
 import { useContactReducer } from "../hooks/useContactReducer"
 import { UserBtn } from "./Navbar/UserBtn"
+import { Wrapper } from "./Navbar/Wrapper"
 
 export const Navbar = () => {
 
@@ -18,16 +19,26 @@ export const Navbar = () => {
                             <img className="w-30" src="https://res.cloudinary.com/dra2cr3uw/image/upload/v1769100140/star-wars-png-46074_fq5ugx.png" alt="" />
                         </Link>
                     </div>
-                    <div className="flex">
-                        {store?.slug ? 
-                        <UserBtn />
-                        : 
-                        <Link to="/user">
+                    <div>
+                        <div className="hidden sm:flex">
 
-                        <InteractiveButton text="Choose an agenda" color="slate" tone="normal"/>
-                        </Link>
-                        }
-                        <InteractiveButton tone="normal" color="slate" text="Contacts" />
+                            {store?.slug ?
+                            <>
+                                <UserBtn main={true}/>
+                                <Link to={`/${store?.slug}/contacts`}>
+                                <InteractiveButton tone="normal" color="slate" text="Contacts" />
+                                </Link>
+                            </>
+                                :
+                                <Link to="/user">
+                                    <InteractiveButton text="Choose an agenda" color="slate" tone="normal" />
+                                </Link>
+                            }
+                        </div>
+                        <div className="relative sm:hidden bg-blue-500">
+                            
+                            <Wrapper/>
+                        </div>
                     </div>
 
                 </div>

@@ -30,6 +30,10 @@ export const ContactProvider = ({ children }: ContactProviderType) => {
         dispatch({ type: "SET_MODAL_TYPE", payload: data.type })
     }
 
+    const resetSlugAndContacts = ()=>{
+        dispatch({type: "SET_AGENDA", payload: {slug: null, contacts: null}})
+    }
+
     const closeModal = () => {
         dispatch({ type: "CLOSE_MODAL" })
         dispatch({ type: "SET_USER_TO_DELETE", payload: "" })
@@ -49,7 +53,7 @@ export const ContactProvider = ({ children }: ContactProviderType) => {
 
 
 
-    return <ContactContext.Provider value={{ store, dispatch, openModal, closeModal, loadAgendas, loadAgenda }}>
+    return <ContactContext.Provider value={{ store, dispatch, openModal, closeModal, loadAgendas, loadAgenda, resetSlugAndContacts }}>
         {children}
     </ContactContext.Provider>
 }
@@ -61,7 +65,7 @@ export const useContactReducer = (): ContactContextType => {
 
     if (!context) throw new Error("useContactReducer must be used inside a ContactProvider")
 
-    const { store, dispatch, openModal, closeModal, loadAgendas, loadAgenda } = context
+    const { store, dispatch, openModal, closeModal, loadAgendas, loadAgenda, resetSlugAndContacts } = context
 
-    return { store, dispatch, openModal, closeModal, loadAgendas, loadAgenda }
+    return { store, dispatch, openModal, closeModal, loadAgendas, loadAgenda, resetSlugAndContacts }
 }

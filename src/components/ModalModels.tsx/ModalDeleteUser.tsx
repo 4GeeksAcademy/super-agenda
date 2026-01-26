@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router"
 import { useContactReducer } from "../../hooks/useContactReducer"
 import { deleteAgenda } from "../../services/agendaServices"
 import { InteractiveButton } from "../InteractiveButton"
@@ -7,8 +8,8 @@ import type { ModalModelType } from "./ModalTypes"
 
 export const ModalDeleteUser= ({closeModal}: ModalModelType)=>{
 
-    const {store, loadAgendas} = useContactReducer()
-
+    const {store, loadAgendas, resetSlugAndContacts} = useContactReducer()
+    const navigate = useNavigate()
     
 
     const handleDeleteAgendaBtn = async()=>{
@@ -17,7 +18,9 @@ export const ModalDeleteUser= ({closeModal}: ModalModelType)=>{
 
        if(deletedAgenda){
         loadAgendas()
+        resetSlugAndContacts()
         closeModal()
+        navigate("/")
        }
 
     }
