@@ -57,13 +57,13 @@ export const ModalCreateUser = ({ closeModal }: ModalModelType) => {
                 {
                     created ?
                         <>
-                            <InteractiveButton color="disabled-green" text="Created" />
-                            <InteractiveButton buttonType="button" color="slate" text="Close" onClick={() => closeModal()} />
+                            <InteractiveButton tone="disabled" color="green" text="Created" />
+                            <InteractiveButton tone="normal" buttonType="button" color="slate" text="Close" onClick={() => closeModal()} />
                         </>
                         :
                         <>
-                            <InteractiveButton color="green" text="Create" />
-                            <InteractiveButton buttonType="button" color="slate" text="Cancel" onClick={() => closeModal()} />
+                            <InteractiveButton tone="normal" color="green" text="Create" />
+                            <InteractiveButton tone="normal" buttonType="button" color="slate" text="Cancel" onClick={() => closeModal()} />
                         </>
                 }
             </form>

@@ -20,7 +20,7 @@ export const Contacts = () => {
     return (
         <>
             {store?.modalFormData &&
-                <InteractiveButton onClick={() => openModal({ type: "createContact"})} text="+" color="red" />
+                <InteractiveButton tone="normal" onClick={() => openModal({ type: "createContact"})} text="+" color="red" />
             }
 
             <ul>

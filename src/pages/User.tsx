@@ -38,11 +38,11 @@ export const User = () => {
 
     return (
         <div>
-           <InteractiveButton text="Create user" color="blue" onClick={handleCreateUserBtn} />
+           <InteractiveButton text="Create user" tone="normal" color="blue" onClick={handleCreateUserBtn} />
             For a fresh start, you need to choose one of us registered users
             <ul>
                 {Array.isArray(store?.agendas) && store.agendas?.map((agenda, index) => {
-                    return <li key={index}><InteractiveButton onClick={() => agendaHandleClick(agenda.slug)} color="red" text={agenda.slug.toUpperCase()} />
+                    return <li key={index}><InteractiveButton onClick={() => agendaHandleClick(agenda.slug)} tone="normal" color="red" text={agenda.slug.toUpperCase()} />
                     <i onClick={()=> openModal({type: "deleteUser", agenda:agenda.slug})} className="fa-solid fa-xmark hover:text-red-500 hover:cursor-pointer"></i>
                     </li>
                 })}

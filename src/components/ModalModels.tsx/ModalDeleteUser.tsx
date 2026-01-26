@@ -28,8 +28,8 @@ export const ModalDeleteUser= ({closeModal}: ModalModelType)=>{
         <>
         <h2>Do you really want to delete <b>{store?.userToDelete}</b>'s agenda?</h2>
         {store?.userToDelete && <>
-        <InteractiveButton onClick={handleDeleteAgendaBtn}color="red" text="Confirm"></InteractiveButton>
-        <InteractiveButton color="slate" text="Cancel" onClick={()=> closeModal()} />
+        <InteractiveButton tone="normal" onClick={handleDeleteAgendaBtn}color="red" text="Confirm"></InteractiveButton>
+        <InteractiveButton tone="normal" color="slate" text="Cancel" onClick={()=> closeModal()} />
         </>
         }
         </>

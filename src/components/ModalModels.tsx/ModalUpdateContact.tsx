@@ -74,13 +74,13 @@ export const ModalUpdateContact = ({ closeModal }: ModalModelType) => {
                 {
                     updated ?
                         <>
-                            <InteractiveButton color="disabled-green" text="Created" />
-                            <InteractiveButton buttonType="button" color="slate" text="Close" onClick={() => closeModal()} />
+                            <InteractiveButton tone="disabled" color="green" text="Created" />
+                            <InteractiveButton buttonType="button" tone="normal" color="slate" text="Close" onClick={() => closeModal()} />
                         </>
                         :
                         <>
-                            <InteractiveButton color="green" text="Create" />
-                            <InteractiveButton buttonType="button" color="slate" text="Cancel" onClick={() => closeModal()} />
+                            <InteractiveButton tone="normal" color="green" text="Create" />
+                            <InteractiveButton buttonType="button"  tone="normal" color="slate" text="Cancel" onClick={() => closeModal()} />
                         </>
                 }
             </form>

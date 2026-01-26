@@ -1,6 +1,7 @@
 import { Link } from "react-router"
 import { InteractiveButton } from "./InteractiveButton"
 import { useContactReducer } from "../hooks/useContactReducer"
+import { UserBtn } from "./Navbar/UserBtn"
 
 export const Navbar = () => {
 
@@ -10,23 +11,27 @@ export const Navbar = () => {
 
     return (
         <div>
-            <nav className="flex justify-center">
-                <div className="flex justify-between">
-                <div className="mr-auto">
+            <nav className="border-b-2 border-slate-700 mx-2 py-3">
+                <div className="flex mx-auto sm:w-[640px] md:w-[750px] lg:w-[980px] xl:w-[1100px] 2xl:w-[1400px] justify-between ">
+                    <div>
+                        <Link to="/">
+                            <img className="w-30" src="https://res.cloudinary.com/dra2cr3uw/image/upload/v1769100140/star-wars-png-46074_fq5ugx.png" alt="" />
+                        </Link>
+                    </div>
+                    <div className="flex">
+                        {store?.slug ? 
+                        <UserBtn />
+                        : 
+                        <Link to="/user">
 
-                <Link to="/">
-                <img  className="w-30" src="https://res.cloudinary.com/dra2cr3uw/image/upload/v1769100140/star-wars-png-46074_fq5ugx.png" alt="" />
-                </Link>
-                </div>
-                
-                <Link to="/user">
-                    <InteractiveButton color="slate" text="User" />
-                </Link>
-                {/* <Link to={`/${store?.slug}/contacts`}>
-                    <InteractiveButton color="slate" text="Contacts" />
-                    </Link> */}
+                        <InteractiveButton text="Choose an agenda" color="slate" tone="normal"/>
+                        </Link>
+                        }
+                        <InteractiveButton tone="normal" color="slate" text="Contacts" />
+                    </div>
 
                 </div>
+
             </nav>
         </div>
     )
