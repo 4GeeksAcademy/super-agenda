@@ -1,7 +1,7 @@
 import { buttonColors } from "./utilsInteractiveButton"
 
 type InteractiveButtonProps = {
-    text: string
+    text?: string
     color: keyof typeof buttonColors
     onClick?: ()=> void
     disabled?: boolean
@@ -9,6 +9,7 @@ type InteractiveButtonProps = {
     tone: keyof ToneType
     extraClass?:string
     onBlur?:()=> void
+    children?: React.ReactNode
 }
 
 
@@ -20,10 +21,16 @@ type ToneType = {
 }
 
 
-export const InteractiveButton = ({text, color, onClick, disabled, buttonType, tone, extraClass, onBlur} : InteractiveButtonProps) =>{
+export const InteractiveButton = ({text, color, onClick, disabled, buttonType, tone, extraClass, onBlur, children} : InteractiveButtonProps) =>{
 
+
+   
+    const extraClassRounded = extraClass?.includes("rounded-")
+   const extraClassMargin = extraClass?.includes("m-")
+
+   const finalClass=` ${buttonColors[color][tone]} ${extraClassRounded || " rounded-lg "}  ${extraClassMargin || " m-2 "} ${extraClass}`
 
     return(
-        <button onBlur={onBlur} type={buttonType ?? "submit"}  disabled={disabled} onClick={onClick} className={`${buttonColors[color][tone]} ${extraClass}`}>{text}</button>
+        <button onBlur={onBlur} type={buttonType ?? "submit"}  disabled={disabled} onClick={onClick} className={finalClass}>{text ?? children}</button>
     )
 }

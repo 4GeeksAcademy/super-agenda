@@ -21,32 +21,31 @@ export const UserBtn = ({ main }: UserBtnType) => {
 
     return (
         <>
-            <div className="relative bg-blue-500">
+            <div  className="relative">
 
                 {
                     main ?
                         <>
-                            <InteractiveButton extraClass="mr-0 mb-0" tone="dark" color="slate" text={`${store?.slug}`} />
-                            <InteractiveButton onClick={() => setOpenDropDown(prev => !prev)} extraClass="ml-0 mb-0 mr-0" tone="dark" color="slate" text="V" />
+                            <InteractiveButton extraClass=" rounded-l-lg m-0" tone="dark" color="slate" text={`${store?.slug}`} />
+                            <InteractiveButton  onClick={() => setOpenDropDown(prev => !prev)} extraClass="m-0 rounded-r-lg" tone="dark" color="slate" text="V" />
                         </>
 
                         :
                         <div className="flex">
-                            <InteractiveButton onClick={() => setOpenDropDown(prev => !prev)} extraClass="ml-0 mb-0 mr-0" tone="dark" color="slate" text="<" />
-                            <InteractiveButton extraClass="mr-0 mb-0" tone="dark" color="slate" text={`${store?.slug}`} />
+                            <InteractiveButton onClick={() => setOpenDropDown(prev => !prev)} extraClass="m-0 rounded-l-lg" tone="dark" color="slate" text="<" />
+                            <InteractiveButton extraClass="m-0 rounded-r-lg" tone="dark" color="slate" text={`${store?.slug}`} />
 
                         </div>
                 }
 
                
-                <div tabIndex={0} onBlur={() => setOpenDropDown(false)} className={`absolute ${main ? "right-0 ": "-left-40 top-0"}  min-w-40 text-right bg-white rounded-md border-1 ${!openDropDown && "hidden "} `}>
+                <div tabIndex={0} onBlur={() => setOpenDropDown(false)} className={`absolute ${main ? "right-0 ": "-left-35 top-0 transform -translate-y-3 "}  min-w-35 text-right bg-white rounded-md border-1 ${!openDropDown && "hidden "} `}>
 
                     <ul>
                         <Link to="/user">
                             <li >Change agenda</li>
                         </Link>
                         {store?.slug &&
-
                             (<li><InteractiveButton onClick={handleDeleteAgenda} text="Delete agenda" color="red" tone="normal" /> </li>)
                         }
                     </ul>

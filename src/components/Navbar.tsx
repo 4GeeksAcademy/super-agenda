@@ -35,7 +35,7 @@ export const Navbar = () => {
                                 </Link>
                             }
                         </div>
-                        <div className="relative sm:hidden bg-blue-500">
+                        <div className="relative sm:hidden">
                             
                             <Wrapper/>
                         </div>

@@ -7,15 +7,23 @@ import { useState } from "react"
 export const Wrapper = () => {
     const { store } = useContactReducer()
     const [wrapperOpen, setWrapperOpen] = useState(false)
+    
 
     return (
-        <>
-            <InteractiveButton onClick={()=> setWrapperOpen(prev=> !prev)} tone="dark" color="slate" text="Hamburguesa" />
-            <div className={`${wrapperOpen ? "absolute": "hidden"} bg-red-500`}>
+        <div tabIndex={0} onBlur={(event)=>{
+            if(!event.currentTarget.contains(event.relatedTarget)){
+                setWrapperOpen(false)
+            }
+        }}>
+            <InteractiveButton onClick={()=> setWrapperOpen(prev=> !prev)} tone="dark"  color="slate">
+                <i className='fa-solid fa-grip-lines'></i>
+                </InteractiveButton>
+            <div className={`${wrapperOpen ? "absolute": "hidden"} right-0 w-30 bg-red-500`}>
                 <ul>
                     {store?.slug ?
                         <>
                             <li> <UserBtn main={false}/></li>
+                            
                             <li> <Link to={`/${store?.slug}/contacts`}>
                                 <InteractiveButton tone="normal" color="slate" text="Contacts" />
                             </Link></li>
@@ -27,6 +35,6 @@ export const Wrapper = () => {
                     }
                 </ul>
             </div>
-        </>
+        </div>
     )
 }
