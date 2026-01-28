@@ -23,7 +23,7 @@ export const UserBtn = ({ main }: UserBtnType) => {
         <>
             <div  className="relative">
 
-                {
+                {/* {
                     main ?
                         <>
                             <InteractiveButton extraClass=" rounded-l-lg m-0" tone="dark" color="slate" text={`${store?.slug}`} />
@@ -36,7 +36,7 @@ export const UserBtn = ({ main }: UserBtnType) => {
                             <InteractiveButton extraClass="m-0 rounded-r-lg" tone="dark" color="slate" text={`${store?.slug}`} />
 
                         </div>
-                }
+                } */}
 
                
                 <div tabIndex={0} onBlur={() => setOpenDropDown(false)} className={`absolute ${main ? "right-0 ": "-left-35 top-0 transform -translate-y-3 "}  min-w-35 text-right bg-white rounded-md border-1 ${!openDropDown && "hidden "} `}>
