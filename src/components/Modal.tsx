@@ -15,7 +15,7 @@ type ModalType = {
 
 
 export type TypesType = {
-    createUser: string
+    createAgenda: string
     loading: string
     deleteUser: string
     createContact: string
@@ -30,7 +30,7 @@ export const Modal = (props: ModalType) => {
     const { closeModal } = useContactReducer()
     const choosedModal = () => {
         switch (props.type) {
-            case "createUser":
+            case "createAgenda":
                 return <ModalCreateUser closeModal={closeModal} />
 
             case "loading":

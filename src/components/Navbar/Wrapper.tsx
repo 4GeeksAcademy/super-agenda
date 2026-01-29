@@ -29,7 +29,7 @@ export const Wrapper = () => {
                             </Link></li>
                         </>
                         :
-                        <li><Link to="/user">
+                        <li><Link to="/agendas">
                             <InteractiveButton text="Choose an agenda" color="slate" tone="normal" />
                         </Link></li>
                     }

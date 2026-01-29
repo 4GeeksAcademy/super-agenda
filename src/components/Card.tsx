@@ -1,5 +1,5 @@
 import Swal from "sweetalert2"
-import { saveAgenda } from "../pages/User"
+import { saveAgenda } from "../pages/Agendas"
 import { useContactReducer } from "../hooks/useContactReducer"
 import { Link } from "react-router"
 import { deleteContact } from "../services/contactServices"

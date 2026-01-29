@@ -13,24 +13,24 @@ export const saveAgenda = async (agenda: string, dispatch: any) => {
 
 }
 
-export const User = () => {
+export const Agendas = () => {
 
   
 
     const { store, dispatch, openModal, loadAgendas } = useContactReducer()
     const navigate = useNavigate()
 
-
-
-    const handleCreateUserBtn = ()=>{
-        openModal({type: "createUser"})
-    }
-
-    
     const agendaHandleClick = async(agenda: string) => {
         await saveAgenda(agenda, dispatch)
         navigate(`/${agenda}/contacts`)
     }
+
+
+    const handleCreateUserBtn = ()=>{
+        openModal({type: "createAgenda"})
+    }
+
+    
 
     useEffect(() => {
         loadAgendas()

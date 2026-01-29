@@ -6,9 +6,10 @@ import { useState } from "react"
 
 type UserBtnType = {
     main: boolean
+    fontColor: string
 }
 
-export const UserBtn = ({ main }: UserBtnType) => {
+export const UserBtn = ({ main, fontColor }: UserBtnType) => {
 
     const { store, openModal } = useContactReducer()
     const [openDropDown, setOpenDropDown] = useState(false)
@@ -19,30 +20,38 @@ export const UserBtn = ({ main }: UserBtnType) => {
         openModal({ type: "deleteUser", agenda: store?.slug })
     }
 
+    const darkTheme = fontColor?.includes("4")
+
+    const bgColor = darkTheme ? "bg-color-3" : "bg-color-2"
+
+    const hoveredBgColor = darkTheme ? "hover:bg-blue-500" : "hover:bg-red-500"
+
+    const btnFontColor = darkTheme ? "font-color-2" : "font-color-4"
+
+
     return (
         <>
             <div  className="relative">
-
-                {/* {
+                {
                     main ?
-                        <>
-                            <InteractiveButton extraClass=" rounded-l-lg m-0" tone="dark" color="slate" text={`${store?.slug}`} />
-                            <InteractiveButton  onClick={() => setOpenDropDown(prev => !prev)} extraClass="m-0 rounded-r-lg" tone="dark" color="slate" text="V" />
-                        </>
+                        <div className="flex">
+                            <button className={`rounded-l-3xl py-2 m-0 border-1 px-5 ${btnFontColor}  ${hoveredBgColor}`} ><b>{store?.slug} </b></button>
+                            <p onClick={() => setOpenDropDown(prev => !prev)} className={`my-auto py-2 pl-1 pr-2 ${openDropDown ? "": ""} rounded-l-lg rounded-full ${btnFontColor} ${bgColor}`}>V</p> 
+                        </div>
 
                         :
                         <div className="flex">
-                            <InteractiveButton onClick={() => setOpenDropDown(prev => !prev)} extraClass="m-0 rounded-l-lg" tone="dark" color="slate" text="<" />
-                            <InteractiveButton extraClass="m-0 rounded-r-lg" tone="dark" color="slate" text={`${store?.slug}`} />
+                            <p onClick={() => setOpenDropDown(prev => !prev)} className={`m-0 rounded-l-lg ${btnFontColor}`} >&lt; gggg</p>
+                            <p className={`m-0 rounded-r-lg ${btnFontColor} ${bgColor}`}>{store?.slug}</p> 
 
                         </div>
-                } */}
+                }
 
                
                 <div tabIndex={0} onBlur={() => setOpenDropDown(false)} className={`absolute ${main ? "right-0 ": "-left-35 top-0 transform -translate-y-3 "}  min-w-35 text-right bg-white rounded-md border-1 ${!openDropDown && "hidden "} `}>
 
                     <ul>
-                        <Link to="/user">
+                        <Link to="/agendas">
                             <li >Change agenda</li>
                         </Link>
                         {store?.slug &&

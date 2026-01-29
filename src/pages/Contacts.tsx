@@ -11,7 +11,7 @@ export const Contacts = () => {
 
     useEffect(() => {
         if (!store?.slug) {
-            navigate("/user")
+            navigate("/agendas")
         }
     }, [])
 

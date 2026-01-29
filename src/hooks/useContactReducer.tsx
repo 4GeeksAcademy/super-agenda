@@ -9,7 +9,7 @@ const ContactContext = createContext<ContactContextType | undefined>(undefined)
 export type OpenModalTypes =
     | { type: "deleteUser"; agenda: string }
     | { type: "updateContact"; formData: FormDataType }
-    | { type: "createUser" | "loading" | "createContact"}
+    | { type: "createAgenda" | "loading" | "createContact"}
 
 export const ContactProvider = ({ children }: ContactProviderType) => {
 
