@@ -18,10 +18,12 @@ export const Navbar = () => {
     const bgColor = darkTheme ?  "bg-slate-700" : "bg-slate-100"
 
     const fontColor = darkTheme ? "text-slate-100" : "text-slate-700"
+    
+    const btnBgColor = darkTheme ? "hover:bg-slate-600 px-3 py-1 rounded-2xl" : "hover:bg-slate-300 px-3 py-1 rounded-2xl"
 
+    
     return (
         <div>
-
             <nav className={`border-slate-700 py-3 ${bgColor}`}>
                 <div className="flex mx-auto sm:w-[640px] md:w-[750px] lg:w-[980px] xl:w-[1100px] 2xl:w-[1400px] justify-between ">
                     <div>
@@ -40,7 +42,7 @@ export const Navbar = () => {
                                     
                                     {/* Boton para ver los contactos */}
                                     <Link to={`/${store?.slug}/contacts`}>
-                                        <p className={`${fontColor} `} >Contacts </p>
+                                        <p className={`${fontColor} ${btnBgColor}`} >Contacts </p>
                                     </Link>
                                     <p className={`${fontColor} hover:cursor-default`}>|</p>
 
@@ -51,11 +53,11 @@ export const Navbar = () => {
                                 <>
                                     {/* Boton para elegir agenda, cuando no hay ninguna seleccionada */}
                                     <Link to="/agendas">
-                                        <p className={`${fontColor}`} >Choose an agenda</p>
+                                        <p className={`${fontColor} ${btnBgColor}`} >Choose an agenda</p>
                                     </Link>
                                     <b><p className={`${fontColor} hover:cursor-default`}>|</p></b>
                                     {/* Boton para abrir modal y crear una agenda si no hay ninguna seleccionada */}
-                                    <p className={`${fontColor} hover:cursor-pointer`} onClick={() => openModal({ type: "createAgenda" })}>Create agenda</p>
+                                    <p className={`${fontColor} ${btnBgColor} hover:cursor-pointer`} onClick={() => openModal({ type: "createAgenda" })}>Create agenda</p>
                                 </>
                             }
                         </div>
