@@ -20,13 +20,16 @@ export const UserBtn = ({ main, fontColor }: UserBtnType) => {
         openModal({ type: "deleteUser", agenda: store?.slug })
     }
 
-    const darkTheme = fontColor?.includes("4")
+    const darkTheme = fontColor?.includes("100")
 
-    const bgColor = darkTheme ? "bg-color-3" : "bg-color-2"
+    const bgColor = darkTheme ? "bg-slate-200" : "bg-slate-500"
 
-    const hoveredBgColor = darkTheme ? "hover:bg-blue-500" : "hover:bg-red-500"
+    const hoveredBgColor = darkTheme ? "hover:bg-slate-300" : "hover:bg-slate-800"
 
     const btnFontColor = darkTheme ? "font-color-2" : "font-color-4"
+
+
+    const dropDownBg = darkTheme ? "bg-slate-50" : "bg-slate-200"
 
 
     return (
@@ -35,8 +38,8 @@ export const UserBtn = ({ main, fontColor }: UserBtnType) => {
                 {
                     main ?
                         <div className="flex">
-                            <button className={`rounded-l-3xl py-2 m-0 border-1 px-5 ${btnFontColor}  ${hoveredBgColor}`} ><b>{store?.slug} </b></button>
-                            <p onClick={() => setOpenDropDown(prev => !prev)} className={`my-auto py-2 pl-1 pr-2 ${openDropDown ? "": ""} rounded-l-lg rounded-full ${btnFontColor} ${bgColor}`}>V</p> 
+                            <button className={`rounded-l-3xl py-2 m-0 border-1 px-5 ${btnFontColor} ${bgColor} ${hoveredBgColor}`} ><b>{store?.slug} </b></button>
+                            <p onClick={() => setOpenDropDown(prev => !prev)} className={`hover:cursor-pointer my-auto py-2 pl-1 pr-2 ${openDropDown ? "": ""} rounded-l-lg rounded-full ${btnFontColor} ${dropDownBg}`}>V</p> 
                         </div>
 
                         :

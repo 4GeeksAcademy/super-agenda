@@ -1,39 +1,7 @@
 @import "tailwindcss";
 
 
-.bg-color-1{
-    background: #313131;
-}
 
-.font-color-1{
-    color: #313131;
-}
-
-
-.bg-color-2{
-    background: #5a5a5a;
-}
-
-.font-color-2{
-    color: #5a5a5a;
-}
-
-
-.bg-color-3{
-    background: #ebebeb;
-}
-
-.font-color-3{
-    color: #ebebeb;
-}
-
-.bg-color-4{
-    background: #ffffff;
-}
-
-.font-color-4{
-    color: #ffffff;
-}
 
 *{
     font-size: 1.1rem

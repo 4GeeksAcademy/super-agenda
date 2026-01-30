@@ -14,13 +14,15 @@ export const Navbar = () => {
     const path = location.pathname
 
     const darkTheme = location.pathname.includes("agendas") || location.pathname == "/"
+    
+    const bgColor = darkTheme ?  "bg-slate-700" : "bg-slate-100"
 
-    const fontColor = darkTheme ? "font-color-4" : "font-color-2"
+    const fontColor = darkTheme ? "text-slate-100" : "text-slate-700"
 
     return (
         <div>
 
-            <nav className={`border-slate-700 py-3 ${darkTheme ? "bg-color-2" : "bg-color-4"}`}>
+            <nav className={`border-slate-700 py-3 ${bgColor}`}>
                 <div className="flex mx-auto sm:w-[640px] md:w-[750px] lg:w-[980px] xl:w-[1100px] 2xl:w-[1400px] justify-between ">
                     <div>
                         {/* Imagen para boton con direccion al inicio */}
