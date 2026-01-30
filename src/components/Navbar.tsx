@@ -63,7 +63,7 @@ export const Navbar = () => {
                         </div>
                         <div className="relative sm:hidden">
                             {/* Contenido del dropdown */}
-                            <Wrapper />
+                            <Wrapper fontColor={fontColor}/>
                         </div>
                     </div>
 

@@ -4,9 +4,14 @@ import { UserBtn } from "./UserBtn"
 import { useContactReducer } from "../../hooks/useContactReducer"
 import { useState } from "react"
 
-export const Wrapper = () => {
+
+type WrapperType = {
+    fontColor: string
+}
+
+export const Wrapper = ({fontColor}:WrapperType) => {
     const { store } = useContactReducer()
-    const [wrapperOpen, setWrapperOpen] = useState(false)
+    const [wrapperOpen, setWrapperOpen] = useState(true)
     
 
     return (
@@ -22,7 +27,7 @@ export const Wrapper = () => {
                 <ul>
                     {store?.slug ?
                         <>
-                            <li> <UserBtn main={false}/></li>
+                            <li> <UserBtn fontColor={fontColor} main={false}/></li>
                             
                             <li> <Link to={`/${store?.slug}/contacts`}>
                                 <InteractiveButton tone="normal" color="slate" text="Contacts" />
