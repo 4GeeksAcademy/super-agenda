@@ -70,9 +70,9 @@ export const UserBtn = ({ main, fontColor }: UserBtnType) => {
                         <div className="flex">
 
                             {/* Boton dropdown */}
-                            <p onClick={() => setOpenDropDown(prev => !prev)} className={`rounded-l-lg py-2 ${dropdownBgHover} ${dropDownBg} ${btnFontColor}`} >
+                            {/* <p onClick={() => setOpenDropDown(prev => !prev)} className={`rounded-l-lg py-2 ${dropdownBgHover} ${dropDownBg} ${btnFontColor}`} >
                                  {dropDownIcon}
-                                </p>
+                                </p> */}
 
                             {/* Texto boton dropdown */}
                             <p className={`m-0 py-2 px-5 rounded-r-lg ${btnFontColor} ${bgColor}`}>{store?.slug}</p>
