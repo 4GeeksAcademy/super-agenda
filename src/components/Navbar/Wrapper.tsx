@@ -9,26 +9,26 @@ type WrapperType = {
     fontColor: string
 }
 
-export const Wrapper = ({fontColor}:WrapperType) => {
+export const Wrapper = ({ fontColor }: WrapperType) => {
     const { store } = useContactReducer()
     const [wrapperOpen, setWrapperOpen] = useState(true)
-    
+
 
     return (
-        <div tabIndex={0} onBlur={(event)=>{
-            if(!event.currentTarget.contains(event.relatedTarget)){
-                setWrapperOpen(false)
-            }
+        <div tabIndex={0} onBlur={(event) => {
+            // if (!event.currentTarget.contains(event.relatedTarget)) {
+            //     setWrapperOpen(false)
+            // }
         }}>
-            <InteractiveButton onClick={()=> setWrapperOpen(prev=> !prev)} tone="dark"  color="slate">
+
+            <InteractiveButton extraClass={`m-0 ${wrapperOpen && "rounded-l-xl rounded-tr-xl"}`} onClick={() => setWrapperOpen(prev => !prev)} tone="dark" color="slate">
                 <i className='fa-solid fa-grip-lines'></i>
-                </InteractiveButton>
-            <div className={`${wrapperOpen ? "absolute": "hidden"} right-0 w-30 bg-red-500`}>
+            </InteractiveButton>
+            <div className={`${wrapperOpen ? "absolute" : "hidden"}  mt-2 right-0 rounded-l-2xl rounded-br-2xl  bg-red-500`}>
                 <ul>
                     {store?.slug ?
                         <>
-                            <li> <UserBtn fontColor={fontColor} main={false}/></li>
-                            
+                            <li> <UserBtn fontColor={fontColor} main={false} /></li>
                             <li> <Link to={`/${store?.slug}/contacts`}>
                                 <InteractiveButton tone="normal" color="slate" text="Contacts" />
                             </Link></li>

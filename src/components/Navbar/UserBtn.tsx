@@ -24,11 +24,11 @@ export const UserBtn = ({ main, fontColor }: UserBtnType) => {
 
     const darkTheme = fontColor?.includes("100")
 
-    const bgColor = darkTheme ? "bg-slate-50" : "bg-slate-500"
+    const bgColor = darkTheme ? main? "bg-slate-300": "bg-slate-800" : main ? "bg-slate-600"  : "bg-slate-50"
 
-    const hoveredBgColor = darkTheme ? "hover:bg-slate-300" : "hover:bg-slate-800"
+    const hoveredBgColor = darkTheme ? main ? "hover:bg-slate-400" : "hover:bg-slate-700": main? "hover:bg-slate-700": "hover:bg-slate-100"
 
-    const btnFontColor = darkTheme ? "text-slate-700" : "text-slate-100"
+    const btnFontColor = darkTheme ? main ? "text-slate-900" : "text-slate-100": main? "text-slate-100": "text-slate-800"
 
     const dropDownBg = darkTheme ? "bg-slate-200" : "bg-slate-300"
 
@@ -48,9 +48,9 @@ export const UserBtn = ({ main, fontColor }: UserBtnType) => {
         <>
             <div tabIndex={0} 
             onBlur={(event)=>{
-                if(!event.currentTarget.contains(event.relatedTarget)){
-                    setOpenDropDown(false)
-                }
+                // if(!event.currentTarget.contains(event.relatedTarget)){
+                //     setOpenDropDown(false)
+                // }
             }} 
             className="relative ">
                 {
@@ -67,12 +67,12 @@ export const UserBtn = ({ main, fontColor }: UserBtnType) => {
                         </div>
 
                         :
-                        <div className="flex">
+                        <div className="flex p-5 ">
 
                             {/* Boton dropdown */}
-                            {/* <p onClick={() => setOpenDropDown(prev => !prev)} className={`rounded-l-lg py-2 ${dropdownBgHover} ${dropDownBg} ${btnFontColor}`} >
+                            <p onClick={() => setOpenDropDown(prev => !prev)} className={`rounded-l-lg py-2 ${dropdownBgHover} ${dropDownBg} ${btnFontColor}`} >
                                  {dropDownIcon}
-                                </p> */}
+                                </p>
 
                             {/* Texto boton dropdown */}
                             <p className={`m-0 py-2 px-5 rounded-r-lg ${btnFontColor} ${bgColor}`}>{store?.slug}</p>

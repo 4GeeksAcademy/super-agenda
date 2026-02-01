@@ -61,7 +61,7 @@ export const Navbar = () => {
                                 </>
                             }
                         </div>
-                        <div className="relative sm:hidden">
+                        <div className="relative sm:hidden m-2">
                             {/* Contenido del dropdown */}
                             <Wrapper fontColor={fontColor}/>
                         </div>

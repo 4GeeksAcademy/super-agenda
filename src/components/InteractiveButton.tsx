@@ -23,7 +23,6 @@ type ToneType = {
 
 export const InteractiveButton = ({text, color, onClick, disabled, buttonType, tone, extraClass, onBlur, children} : InteractiveButtonProps) =>{
 
-
    
     const extraClassRounded = extraClass?.includes("rounded-")
    const extraClassMargin = extraClass?.includes("m-")
