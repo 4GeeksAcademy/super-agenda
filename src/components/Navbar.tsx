@@ -44,7 +44,7 @@ export const Navbar = () => {
                                     <Link to={`/${store?.slug}/contacts`}>
                                         <p className={`${fontColor} ${btnBgColor}`} >Contacts </p>
                                     </Link>
-                                    <p className={`${fontColor} hover:cursor-default`}>|</p>
+                                    <p className={`${fontColor} hover:cursor-default hidden md:block`}>|</p>
 
                                     {/* Boton con el dropdown con el nombre de la agenda */}
                                     <UserBtn fontColor={fontColor} main={true} />
@@ -53,17 +53,17 @@ export const Navbar = () => {
                                 <>
                                     {/* Boton para elegir agenda, cuando no hay ninguna seleccionada */}
                                     <Link to="/agendas">
-                                        <p className={`${fontColor} ${btnBgColor}`} >Choose an agenda</p>
+                                        <p className={`${fontColor} ${btnBgColor} whitespace-nowrap`} >Choose an agenda</p>
                                     </Link>
                                     <b><p className={`${fontColor} hover:cursor-default`}>|</p></b>
                                     {/* Boton para abrir modal y crear una agenda si no hay ninguna seleccionada */}
-                                    <p className={`${fontColor} ${btnBgColor} hover:cursor-pointer`} onClick={() => openModal({ type: "createAgenda" })}>Create agenda</p>
+                                    <p className={`${fontColor} ${btnBgColor} hover:cursor-pointer whitespace-nowrap`} onClick={() => openModal({ type: "createAgenda" })}>Create agenda</p>
                                 </>
                             }
                         </div>
                         <div className="relative sm:hidden m-2">
                             {/* Contenido del dropdown */}
-                            <Wrapper fontColor={fontColor}/>
+                            <Wrapper darkTheme={darkTheme} fontColor={fontColor}/>
                         </div>
                     </div>
 
