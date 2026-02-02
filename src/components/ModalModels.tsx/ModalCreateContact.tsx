@@ -72,7 +72,12 @@ export const ModalCreateContact = ({ closeModal }: ModalModelType) => {
         <>
             <form onSubmit={handleSubmit}>
                 {fields.map((field, index) => {
-                    return <FormField disabled={created} key={index} formData={formData} field={field} handleChange={handleChange} />
+                    // return (<><FormField disabled={created} key={index} formData={formData} field={field} handleChange={handleChange} /> </>)
+                    const capitalized = field[0].toUpperCase() + field.slice(1)
+                     return (<>
+                    <label>{capitalized}</label>
+                    <input disabled={created} key={index} onChange={handleChange} />
+                     </>)
                 })}
                 {
                     created ?
