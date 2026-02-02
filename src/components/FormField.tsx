@@ -17,6 +17,8 @@ export const FormField = ({field, handleChange, formData, userField, disabled}:F
     const value = fields.includes(field) ? formData?.[field] : userField
 
     const fieldCapitalized = field[0].toUpperCase() + field.slice(1)
+
+    
     
     return(
         <>
