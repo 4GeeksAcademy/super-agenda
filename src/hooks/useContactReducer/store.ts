@@ -17,6 +17,7 @@ export const initialStore : StoreType = {
     isModal: false,
     modalType: "loading",
     userToDelete: "",
+    contactToDelete: "",
     modalFormData: initialModalFormData
     
 }
@@ -46,6 +47,7 @@ export type ActionType =
 |{type: "SET_MODAL_FORM_DATA"; payload:FormDataType}
 |{type: "SET_AGENDAS"; payload: AgendaType[]}
 |{type: "SET_USER_TO_DELETE"; payload: string}
+|{type: "SET_CONTACT_TO_DELETE"; payload: string}
 
 
 
@@ -72,9 +74,13 @@ export const reducer = (store: StoreType, action: ActionType) => {
 
         case "SET_USER_TO_DELETE":
             return {...store, userToDelete: action.payload}
+        
+        case "SET_CONTACT_TO_DELETE":
+            return {...store, contactToDelete: action.payload}
 
         case "SET_MODAL_FORM_DATA":
             return {...store, modalFormData: action.payload}
+
 
         default:
             return store

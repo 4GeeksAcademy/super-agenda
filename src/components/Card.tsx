@@ -2,7 +2,7 @@ import Swal from "sweetalert2"
 import { saveAgenda } from "../pages/Agendas"
 import { useContactReducer } from "../hooks/useContactReducer"
 import { Link } from "react-router"
-import { deleteContact } from "../services/contactServices"
+
 
 
 export type ItemType = {
@@ -22,26 +22,16 @@ type CardType = {
 
 export const Card = ({item, item: {name, phone, email, address, id}, agenda} : CardType) =>{
 
-    const {dispatch, openModal} = useContactReducer()
+    const {store, openModal} = useContactReducer()
 
     const handleDelete = () => {
-        Swal.fire({
-            title: "Are you sure?",
-            html:`You are about to delete <b>${name.toUpperCase()}</b>'s contact. <br/>Do you want to proceed?`,
-            confirmButtonText: "Delete",
-            confirmButtonColor: "red",
-            showDenyButton: true,
-            denyButtonText: "Cancel",
-            denyButtonColor: "gray"
-        }).then((resp)=>{
-            if(resp.isConfirmed){
-                deleteContact(agenda, id!).then((resp)=>{
-                    if(resp){
-                        saveAgenda(agenda, dispatch)
-                    }
-                })
+                // deleteContact(agenda, id!).then((resp)=>{
+                //     if(resp){
+                //         saveAgenda(agenda, dispatch)
+                //     } })
+            if(id){
+                openModal({type: "deleteContact", contactId: id.toString()})    
             }
-        })
     }
 
     const handleUpdateContact = () =>{

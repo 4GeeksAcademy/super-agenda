@@ -22,6 +22,7 @@ export type StoreType = {
     isModal: boolean
     modalType: keyof TypesType
     userToDelete: string
+    contactToDelete: string
     modalFormData: FormDataType
 }
 

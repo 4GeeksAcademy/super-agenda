@@ -7,8 +7,9 @@ import { getAgenda, getAllAgendas } from "../services/agendaServices";
 const ContactContext = createContext<ContactContextType | undefined>(undefined)
 
 export type OpenModalTypes =
+    | { type: "deleteContact"; contactId: string }
     | { type: "deleteUser"; agenda: string }
-    | { type: "updateContact"; formData: FormDataType }
+    | { type: "updateContact"; formData: FormDataType}
     | { type: "createAgenda" | "loading" | "createContact"}
 
 export const ContactProvider = ({ children }: ContactProviderType) => {
@@ -20,6 +21,9 @@ export const ContactProvider = ({ children }: ContactProviderType) => {
         switch (data.type) {
             case "deleteUser":
                 dispatch({ type: "SET_USER_TO_DELETE", payload: data.agenda })
+                break
+            case "deleteContact":
+                dispatch({ type: "SET_CONTACT_TO_DELETE", payload: data.contactId })
                 break
             
             case "updateContact":
@@ -37,6 +41,7 @@ export const ContactProvider = ({ children }: ContactProviderType) => {
     const closeModal = () => {
         dispatch({ type: "CLOSE_MODAL" })
         dispatch({ type: "SET_USER_TO_DELETE", payload: "" })
+        dispatch({ type: "SET_CONTACT_TO_DELETE", payload: "" })
         dispatch({ type: "SET_MODAL_TYPE", payload: "loading" })
         dispatch({type: "SET_MODAL_FORM_DATA", payload: initialModalFormData })
     }

@@ -1,6 +1,6 @@
 import type { ItemType } from "../components/Card"
 
-export const deleteContact = async(agenda:string, contactId: number)=>{
+export const deleteContact = async(agenda:string, contactId: string)=>{
     const response = await fetch(`https://playground.4geeks.com/contact/agendas/${agenda}/contacts/${contactId}`,
         {
             method: "DELETE"
