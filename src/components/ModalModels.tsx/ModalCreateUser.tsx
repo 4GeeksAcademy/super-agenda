@@ -4,14 +4,16 @@ import { InteractiveButton } from "../InteractiveButton"
 import type { ModalModelType } from "./ModalTypes"
 import { createAgenda, getAllAgendas } from "../../services/agendaServices"
 import { useContactReducer } from "../../hooks/useContactReducer"
+import { useNavigate } from "react-router"
 
 
 export const ModalCreateUser = ({ closeModal }: ModalModelType) => {
 
     const [userField, setUserField] = useState<string>("")
     const [fieldMessage, setFieldMessage] = useState("")
-    const { store, loadAgendas } = useContactReducer()
+    const { store, loadAgendas, loadAgenda } = useContactReducer()
     const [created, setCreated] = useState(false)
+    const navigate = useNavigate()
     const requiredError = "Required. Must be at least 6 characters."
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -38,10 +40,16 @@ export const ModalCreateUser = ({ closeModal }: ModalModelType) => {
             loadAgendas()
             setCreated(true)
             setFieldMessage(`${userField}'s agenda created successfully`)
+            loadAgenda(userField)
+            setTimeout(()=>{
+                navigate(`/${userField}/contacts`)
+            },1000)
+            
         } else {
             setFieldMessage("This agenda already exist")
         }
     }
+
 
 
     const btnClass = "py-2 rounded-2xl hover:cursor-pointer transform hover:scale-105 transition duration-300"
@@ -57,7 +65,7 @@ export const ModalCreateUser = ({ closeModal }: ModalModelType) => {
     return (
         <div className="min-h-80 sm:w-74">
             <div className="w-full md:w-full text-right">
-                <button className="transform hover:scale-110 transition duration-300 hover:cursor-pointer hover:text-slate-400" onClick={() => closeModal()}>
+                <button className="transform hover:scale-110 transition duration-300 hover:cursor-pointer hover:text-slate-400" onClick={()=> closeModal()}>
                     <i className="fa-solid fa-xmark"></i>
                 </button>
             </div>
