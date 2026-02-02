@@ -1,43 +1,95 @@
-import { Link } from "react-router"
+import { Link, useLocation } from "react-router"
 import { InteractiveButton } from "./InteractiveButton"
 import { useContactReducer } from "../hooks/useContactReducer"
 
 export const Footer = () => {
 
     const { store, openModal } = useContactReducer()
+    const location = useLocation()
 
+
+    const darkTheme = location.pathname.includes("agendas") || location.pathname == "/"
+    const buttonClasses = ` 
+        ${!darkTheme
+            ?
+            `hover:bg-slate-200 active:bg-white `
+            :
+            ` hover:bg-slate-600 active:bg-slate-800`
+        }
+    px-4  py-2 rounded-full  hover:cursor-pointer`
 
     return (
         <footer>
-            <div className="bg-orange-400">
-                <div className="mx-auto bg-blue-400 sm:w-[640px] md:w-[750px] lg:w-[980px] xl:w-[1100px] 2xl:w-[1400px]">
+            <div className={`${darkTheme ?
+                "bg-slate-900 text-slate-300"
+                :
+                "bg-slate-50 text-slate-700"
+                }
+            pb-15 pt-10
+            `
 
-                    <p>Soy Footer</p>
-
+            }>
+                <div className="mx-auto max-w-sm sm:max-w-2xl md:max-w-3xl lg:max-w-4xl px-4  grid grid-cols-12 gap-4">
                     {store?.slug ?
 
                         <>
-                            <Link to="/agendas">
-                                <p>Change agenda</p>
-                            </Link>
-                            <Link to={`/${store.slug}/contacts`}>
-                                <p>Contacts</p>
-                            </Link>
-                            <Link to="/about-me">
-                                <p>About me</p>
-                            </Link>
+
+                            <div className="col-span-6 sm:col-span-4 text-center border-r-1">
+                                <Link to="/agendas">
+                                    <button  className={buttonClasses} >Change agenda</button>
+                                </Link>
+                            </div>
+
+
+                            <div className="col-span-6 sm:col-span-4   text-center sm:border-r-1">
+                                <Link to={`/${store.slug}/contacts`}>
+                                    <button className={buttonClasses}>Contacts</button>
+                                </Link>
+                            </div>
+
+                            <div className="col-span-12 sm:col-span-4  text-center">
+                                <Link to="/about-me">
+                                    <button className={buttonClasses}>About me</button>
+                                </Link>
+                            </div>
+
+                            <div className="col-span-12 my-3 flex justify-center">
+                                <Link to="/">
+                                    <img className="w-30" src="https://res.cloudinary.com/dra2cr3uw/image/upload/v1769100140/star-wars-png-46074_fq5ugx.png" alt="" />
+                                </Link>
+                            </div>
+
+                            <div className="col-span-12 text-center">
+                                <p>1717 Harrison St, San Francisco, CA 94103, USA<br /> © 2022 Your Company.  All rights reserved.</p>
+                            </div>
+
                         </>
                         :
                         <>
-                            <Link to="/agendas">
-                                <p>Choose agenda</p>
-                            </Link>
-                           
-                                <p className="hover:cursor-pointer" onClick={()=> openModal({type: "createAgenda"})}>Create agenda</p>
-                           
-                            <Link to="/about-me">
-                                <p>About me</p>
-                            </Link>
+                            <div className="col-span-6 sm:col-span-4 text-center border-r-1">
+
+                                <Link to="/agendas">
+                                    <button className={buttonClasses}>Choose agenda</button>
+                                </Link>
+                            </div>
+
+                            <div className="col-span-6 sm:col-span-4 text-center sm:border-r-1">
+                                <button  className={buttonClasses} onClick={() => openModal({ type: "createAgenda" })}>Create agenda</button>
+                            </div>
+
+                            <div className="col-span-12 sm:col-span-4 text-center">
+                                <Link to="/about-me">
+                                    <button className={buttonClasses}>About me</button>
+                                </Link>
+                            </div>
+                            <div className="col-span-12 flex justify-center my-3">
+                                <Link to="/">
+                                    <img className="w-30" src="https://res.cloudinary.com/dra2cr3uw/image/upload/v1769100140/star-wars-png-46074_fq5ugx.png" alt="" />
+                                </Link>
+                            </div>
+                            <div className="col-span-12  text-center">
+                                <p>1717 Harrison St, San Francisco, CA 94103, USA<br /> © 2022 Your Company.  All rights reserved.</p>
+                            </div>
                         </>
                     }
 

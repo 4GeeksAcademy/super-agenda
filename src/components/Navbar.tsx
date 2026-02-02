@@ -15,7 +15,7 @@ export const Navbar = () => {
 
     const darkTheme = location.pathname.includes("agendas") || location.pathname == "/"
     
-    const bgColor = darkTheme ?  "bg-slate-700" : "bg-slate-100"
+    const bgColor = darkTheme ?  "bg-slate-700" : "bg-slate-50"
 
     const fontColor = darkTheme ? "text-slate-100" : "text-slate-700"
     
