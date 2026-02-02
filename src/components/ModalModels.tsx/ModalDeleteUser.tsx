@@ -34,13 +34,13 @@ export const ModalDeleteUser = ({ closeModal }: ModalModelType) => {
             <div className="flex justify-center">
                 <img className="w-30" src="https://cdn-icons-png.flaticon.com/512/4989/4989793.png" />
             </div>
-            <div className="w-75 text-center">
-                <h2>Do you really want to delete <b>{store?.slug}</b>'s agenda?</h2>
+            <div className="text-center bg-red-200 py-2 md:px-2 rounded-xl text-red-900">
+                <h2 className="text-sm md:text-lg">Do you really want to delete <b>{store?.userToDelete}</b>'s agenda?</h2>
             </div>
             <div className="flex justify-center ">
-                <div className="w-50 flex justify-between">
+                <div className="w-full flex justify-evenly">
 
-                <button className={`${btnClass} ${deleteClasses}`} onClick={handleDeleteAgendaBtn}>Confirm</button>
+                <button className={`${btnClass} ${deleteClasses} mr-4`} onClick={handleDeleteAgendaBtn}>Confirm</button>
                 <button className={`${btnClass} ${cancelClasses}`}  onClick={() => closeModal()} >Cancel</button>
                 </div>
             </div>

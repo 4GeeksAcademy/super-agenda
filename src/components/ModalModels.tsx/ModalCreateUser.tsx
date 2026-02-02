@@ -56,7 +56,7 @@ export const ModalCreateUser = ({ closeModal }: ModalModelType) => {
 
     return (
         <div className="min-h-80 sm:w-74">
-            <div className="w-full text-right">
+            <div className="w-full md:w-full text-right">
                 <button className="transform hover:scale-110 transition duration-300 hover:cursor-pointer hover:text-slate-400" onClick={() => closeModal()}>
                     <i className="fa-solid fa-xmark"></i>
                 </button>

@@ -1,3 +1,6 @@
 @import "tailwindcss";
 
 
+* {
+   font-family: "SN Pro", sans-serif; 
+}
