@@ -14,8 +14,8 @@ export const initialStore : StoreType = {
     slug: null,
     agendas: null,
     contacts: null,
-    isModal: false,
-    modalType: "loading",
+    isModal: true,
+    modalType: "deleteUser",
     userToDelete: "",
     modalFormData: initialModalFormData
     
