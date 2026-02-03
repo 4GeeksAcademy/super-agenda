@@ -9,7 +9,7 @@ import type { ItemType } from "./Card"
     disabled?: boolean
  }
 
-export const fields: (keyof ItemType)[] = ["name", "phone", "email", "address",]
+export const fields: (keyof ItemType)[] = ["name", "phone", "email", "address"] as const
 
 
 export const FormField = ({field, handleChange, formData, userField, disabled}:FormFieldType) =>{

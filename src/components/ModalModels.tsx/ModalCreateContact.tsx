@@ -17,13 +17,27 @@ export const ModalCreateContact = ({ closeModal }: ModalModelType) => {
     const { store, loadAgenda } = useContactReducer()
     const [created, setCreated] = useState(false)
     const requiredError = "Required. Must be at least 6 characters."
-
+    const [errors, setErrors] = useState({
+        name: false,
+        phone: false,
+        email: false,
+        address: false
+    })
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-        setFormData({ ...formData, [event.target.name]: event.target.value })
+
+        const name  = event.target.name
+        const value = event.target.value
+
+        setFormData({ ...formData, [name]: value })
+        setErrors(prev => {
+            return ({...prev, [name]: value.trim().length < 6})
+        })
     }
 
-
+    useEffect(()=>{
+        console.log(formData)
+    },[formData])
 
     const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
@@ -34,7 +48,7 @@ export const ModalCreateContact = ({ closeModal }: ModalModelType) => {
 
             const value: string = formData[key]
 
-            if (value.length > 0 && value.length < 6) {
+            if (value.trim() == "" && value.length >= 0 && value.length < 6) {
                 setFieldMessage("Please enter at least 6 characters in every field.")
                 return
             } else {
@@ -70,13 +84,18 @@ export const ModalCreateContact = ({ closeModal }: ModalModelType) => {
 
     return (
         <>
-            <form onSubmit={handleSubmit}>
+            <form className="flex flex-col px-10" onSubmit={handleSubmit}>
+                
                 {fields.map((field, index) => {
                     // return (<><FormField disabled={created} key={index} formData={formData} field={field} handleChange={handleChange} /> </>)
                     const capitalized = field[0].toUpperCase() + field.slice(1)
                      return (<>
-                    <label>{capitalized}</label>
-                    <input disabled={created} key={index} onChange={handleChange} />
+                    <label htmlFor={field}>{capitalized}</label>
+                    <input className={`mb-4 ${errors[field] ? "bg-red-500 " : "bg-slate-100"} border-1 border-slate-300 h-9 rounded-xl px-3 focus:outline-slate-400 text-slate-500`}
+                     id={field} disabled={created}
+                      key={index}
+                      name={field} 
+                      onChange={handleChange}/>
                      </>)
                 })}
                 {
@@ -87,15 +106,15 @@ export const ModalCreateContact = ({ closeModal }: ModalModelType) => {
                 }
                 {
                     created ?
-                        <>
+                        <div>
                             <InteractiveButton tone="disabled" color="green" text="Created" />
                             <InteractiveButton tone="normal" buttonType="button" color="slate" text="Close" onClick={() => closeModal()} />
-                        </>
+                        </div>
                         :
-                        <>
+                        <div>
                             <InteractiveButton tone="normal" color="green" text="Create" />
                             <InteractiveButton buttonType="button" tone="normal" color="slate" text="Cancel" onClick={() => closeModal()} />
-                        </>
+                        </div>
                 }
             </form>
         </>

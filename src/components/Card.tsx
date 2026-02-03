@@ -20,7 +20,7 @@ type CardType = {
 }
 
 
-export const Card = ({item, item: {name, phone, email, address, id}, agenda} : CardType) =>{
+export const Card = ({item, item: {name, phone, email, address, id}} : CardType) =>{
 
     const {store, openModal} = useContactReducer()
 
