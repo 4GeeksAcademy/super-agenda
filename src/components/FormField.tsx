@@ -1,16 +1,16 @@
 import type { ChangeEvent } from "react"
 import type { ItemType } from "./Card"
 
- type FormFieldType = {
-    handleChange: (event: ChangeEvent<HTMLInputElement>)=> void
-    field: keyof ItemType
-    formData?: ItemType 
-    userField?: string
-    disabled?: boolean
- }
 
-export const fields: (keyof ItemType)[] = ["name", "phone", "email", "address"] as const
+export const fields = ["name", "phone", "email", "address"] as const
 
+type FormFieldType = {
+   handleChange: (event: ChangeEvent<HTMLInputElement>)=> void
+   field: typeof fields[number]
+   formData?: ItemType 
+   userField?: string
+   disabled?: boolean
+}
 
 export const FormField = ({field, handleChange, formData, userField, disabled}:FormFieldType) =>{
 
