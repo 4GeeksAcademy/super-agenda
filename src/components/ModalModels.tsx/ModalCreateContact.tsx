@@ -15,8 +15,8 @@ export const ModalCreateContact = ({ closeModal }: ModalModelType) => {
     })
     const [fieldMessage, setFieldMessage] = useState("")
     const { store, loadAgenda } = useContactReducer()
-    const [created, setCreated] = useState(false)
-    const requiredError = "Required. Must be at least 6 characters."
+    const [created, setCreated] = useState(false)  
+    const btnClass = "transform hover:scale-110 transition hover:duration-300"
 
     const [errors, setErrors] = useState({
         name: false,
@@ -89,8 +89,8 @@ export const ModalCreateContact = ({ closeModal }: ModalModelType) => {
     return (
         <>
             <div className="relative pt-6">
-                <div onClick={() => closeModal()} className="absolute top-0 right-0 p-1 rounded-lg hover:cursor-pointer hover:bg-slate-200">
-                    <i className=" fa-solid fa-xmark"></i>
+                <div  className={`${btnClass} absolute top-0 right-0 p-1 rounded-lg  hover:bg-slate-200`}>
+                    <button onClick={() => closeModal()}className="fa-solid fa-xmark hover:cursor-pointer"></button>
                 </div>
                 <div className="text-center ">
                     <span className="text-2xl">Add a new contact</span>
@@ -126,13 +126,13 @@ export const ModalCreateContact = ({ closeModal }: ModalModelType) => {
                         {
                             created ?
                                 <>
-                                    <InteractiveButton tone="disabled" color="green" text="Created" />
-                                    <InteractiveButton tone="normal" buttonType="button" color="slate" text="Close" onClick={() => closeModal()} />
+                                    <InteractiveButton extraClass={btnClass} tone="disabled" color="green" text="Created" />
+                                    <InteractiveButton extraClass={btnClass} tone="normal" buttonType="button" color="slate" text="Close" onClick={() => closeModal()} />
                                 </>
                                 :
                                 <>
-                                    <InteractiveButton tone="normal" color="green" text="Create" />
-                                    <InteractiveButton buttonType="button" tone="normal" color="slate" text="Cancel" onClick={() => closeModal()} />
+                                    <InteractiveButton extraClass={btnClass} tone="normal" color="green" text="Create" />
+                                    <InteractiveButton extraClass={btnClass} buttonType="button" tone="normal" color="slate" text="Cancel" onClick={() => closeModal()} />
                                 </>
                         }
                     </div>
