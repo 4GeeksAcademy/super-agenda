@@ -44,7 +44,6 @@ export const ModalUpdateContact = ({ closeModal }: ModalModelType) => {
                     }        
                     }
             }
-
             if(changes > 0){
                 const updatedContact = await updateContact(store?.slug, formData)
                 if(updatedContact){
