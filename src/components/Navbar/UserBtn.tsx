@@ -83,7 +83,7 @@ export const UserBtn = ({ main, fontColor }: UserBtnType) => {
                 }
 
 
-                <div className={`absolute ${main ? "right-0 mt-2 " : "top-0 -left-43"}
+                <div className={`absolute z-1 ${main ? "right-0 mt-2 " : "top-0 -left-43"}
                  text-center p-3   ${roundedDropDownContent} ${!openDropDown && "hidden "} 
                  ${darkTheme ?
                         `bg-slate-200`

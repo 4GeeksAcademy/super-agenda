@@ -2,7 +2,7 @@ import { Card } from "./Card"
 
 export const BenefitsSection = () => {
     return (
-        <div className="px-2 py-25  mx-auto  w-full sm:w-[600px] md:w-[700px] lg:w-[800px] xl:w-[900px] 2xl:w-[1000px]  ">
+        <div className="px-2 pt-25 pb-40 mx-auto  w-full sm:w-[600px] md:w-[700px] lg:w-[800px] xl:w-[900px] 2xl:w-[1000px]  ">
             <div className="p-2">
                 <div id="benefits-section" className="text-center border-b-1 sm:mx-20 pb-10">
                     <h2 className="text-slate-800 text-3xl md:text-4xl 2xl:text-5xl font-semibold">Why use Super Agenda?</h2>
