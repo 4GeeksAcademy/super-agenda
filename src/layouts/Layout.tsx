@@ -13,14 +13,14 @@ export const Layout = () => {
     const modalType = store?.modalType
     const location = useLocation()
 
-    const home = location.pathname.trim()== "/"
+    const exclusiveSize = location.pathname.trim()== "/" || location.pathname.trim() == "/agendas"
    
 
     return (
         <div className="min-h-screen flex flex-col">
             {isModal && modalType && <Modal type={modalType as keyof TypesType} />}
             <Navbar />
-            <div className={`flex-1 ${home ?"": " mx-auto sm:w-[640px] md:w-[750px] lg:w-[980px] xl:w-[1100px] 2xl:w-[1400px]  my-5"}`}>
+            <div className={`flex-1 ${exclusiveSize ?"": " mx-auto w-full sm:w-[600px] lg:w-[700px]  my-5"}`}>
                 <Outlet />
             </div>
             <Footer />
