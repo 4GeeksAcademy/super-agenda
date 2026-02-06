@@ -45,9 +45,9 @@ export const Agendas = () => {
             <div className="absolute inset-x-0 top-1/2 -bottom-12 z-0 bg-slate-900"></div>
             <div className="relative z-1  mx-auto w-full sm:w-[600px] lg:w-[700px]  py-10">
                 <div className="ml-3 sm:ml-6 p-1 flex">
-                    <Link to="/">
-                        <button  className="pr-6 pl-3 py-3 bg-slate-200 rounded-full hover:cursor-pointer hover:bg-slate-100 active:bg-slate-300"><i className="fa-solid fa-angle-left pr-1"></i>Return</button>
-                    </Link>
+                 
+                        <button onClick={()=> navigate(-1)} className="pr-6 pl-3 py-3 bg-slate-200 rounded-full hover:cursor-pointer hover:bg-slate-100 active:bg-slate-300"><i className="fa-solid fa-angle-left pr-1"></i>Return</button>
+                  
 
                 </div>
                 <div className="flex justify-center p-3">
