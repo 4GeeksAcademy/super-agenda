@@ -31,7 +31,7 @@ export const ContactCard = ({item, agenda}:ContactCardType)=>{
 
 
     return (
-        <li className="col-span-12 lg:col-span-6 lg:block flex justify-center">
+        <li className="col-span-12 lg:col-span-6 h-64 flex justify-center">
            <div className="relative w-68 h-45 grid grid-cols-12 gap-1 p-3 bg-slate-50 rounded-2xl hover:shadow-lg transition hover:duration-300">
             <div className="absolute -top-7 -rotate-2 left-1/2 h-17 w-10  bg-blue-100 opacity-50 border-x-1 border-blue-200"></div>
                 <div className="col-span-4 row-span-3 bg-slate-300 rounded-xl"></div>

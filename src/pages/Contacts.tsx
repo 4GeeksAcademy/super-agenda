@@ -18,6 +18,8 @@ export const Contacts = () => {
     }, [])
 
 
+    let contacts = Array.isArray(store?.contacts) && store?.contacts.slice(5 * page - 5, 5 * page)
+    let disabled = Array.isArray(store?.contacts) && store?.contacts.length / (5 * page) <= 1
 
     return (
         <>
@@ -33,11 +35,14 @@ export const Contacts = () => {
                             {store?.slug}'s Contacts
                         </h2>
                     </div>
-                    <div className="flex flex-col justify-between gap-13 p-3 pb-15 rounded-xl bg-slate-700 h-210 shadow-xl shadow-slate-400">
+                    <div  className="min-h-300 flex flex-col justify-between p-3 pb-15 rounded-4xl bg-slate-700 shadow-xl shadow-slate-400 ">
+
+
+
                         <ul className="grid grid-cols-12 gap-y-10 md:gap-10 p-10 ">
 
                             {
-                                Array.isArray(store?.contacts) && store.slug && store.contacts.map((contact, index) => {
+                                Array.isArray(contacts) && store?.slug && contacts.map((contact, index) => {
                                     return <ContactCard item={contact} agenda={store?.slug!} />
                                 })
                             }
@@ -52,15 +57,22 @@ export const Contacts = () => {
                                 </button>
                             </div>
                         </ul>
-                        <div className="bg-red-200 flex justify-center py-2">
+
+                        <div className="bg-blue-200 flex justify-center py-2">
                             <div className="w-35 flex justify-between bg-orange-200">
-                                <button disabled={page == 1} onClick={() => setPage(prev => prev > 1 ? prev - 1 : prev)} className={`${page == 1 && "opacity-0"}`}>
+                                <button type="button" disabled={page == 1} onClick={(e) =>{
+                                    e.preventDefault()
+                                setPage(prev => prev > 1 ? prev - 1 : prev)
+                                }} className={`${page == 1 && "opacity-0"}`}>
                                     <i className="fa-solid fa-angle-left"></i>
                                 </button>
-                                <button className="">
+                                <button type="button">
                                     {page}
                                 </button>
-                                <button onClick={() => setPage(prev => prev + 1)} className="">
+                                <button type="button" onClick={(e) => {
+                                    e.preventDefault()
+                                    setPage(prev => prev + 1)
+                                    }} className="">
                                     <i className="fa-solid fa-angle-right"></i>
                                 </button>
                             </div>
