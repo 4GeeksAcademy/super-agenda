@@ -25,10 +25,6 @@ export const Card = ({item, item: {name, phone, email, address, id}} : CardType)
     const {store, openModal} = useContactReducer()
 
     const handleDelete = () => {
-                // deleteContact(agenda, id!).then((resp)=>{
-                //     if(resp){
-                //         saveAgenda(agenda, dispatch)
-                //     } })
             if(id){
                 openModal({type: "deleteContact", contactId: id.toString()})    
             }
