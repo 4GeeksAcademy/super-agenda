@@ -14,10 +14,13 @@ export const Layout = () => {
     const location = useLocation()
 
     const exclusiveSize = location.pathname.trim()== "/" || location.pathname.trim() == "/agendas"
+    const bgColor = location.pathname.trim() == "/about-me" || location.pathname.trim().includes("/contacts") || location.pathname.trim() == "/"
+
+    console.log(bgColor)
    
 
     return (
-        <div className="min-h-screen flex flex-col bg-slate-50">
+        <div className={`min-h-screen flex flex-col ${bgColor ? "bg-slate-50" : "bg-slate-900"}`}>
             {isModal && modalType && <Modal type={modalType as keyof TypesType} />}
             <Navbar />
             <div className={`flex-1 ${exclusiveSize ?"": " mx-auto w-full sm:w-[600px] lg:w-[700px] my-5 "}`}>

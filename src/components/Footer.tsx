@@ -19,7 +19,7 @@ export const Footer = () => {
     px-4  py-2 rounded-full  hover:cursor-pointer`
 
     return (
-        <footer>
+        <footer className="">
             <div className={`${darkTheme ?
                 "bg-slate-900 text-slate-300"
                 :
@@ -29,7 +29,7 @@ export const Footer = () => {
             `
 
             }>
-                <div className="mx-auto max-w-sm sm:max-w-2xl md:max-w-3xl lg:max-w-4xl px-4  grid grid-cols-12 gap-4">
+                <div className={`${ !darkTheme && "border-t-3 border-slate-400"} pt-15 mx-auto max-w-sm sm:max-w-2xl md:max-w-3xl lg:max-w-4xl px-4  grid grid-cols-12 gap-4`}>
                     {store?.slug ?
 
                         <>
