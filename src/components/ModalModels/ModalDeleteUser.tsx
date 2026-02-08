@@ -20,7 +20,7 @@ export const ModalDeleteUser = ({ closeModal }: ModalModelType) => {
                 loadAgendas()
                 resetSlugAndContacts()
                 closeModal()
-                navigate("/")
+                navigate("/agendas")
             }
 
         }

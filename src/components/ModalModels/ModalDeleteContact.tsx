@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router"
 import { useContactReducer } from "../../hooks/useContactReducer"
 import { deleteContact } from "../../services/contactServices"
 import type { ModalModelType } from "./ModalTypes"
@@ -5,7 +6,6 @@ import type { ModalModelType } from "./ModalTypes"
 export const ModalDeleteContact = ({ closeModal }: ModalModelType) => {
 
     const { store, loadAgenda } = useContactReducer()
-
 
     const handleDeleteContact = async () => {
         if (store?.slug && store?.contactToDelete) {

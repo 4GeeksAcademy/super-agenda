@@ -19,10 +19,10 @@ export const BannerSection = () => {
                 </div>
             </div>
             <div className="absolute bottom-2 inset-x-0  flex justify-center">
-                <a href="#benefits-section" className="mb-3 border-2 border-slate-50 text-slate-50 rounded-4xl w-10 h-10 flex items-center
+                <a href="#benefits-section" className="mb-3 border-2 border-slate-50 text-slate-50 rounded-full w-15 h-15 flex items-center
                  justify-center hover:cursor-pointer transform hover:translate-y-3 transition hover:duration-500 
                  animate-pulse">
-                <i className="text-xl fa-solid fa-angle-down"></i>
+                <i className="text-3xl fa-solid fa-angle-down"></i>
                 </a>
             </div>
         </div>

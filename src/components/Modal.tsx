@@ -1,10 +1,10 @@
 import { useContactReducer } from "../hooks/useContactReducer"
-import { ModalCreateContact } from "./ModalModels.tsx/ModalCreateContact";
-import { ModalCreateUser } from "./ModalModels.tsx/ModalCreateUser"
-import { ModalDeleteContact } from "./ModalModels.tsx/ModalDeleteContact";
-import { ModalDeleteUser } from "./ModalModels.tsx/ModalDeleteUser";
-import { ModalLoading } from "./ModalModels.tsx/ModalLoading"
-import { ModalUpdateContact } from "./ModalModels.tsx/ModalUpdateContact";
+import { ModalCreateContact } from "./ModalModels/ModalCreateContact";
+import { ModalCreateUser } from "./ModalModels/ModalCreateUser"
+import { ModalDeleteContact } from "./ModalModels/ModalDeleteContact";
+import { ModalDeleteUser } from "./ModalModels/ModalDeleteUser";
+import { ModalLoading } from "./ModalModels/ModalLoading"
+import { ModalUpdateContact } from "./ModalModels/ModalUpdateContact";
 
 
 

@@ -36,7 +36,7 @@ export const Contacts = () => {
                         </h2>
                     </div>
                     <div className=" flex flex-col justify-between p-3 pb-15 rounded-4xl bg-slate-700 shadow-xl shadow-slate-400 ">
-                        <div className="grid grid-cols-12 md:grid-rows-3 gap-x-10 min-h-[750px] p-10 ">
+                        <div className="grid grid-cols-12 md:grid-rows-3 gap-y-15 gap-x-10 min-h-[750px] p-10 ">
                             <div className="col-span-12 lg:col-span-6 lg:block flex items-center justify-center ">
                                 <button onClick={() => openModal({ type: "createContact" })} className="w-68 h-45 hover:cursor-pointer transform hover:scale-110 transition hover:duration-500 hover:bg-slate-300 active:bg-slate-100 bg-slate-200 rounded-2xl">
                                     <i className="fa-solid fa-plus text-5xl text-slate-50"></i>
