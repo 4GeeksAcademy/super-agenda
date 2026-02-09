@@ -4,6 +4,7 @@ import { InteractiveButton } from "../InteractiveButton"
 import type { ModalModelType } from "./ModalTypes"
 import { useContactReducer } from "../../hooks/useContactReducer"
 import { createContact } from "../../services/contactServices"
+import { FieldCreateContact } from "./FieldCreateContacts"
 
 export const ModalCreateContact = ({ closeModal }: ModalModelType) => {
 
@@ -15,7 +16,8 @@ export const ModalCreateContact = ({ closeModal }: ModalModelType) => {
     })
     const [fieldMessage, setFieldMessage] = useState("")
     const { store, loadAgenda } = useContactReducer()
-    const [created, setCreated] = useState(false)  
+    const [created, setCreated] = useState(false)
+    const [sended, setSended] = useState(false)  
     const btnClass = "transform hover:scale-110 transition hover:duration-300"
 
     const [errors, setErrors] = useState({
@@ -43,46 +45,58 @@ export const ModalCreateContact = ({ closeModal }: ModalModelType) => {
         if (!store?.slug) throw new Error("Agenda not valid")
 
         let error = false
+        
+        setSended(true)
 
         for (let field in formData) {
             const key = field as keyof typeof formData
 
             const value: string = formData[key]
+
             setErrors(prev => ({ ...prev, [key]: value.trim().length < 6 }))
 
-            if (value.trim().length < 6) {
-                if (!error) {
-                    error = true
+            if(key === "email"){
+
+                const emailRegex =  /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+
+                if(!emailRegex.test(value)){
+                    alert("Please enter a valid email address (e.g. user@domain.com)")
                 }
-                setFieldMessage("Please enter at least 6 characters in every field.")
             }
+            // if (value.trim().length < 6) {
+            //     if (!error) {
+            //         error = true
+            //     }
+            //     setFieldMessage("Please enter at least 6 characters in every field.")
+            // }
         }
-        loadAgenda(store?.slug)
+        // loadAgenda(store?.slug)
 
-        const exist = Array.isArray(store?.contacts) && store.contacts.some((contact) => {
-            const contactName = contact.name.replace(" ", "").toLowerCase()
-            const formDataName = formData.name.replace(" ", "").toLowerCase()
-            return contactName == formDataName
-        })
+        // const exist = Array.isArray(store?.contacts) && store.contacts.some((contact) => {
+        //     const contactName = contact.name.replace(" ", "").toLowerCase()
+        //     const formDataName = formData.name.replace(" ", "").toLowerCase()
+        //     return contactName == formDataName
+        // })
 
-        if (exist) {
-            setFieldMessage("This contact name already exist, try another one")
-            setErrors({...errors, name : true})
-            return
-        }
-        if (!error) {
-            setFieldMessage("")
-        } else {
-            return
-        }
+        // if (exist) {
+        //     setFieldMessage("This contact name already exist, try another one")
+        //     setErrors({...errors, name : true})
+        //     return
+        // }
+        // if (!error) {
+        //     setFieldMessage("")
+        // } else {
+        //     return
+        // }
 
-        const createdContact = await createContact(store.slug, formData)
+        // const createdContact = await createContact(store.slug, formData)
 
-        if (createdContact) {
-            setCreated(true)
-            setFieldMessage(`${store.slug}'s contact has been successfully added`)
-            loadAgenda(store.slug)
-        }
+        // if (createdContact) {
+        //     setCreated(true)
+        //     setFieldMessage(`${store.slug}'s contact has been successfully added`)
+        //     loadAgenda(store.slug)
+        //     closeModal()
+        // }
     }
 
 
@@ -102,18 +116,10 @@ export const ModalCreateContact = ({ closeModal }: ModalModelType) => {
 
                     {fields.map((field, index) => {
                         // return (<><FormField disabled={created} key={index} formData={formData} field={field} handleChange={handleChange} /> </>)
-                        const capitalized = field[0].toUpperCase() + field.slice(1)
-                        return (<>
-                            <label htmlFor={field}>{capitalized}</label>
-                            <input className={`mb-4 ${errors[field] ?
-                                "focus:outline-red-300 bg-red-100 text-red-400 border-red-300 "
-                                : "focus:outline-slate-400 bg-slate-100 text-slate-500 border-slate-300 "
-                            } border-1  h-9 rounded-xl px-3 `}
-                            id={field} disabled={created}
-                            key={index}
-                            name={field}
-                            onChange={handleChange} />
-                        </>)
+
+                        return (
+                            <FieldCreateContact field={field} sended={sended} created={created} errors={errors} handleChange={handleChange} />
+                        )
                     })}
                     {
                         created ?

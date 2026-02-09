@@ -50,6 +50,7 @@ export const ModalUpdateContact = ({ closeModal }: ModalModelType) => {
                      loadAgenda(store?.slug)
                      setFieldMessage(`${store?.slug.toUpperCase()}'s contact has been updated`)
                      setUpdated(true)
+                     closeModal()
                 }
             } else{
                 setFieldMessage("You must update at least 1 field")

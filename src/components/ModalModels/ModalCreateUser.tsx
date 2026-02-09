@@ -43,7 +43,9 @@ export const ModalCreateUser = ({ closeModal }: ModalModelType) => {
             loadAgenda(userField)
             setTimeout(()=>{
                 navigate(`/${userField}/contacts`)
+                closeModal()
             },1000)
+           
             
         } else {
             setFieldMessage("This agenda already exist")
