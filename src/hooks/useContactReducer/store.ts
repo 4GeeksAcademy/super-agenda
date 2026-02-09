@@ -36,7 +36,7 @@ export type FormDataType = {
     address: string
     phone: string
     email: string
-    id: number
+    id?: number
 }
 
 

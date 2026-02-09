@@ -45,7 +45,7 @@ export const ModalCreateContact = ({ closeModal }: ModalModelType) => {
         if (!store?.slug) throw new Error("Agenda not valid")
 
         let error = false
-        
+
         setSended(true)
 
         for (let field in formData) {
@@ -55,14 +55,7 @@ export const ModalCreateContact = ({ closeModal }: ModalModelType) => {
 
             setErrors(prev => ({ ...prev, [key]: value.trim().length < 6 }))
 
-            if(key === "email"){
-
-                const emailRegex =  /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
-
-                if(!emailRegex.test(value)){
-                    alert("Please enter a valid email address (e.g. user@domain.com)")
-                }
-            }
+           
             // if (value.trim().length < 6) {
             //     if (!error) {
             //         error = true
@@ -115,10 +108,9 @@ export const ModalCreateContact = ({ closeModal }: ModalModelType) => {
                     <div className="flex flex-col bg-slate-50 rounded-xl p-5">
 
                     {fields.map((field, index) => {
-                        // return (<><FormField disabled={created} key={index} formData={formData} field={field} handleChange={handleChange} /> </>)
-
+                      
                         return (
-                            <FieldCreateContact field={field} sended={sended} created={created} errors={errors} handleChange={handleChange} />
+                            <FieldCreateContact setSended={setSended} field={field} sended={sended} created={created}  setFormData={setFormData} formData={formData} />
                         )
                     })}
                     {
