@@ -23,7 +23,7 @@ export const Layout = () => {
         <div className={`min-h-screen flex flex-col ${bgColor ? "bg-slate-50" : "bg-slate-900"}`}>
             {isModal && modalType && <Modal type={modalType as keyof TypesType} />}
             <Navbar />
-            <div className={`flex-1 ${exclusiveSize ?"": " mx-auto w-full sm:w-[600px] lg:w-[700px] my-5 "}`}>
+            <div className={`flex-1 ${exclusiveSize ?"": " mx-auto w-full sm:w-[600px] lg:w-[800px] my-5 "}`}>
                 <Outlet />
             </div>
             <Footer />

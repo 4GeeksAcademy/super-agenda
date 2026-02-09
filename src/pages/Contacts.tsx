@@ -27,7 +27,7 @@ export const Contacts = () => {
                 <div className="flex flex-col  gap-2 hover:cursor-default ">
                     <div className="flex">
                         <div className="p-2">
-                            <button onClick={() => navigate(-1)} className="pr-6 pl-3 py-2 shadow-md shadow-slate-400 bg-slate-200 rounded-full hover:cursor-pointer hover:bg-slate-100 active:bg-slate-300"><i className="fa-solid fa-angle-left pr-1"></i>Return</button>
+                            <button onClick={() => navigate(-1)} className="pr-6 pl-3 py-2 shadow-md shadow-slate-400 bg-slate-400  text-slate-50 rounded-full hover:cursor-pointer hover:bg-slate-300 active:bg-slate-500"><i className="fa-solid fa-angle-left pr-1"></i>Return</button>
                         </div>
                     </div>
                     <div className="flex justify-center p-3">
