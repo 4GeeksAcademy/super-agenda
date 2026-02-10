@@ -4,11 +4,11 @@ import type { FormDataType } from "../../hooks/useContactReducer/store"
 type FieldCreateContactType = {
     field: keyof ErrorsType
     created: boolean
-    sended: boolean
+    submitCount: number
 
     setFormData: Dispatch<React.SetStateAction<FormDataType>>
     formData: FormDataType
-    setSended: Dispatch<React.SetStateAction<boolean>>
+    setSubmitCount: Dispatch<React.SetStateAction<number>>
 }
 
 
@@ -22,47 +22,52 @@ type ErrorsType = {
 
 
 
-export const FieldCreateContact = ({ field, created, sended, setSended, setFormData, formData }: FieldCreateContactType) => {
+export const FieldCreateContact = ({ field, created, submitCount, setSubmitCount, setFormData, formData }: FieldCreateContactType) => {
 
     const capitalized = field[0].toUpperCase() + field.slice(1)
     const [error, setError] = useState("")
     const [fieldValue, setFieldValue] = useState("")
-
+    const [textRequired, setTextRequired] = useState("Please enter at least 6 characters")
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         const name = event.target.name
         const value = event.target.value
         setFormData({ ...formData, [name]: value })
         setFieldValue(value)
-
+        
     }
 
-    useEffect(() => {
-        if (sended && fieldValue.trim() === "") {
-            setError("Please enter at least 6 characters")
-        } else {
-            setError("")
-        }
-    }, [sended, fieldValue])
+useEffect(() => {
+    if (submitCount === 0) {
+        setError("")
+        return
+    }
 
+    if (fieldValue.trim().length < 6) {
+        setError("Please enter at least 6 characters")
+        return
+    }
 
+    if (field === "email") {
+        const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/
+        setError(
+            emailRegex.test(fieldValue)
+                ? ""
+                : "Please enter a valid email address (e.g. user@domain.com)"
+        )
+        return
+    }
 
-    //  if(key === "email"){
+    setError("")
+}, [submitCount, fieldValue, field])
 
-    //                 const emailRegex =  /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
-
-    //                 if(!emailRegex.test(value)){
-    //                     alert("Please enter a valid email address (e.g. user@domain.com)")
-    //                 }
-    //             }
 
 
     return (<>
         <label htmlFor={field}>{capitalized}</label>
         <div className="relative w-full">
-
             <input
-                className={` border-1 rounded-xl h-9 ${error ? "bg-red-200 text-red-800" :
-                    "bg-slate-300 text-slate-800"
+                className={`pl-3  border-1 rounded-xl h-10 ${error ? "bg-red-200 text-red-700" :
+                    "bg-emerald-100 text-emerald-700"
                     } w-full `}
                 // className={` 
                 // ${errors[field] ?
@@ -81,9 +86,11 @@ export const FieldCreateContact = ({ field, created, sended, setSended, setFormD
                 </div>
             }
         </div>
-        {error &&
+   
 
-            <div className="mb-4 w-full bg-red-300 text-red-800 mt-1 py-1 text-center rounded-xl">{error}</div>
-        }
+            <div className={`${error ? "text-red-800" : "text-emerald-400"} mb-2 w-full  mt-1 py-1 text-center rounded-xl min-h-9`}>
+                {error || textRequired}
+            </div>
+        
     </>)
 }

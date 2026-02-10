@@ -17,7 +17,7 @@ export const ModalCreateContact = ({ closeModal }: ModalModelType) => {
     const [fieldMessage, setFieldMessage] = useState("")
     const { store, loadAgenda } = useContactReducer()
     const [created, setCreated] = useState(false)
-    const [sended, setSended] = useState(false)  
+    const [submitCount, setSubmitCount] = useState(0)  
     const btnClass = "transform hover:scale-110 transition hover:duration-300"
 
     const [errors, setErrors] = useState({
@@ -38,15 +38,15 @@ export const ModalCreateContact = ({ closeModal }: ModalModelType) => {
         })
     }
 
-
+    
 
     const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
         if (!store?.slug) throw new Error("Agenda not valid")
 
         let error = false
-
-        setSended(true)
+        console.log("Se envio el form")
+        setSubmitCount(prev => prev + 1)
 
         for (let field in formData) {
             const key = field as keyof typeof formData
@@ -56,12 +56,12 @@ export const ModalCreateContact = ({ closeModal }: ModalModelType) => {
             setErrors(prev => ({ ...prev, [key]: value.trim().length < 6 }))
 
            
-            // if (value.trim().length < 6) {
-            //     if (!error) {
-            //         error = true
-            //     }
-            //     setFieldMessage("Please enter at least 6 characters in every field.")
-            // }
+            if (value.trim().length < 6) {
+                if (!error) {
+                    error = true
+                }
+                setFieldMessage("Please enter at least 6 characters in every field.")
+            }
         }
         // loadAgenda(store?.slug)
 
@@ -95,7 +95,7 @@ export const ModalCreateContact = ({ closeModal }: ModalModelType) => {
 
     return (
         <>
-            <div className="relative pt-6">
+            <div className="relative pt-6 ">
                 <div  className={`${btnClass} absolute top-0 right-0 p-1 rounded-lg  hover:bg-slate-200`}>
                     <button onClick={() => closeModal()}className="fa-solid fa-xmark hover:cursor-pointer"></button>
                 </div>
@@ -104,20 +104,19 @@ export const ModalCreateContact = ({ closeModal }: ModalModelType) => {
                 </div>
                 <img className="w-20 mx-auto opacity-75 my-3" src="https://marketplace.canva.com/Dz63E/MAF4KJDz63E/1/tl/canva-user-icon-MAF4KJDz63E.png"/>
 
-                <form className="flex flex-col max-w-70 py-2" onSubmit={handleSubmit}>
+                <form className="flex flex-col w-90 py-2" onSubmit={handleSubmit}>
                     <div className="flex flex-col bg-slate-50 rounded-xl p-5">
 
                     {fields.map((field, index) => {
                       
                         return (
-                            <FieldCreateContact setSended={setSended} field={field} sended={sended} created={created}  setFormData={setFormData} formData={formData} />
+                            <FieldCreateContact setSubmitCount={setSubmitCount} field={field} submitCount={submitCount} created={created}  setFormData={setFormData} formData={formData} />
                         )
                     })}
                     {
-                        created ?
+                        created &&
                         <p className="text-green-500 whitespace-wrap">{fieldMessage}</p>
-                        :
-                        <p className="text-red-500">{fieldMessage}</p>
+                      
                     }
                     </div>
                     <div className="flex justify-evenly mt-2 ">
