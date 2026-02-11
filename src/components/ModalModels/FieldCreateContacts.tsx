@@ -37,27 +37,27 @@ export const FieldCreateContact = ({ field, created, submitCount, setSubmitCount
     }
 
 useEffect(() => {
-    if (submitCount === 0) {
-        setError("")
-        return
-    }
+    // if (submitCount === 0) {
+    //     setError("")
+    //     return
+    // }
 
-    if (fieldValue.trim().length < 6) {
-        setError("Please enter at least 6 characters")
-        return
-    }
+    // if (fieldValue.trim().length < 6) {
+    //     setError("Please enter at least 6 characters")
+    //     return
+    // }
 
-    if (field === "email") {
-        const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/
-        setError(
-            emailRegex.test(fieldValue)
-                ? ""
-                : "Please enter a valid email address (e.g. user@domain.com)"
-        )
-        return
-    }
+    // if (field === "email") {
+    //     const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/
+    //     setError(
+    //         emailRegex.test(fieldValue)
+    //             ? ""
+    //             : "Please enter a valid email address (e.g. user@domain.com)"
+    //     )
+    //     return
+    // }
 
-    setError("")
+    // setError("")
 }, [submitCount, fieldValue, field])
 
 
