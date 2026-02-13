@@ -57,7 +57,7 @@ export const ModalCreateContact = ({ closeModal }: ModalModelType) => {
     }
 
     const isFormValid = Object.values(errors).every(error => error === "") && Object.values(formData).every(input => input != "") 
-
+    
 
     return (
         <div className="relative">
@@ -69,9 +69,9 @@ export const ModalCreateContact = ({ closeModal }: ModalModelType) => {
                 })}
                 <div className="flex gap-10 mt-5">
                     <button disabled={!isFormValid} type="submit" className={`text-orange-100 ${isFormValid ? "bg-orange-500 hover:bg-orange-400 active:bg-orange-600" : "bg-orange-200 "} 
-                    px-10 py-2 hover:cursor-pointer text-lg rounded-xl
+                    px-10 py-2 ${isFormValid ? "hover:cursor-pointer" : "hover:cursor-default"} text-lg rounded-xl
                     `} >Save</button>
-                    <button type="button" onClick={() => closeModal()} className="mt-3 hover:bg-slate-300 hover:cursor-pointer px-10 py-2 rounded-xl text-lg">Cancel</button>
+                    <button type="button" onClick={() => closeModal()} className=" hover:bg-slate-300 hover:cursor-pointer px-10 py-2 rounded-xl text-lg">Cancel</button>
                 </div>
             </form>
             <div className="absolute top-0 right-0 py-3 pr-2">
