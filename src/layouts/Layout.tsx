@@ -16,7 +16,6 @@ export const Layout = () => {
     const exclusiveSize = location.pathname.trim()== "/" || location.pathname.trim() == "/agendas"
     const bgColor = location.pathname.trim() == "/about-me" || location.pathname.trim().includes("/contacts") || location.pathname.trim() == "/"
 
-    console.log(bgColor)
    
 
     return (

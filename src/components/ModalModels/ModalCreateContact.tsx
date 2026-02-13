@@ -7,16 +7,53 @@ import { createContact } from "../../services/contactServices"
 import { FieldCreateContact } from "./FieldCreateContacts"
 import { InputFormCreateContact } from "./InputFormCreateContact"
 
+
+
+
 export const ModalCreateContact = ({ closeModal }: ModalModelType) => {
 
-    
+
+    const [submitBtn, setSubmitBtn] = useState(false)
+    const [formFetchData, setFormFetchData] = useState({
+        name: "",
+        phone: "",
+        address: "",
+        email: ""
+    })
+
     const handleSubmit = (event: FormEvent<HTMLFormElement>)=>{
         event.preventDefault()
-        // console.log(event.target)
-        for(let input in event.target){
-            console.log(input)
+
+        
+
+        const formArray = Array.from(event.currentTarget.elements)
+
+        for(let element of formArray){
+            if(element instanceof HTMLInputElement){
+                if(element.dataset.error == "true"){
+                    setSubmitBtn(false)
+                    return
+                }
+            }
         }
+
+       setSubmitBtn(true)
+
+        const formData = new FormData(event.currentTarget)
+
+        setFormFetchData(Object.fromEntries(formData.entries()) as {
+            name:string;
+            phone: string;
+            address:string;
+            email: string;
+        })
+
+         
     }
+
+    useEffect(()=>{
+        console.log("formFetchData es -->",formFetchData)
+    },[formFetchData])
 
 
     return (
@@ -27,8 +64,8 @@ export const ModalCreateContact = ({ closeModal }: ModalModelType) => {
             })}
             <div className="flex gap-3">
 
-            <button type="submit" className="bg-sky-300 mt-3 px-3">Save</button>
-            <button type="submit" className="mt-3">Cancel</button>
+            <button type="submit" className={`${submitBtn ? "bg-sky-500": "bg-sky-100"} mt-3 px-3`} disabled={!submitBtn}>Save</button>
+            <button type="button" className="mt-3">Cancel</button>
             </div>
         </form>
         </div>
