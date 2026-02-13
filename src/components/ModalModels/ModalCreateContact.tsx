@@ -12,7 +12,7 @@ import { InputFormCreateContact } from "./InputFormCreateContact"
 
 export const ModalCreateContact = ({ closeModal }: ModalModelType) => {
 
-
+    const {store, loadAgenda} = useContactReducer()
     const [submitBtn, setSubmitBtn] = useState(false)
     const [formFetchData, setFormFetchData] = useState({
         name: "",
@@ -21,10 +21,10 @@ export const ModalCreateContact = ({ closeModal }: ModalModelType) => {
         email: ""
     })
 
-    const handleSubmit = (event: FormEvent<HTMLFormElement>)=>{
-        event.preventDefault()
+    useEffect(()=> console.log("submitBtn es -->", submitBtn), [submitBtn])
 
-        
+    const handleSubmit = async(event: FormEvent<HTMLFormElement>)=>{
+        event.preventDefault()
 
         const formArray = Array.from(event.currentTarget.elements)
 
@@ -36,7 +36,7 @@ export const ModalCreateContact = ({ closeModal }: ModalModelType) => {
                 }
             }
         }
-
+        
        setSubmitBtn(true)
 
         const formData = new FormData(event.currentTarget)
@@ -47,6 +47,11 @@ export const ModalCreateContact = ({ closeModal }: ModalModelType) => {
             address:string;
             email: string;
         })
+        if(store?.slug){
+            const createdContact = await createContact(store.slug, formFetchData)
+            loadAgenda(store.slug)
+            closeModal()
+        }
 
          
     }
@@ -63,9 +68,8 @@ export const ModalCreateContact = ({ closeModal }: ModalModelType) => {
                 return <InputFormCreateContact field={field}/>
             })}
             <div className="flex gap-3">
-
-            <button type="submit" className={`${submitBtn ? "bg-sky-500": "bg-sky-100"} mt-3 px-3`} disabled={!submitBtn}>Save</button>
-            <button type="button" className="mt-3">Cancel</button>
+            <button type="submit" className={`${submitBtn ? "bg-sky-500": "bg-sky-100"} text-white mt-3 px-3 hover:cursor-pointer`} disabled={!submitBtn}>Save</button>
+            <button type="button" onClick={()=> closeModal()} className="mt-3">Cancel</button>
             </div>
         </form>
         </div>

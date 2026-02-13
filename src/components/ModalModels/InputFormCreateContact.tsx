@@ -8,7 +8,7 @@ type InputFormCreateContactType = {
 export const InputFormCreateContact = ({field}:InputFormCreateContactType)=>{
 
 
-    const {store} = useContactReducer()
+    const {store, loadAgenda} = useContactReducer()
     const [error, setError] = useState(false)
     const [errorMessage, setErrorMessage] = useState("")
     const [inputValue, setInputValue] = useState("")
@@ -38,6 +38,9 @@ export const InputFormCreateContact = ({field}:InputFormCreateContactType)=>{
             setError(false)
         }else if(field == "name"){
             if(!store) throw new Error("Store was not found")
+                if(store.slug){
+                    loadAgenda(store?.slug)
+                }
             if(store.contacts){
                 for(let contact of store?.contacts){
                     const contactName = contact.name.replace(" ", "").toLowerCase()
