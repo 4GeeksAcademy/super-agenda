@@ -6,72 +6,71 @@ import { useContactReducer } from "../../hooks/useContactReducer"
 import { createContact } from "../../services/contactServices"
 import { FieldCreateContact } from "./FieldCreateContacts"
 import { InputFormCreateContact } from "./InputFormCreateContact"
+import { validateField } from "./utilsModalCreateContact"
 
 
 
 
 export const ModalCreateContact = ({ closeModal }: ModalModelType) => {
 
-    const {store, loadAgenda} = useContactReducer()
-    const [submitBtn, setSubmitBtn] = useState(false)
-    const [formFetchData, setFormFetchData] = useState({
+    const { store, loadAgenda } = useContactReducer()
+    const [anyError, setAnyError] = useState(false)
+    const [formData, setFormData] = useState({
         name: "",
         phone: "",
         address: "",
         email: ""
     })
 
-    useEffect(()=> console.log("submitBtn es -->", submitBtn), [submitBtn])
+    const [errors, setErrors] = useState({
+        name: "",
+        phone: "",
+        address: "",
+        email: ""
+    })
 
-    const handleSubmit = async(event: FormEvent<HTMLFormElement>)=>{
+
+    const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
+        if(store?.slug){
 
-        const formArray = Array.from(event.currentTarget.elements)
-
-        for(let element of formArray){
-            if(element instanceof HTMLInputElement){
-                if(element.dataset.error == "true"){
-                    setSubmitBtn(false)
-                    return
-                }
+            const created = await createContact(store?.slug, formData)
+            if(created){
+                loadAgenda(store.slug)
+                closeModal()
             }
         }
-        
-       setSubmitBtn(true)
 
-        const formData = new FormData(event.currentTarget)
-
-        setFormFetchData(Object.fromEntries(formData.entries()) as {
-            name:string;
-            phone: string;
-            address:string;
-            email: string;
-        })
-        if(store?.slug){
-            const createdContact = await createContact(store.slug, formFetchData)
-            loadAgenda(store.slug)
-            closeModal()
-        }
-
-         
     }
 
-    useEffect(()=>{
-        console.log("formFetchData es -->",formFetchData)
-    },[formFetchData])
+    const handleChange = (name: string, value: string) => {
+        setFormData(prev => ({ ...prev, [name]: value }))
+        if (store) {
+            const error = validateField(name, value, store)
+
+            setErrors(prev => ({
+                ...prev, [name]: error
+            }))
+        }
+    }
+
+   
+
+    const isFormValid = Object.values(errors).every(error => error === "") && Object.values(formData).every(input => input != "") 
+
 
 
     return (
         <div>
-        <form onSubmit={handleSubmit} className="flex flex-col">
-            {fields.map((field)=>{
-                return <InputFormCreateContact field={field}/>
-            })}
-            <div className="flex gap-3">
-            <button type="submit" className={`${submitBtn ? "bg-sky-500": "bg-sky-100"} text-white mt-3 px-3 hover:cursor-pointer`} disabled={!submitBtn}>Save</button>
-            <button type="button" onClick={()=> closeModal()} className="mt-3">Cancel</button>
-            </div>
-        </form>
+            <form onSubmit={handleSubmit} className="flex flex-col">
+                {fields.map((field) => {
+                    return <InputFormCreateContact name={field} value={formData[field]} error={errors[field]} onChange={handleChange} />
+                })}
+                <div className="flex gap-3">
+                    <button type="submit" className={`${isFormValid ? "bg-blue-300" : "bg-red-300"} mt-3 px-3 hover:cursor-pointer`} >Save</button>
+                    <button type="button" onClick={() => closeModal()} className="mt-3">Cancel</button>
+                </div>
+            </form>
         </div>
     )
 }
@@ -177,7 +176,7 @@ export const ModalCreateContact = ({ closeModal }: ModalModelType) => {
 
 //         setErrors(prev => ({ ...prev, [key]: value.trim().length < 6 }))
 
-       
+
 //         if (value.trim().length < 6) {
 //             if (!error) {
 //                 error = true
