@@ -2,7 +2,7 @@ import type { ChangeEvent } from "react"
 import type { ItemType } from "./Card"
 
 
-export const fields = ["name", "phone", "email", "address"] as const
+export const fields = ["name", "email", "phone", "address"] as const
 
 type FormFieldType = {
     handleChange: (event: ChangeEvent<HTMLInputElement>) => void

@@ -14,7 +14,6 @@ import { validateField } from "./utilsModalCreateContact"
 export const ModalCreateContact = ({ closeModal }: ModalModelType) => {
 
     const { store, loadAgenda } = useContactReducer()
-    const [anyError, setAnyError] = useState(false)
     const [formData, setFormData] = useState({
         name: "",
         phone: "",
@@ -23,15 +22,18 @@ export const ModalCreateContact = ({ closeModal }: ModalModelType) => {
     })
 
     const [errors, setErrors] = useState({
-        name: "",
-        phone: "",
-        address: "",
-        email: ""
+        name: "Introduce at least 5 characters",
+        phone: "Introduce at least 5 characters",
+        address: "Introduce at least 5 characters",
+        email: "Introduce at least 5 characters"
     })
 
 
     const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
+
+        if(!isFormValid) return
+
         if(store?.slug){
 
             const created = await createContact(store?.slug, formData)
@@ -54,202 +56,29 @@ export const ModalCreateContact = ({ closeModal }: ModalModelType) => {
         }
     }
 
-   
-
     const isFormValid = Object.values(errors).every(error => error === "") && Object.values(formData).every(input => input != "") 
 
 
-
     return (
-        <div>
-            <form onSubmit={handleSubmit} className="flex flex-col">
+        <div className="relative">
+            <div className="p-5 bg-slate-200">
+                <h3 className="text-3xl">Create contact</h3></div>
+            <form onSubmit={handleSubmit} className="grid grid-cols-12 gap-y-5 min-w-90 max-w-110 xl:max-w-160 p-5 ">
                 {fields.map((field) => {
                     return <InputFormCreateContact name={field} value={formData[field]} error={errors[field]} onChange={handleChange} />
                 })}
-                <div className="flex gap-3">
-                    <button type="submit" className={`${isFormValid ? "bg-blue-300" : "bg-red-300"} mt-3 px-3 hover:cursor-pointer`} >Save</button>
-                    <button type="button" onClick={() => closeModal()} className="mt-3">Cancel</button>
+                <div className="flex gap-10 mt-5">
+                    <button disabled={!isFormValid} type="submit" className={`text-orange-100 ${isFormValid ? "bg-orange-500 hover:bg-orange-400 active:bg-orange-600" : "bg-orange-200 "} 
+                    px-10 py-2 hover:cursor-pointer text-lg rounded-xl
+                    `} >Save</button>
+                    <button type="button" onClick={() => closeModal()} className="mt-3 hover:bg-slate-300 hover:cursor-pointer px-10 py-2 rounded-xl text-lg">Cancel</button>
                 </div>
             </form>
+            <div className="absolute top-0 right-0 py-3 pr-2">
+                <button onClick={()=> closeModal()} className="hover:cursor-pointer">
+                <i className="text-2xl fa-solid fa-xmark"></i>
+                </button>
+                </div>
         </div>
     )
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// const [formData, setFormData] = useState({
-//     name: "",
-//     phone: "",
-//     email: "",
-//     address: ""
-// })
-// const [fieldMessage, setFieldMessage] = useState("")
-// const { store, loadAgenda } = useContactReducer()
-// const [created, setCreated] = useState(false)
-// const [submitCount, setSubmitCount] = useState(0)  
-// const btnClass = "transform hover:scale-110 transition hover:duration-300"
-
-// const [errors, setErrors] = useState({
-//     name: false,
-//     phone: false,
-//     email: false,
-//     address: false
-// })
-
-// const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-
-//     const name = event.target.name
-//     const value = event.target.value
-
-//     setFormData({ ...formData, [name]: value })
-//     setErrors(prev => {
-//         return ({ ...prev, [name]: value.trim().length < 6 })
-//     })
-// }
-
-
-
-// const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-//     event.preventDefault()
-//     if (!store?.slug) throw new Error("Agenda not valid")
-
-//     let error = false
-//     console.log("Se envio el form")
-//     setSubmitCount(prev => prev + 1)
-
-//     for (let field in formData) {
-//         const key = field as keyof typeof formData
-
-//         const value: string = formData[key]
-
-//         setErrors(prev => ({ ...prev, [key]: value.trim().length < 6 }))
-
-
-//         if (value.trim().length < 6) {
-//             if (!error) {
-//                 error = true
-//             }
-//             setFieldMessage("Please enter at least 6 characters in every field.")
-//         }
-//     }
-// }
-// loadAgenda(store?.slug)
-
-// const exist = Array.isArray(store?.contacts) && store.contacts.some((contact) => {
-//     const contactName = contact.name.replace(" ", "").toLowerCase()
-//     const formDataName = formData.name.replace(" ", "").toLowerCase()
-//     return contactName == formDataName
-// })
-
-// if (exist) {
-//     setFieldMessage("This contact name already exist, try another one")
-//     setErrors({...errors, name : true})
-//     return
-// }
-// if (!error) {
-//     setFieldMessage("")
-// } else {
-//     return
-// }
-
-// const createdContact = await createContact(store.slug, formData)
-
-// if (createdContact) {
-//     setCreated(true)
-//     setFieldMessage(`${store.slug}'s contact has been successfully added`)
-//     loadAgenda(store.slug)
-//     closeModal()
-// }
-
-{/* <div className="relative pt-6 ">
-    <div  className={`${btnClass} absolute top-0 right-0 p-1 rounded-lg  hover:bg-slate-200`}>
-        <button onClick={() => closeModal()}className="fa-solid fa-xmark hover:cursor-pointer"></button>
-    </div>
-    <div className="text-center ">
-        <span className="text-2xl">Add a new contact</span>
-    </div>
-    <img className="w-20 mx-auto opacity-75 my-3" src="https://marketplace.canva.com/Dz63E/MAF4KJDz63E/1/tl/canva-user-icon-MAF4KJDz63E.png"/>
-
-    <form className="flex flex-col w-90 py-2" onSubmit={handleSubmit}>
-        <div className="flex flex-col bg-slate-50 rounded-xl p-5">
-
-        {fields.map((field, index) => {
-          
-            return (
-                <FieldCreateContact setSubmitCount={setSubmitCount} field={field} submitCount={submitCount} created={created}  setFormData={setFormData} formData={formData} />
-            )
-        })}
-        {
-            created &&
-            <p className="text-green-500 whitespace-wrap">{fieldMessage}</p>
-          
-        }
-        </div>
-        <div className="flex justify-evenly mt-2 ">
-            {
-                created ?
-                    <>
-                        <InteractiveButton extraClass={btnClass} tone="disabled" color="green" text="Created" />
-                        <InteractiveButton extraClass={btnClass} tone="normal" buttonType="button" color="slate" text="Close" onClick={() => closeModal()} />
-                    </>
-                    :
-                    <>
-                        <InteractiveButton extraClass={btnClass} tone="normal" color="green" text="Create" />
-                        <InteractiveButton extraClass={btnClass} buttonType="button" tone="normal" color="slate" text="Cancel" onClick={() => closeModal()} />
-                    </>
-            }
-        </div>
-    </form>
-</div> */}

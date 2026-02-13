@@ -58,7 +58,7 @@ export const Modal = (props: ModalType) => {
     return (
         <>
             <div onClick={() => closeModal()} className="fixed inset-0 bg-black/50 backdrop-blur-xs z-10 "></div>
-            <div className="fixed  top-1/2 left-1/2 bg-white transform -translate-x-1/2 -translate-y-1/2 p-6 rounded-2xl z-20 ">
+            <div className="fixed  top-1/2 left-1/2 bg-white transform -translate-x-1/2 -translate-y-1/2 rounded-2xl z-20 overflow-hidden ">
                 {
                     choosedModal()
                 }
