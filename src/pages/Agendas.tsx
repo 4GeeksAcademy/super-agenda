@@ -1,4 +1,4 @@
-import { useEffect, useState, type ChangeEvent } from "react"
+import { useEffect, useMemo, useState, type ChangeEvent } from "react"
 import { getAgenda, getAllAgendas, type GetAgendasErrorType } from "../services/agendaServices"
 import { InteractiveButton } from "../components/InteractiveButton"
 import { useContactReducer } from "../hooks/useContactReducer"
@@ -14,6 +14,9 @@ export const saveAgenda = async (agenda: string, dispatch: any) => {
 
 }
 
+
+const PAGE_SIZE = 5
+
 export const Agendas = () => {
 
 
@@ -21,10 +24,11 @@ export const Agendas = () => {
     const { store, dispatch, openModal, loadAgendas } = useContactReducer()
     const [page, setPage] = useState(1)
     const navigate = useNavigate()
+    
     const [searchInput, setSearchInput] = useState("")
-
-    const handleSearchInput = (event: ChangeEvent<HTMLInputElement>)=>{
-
+    const handleSearchInput = (event: ChangeEvent<HTMLInputElement>) => {
+        setSearchInput(event.target.value)
+        console.log(searchInput)
     }
 
     const agendaHandleClick = async (agenda: string) => {
@@ -37,8 +41,32 @@ export const Agendas = () => {
         openModal({ type: "createAgenda" })
     }
 
-    let agendas = Array.isArray(store?.agendas) && store?.agendas.slice(5 * page - 5, 5 * page)
-    let disabled = Array.isArray(store?.agendas) && store?.agendas.length / (5 * page) <= 1
+
+    const filteredAgendas = useMemo(() =>{
+
+        if(!store?.agendas) return []
+
+        if(searchInput.trim() == "") return store?.agendas
+
+        return store?.agendas.filter((contact)=> contact.slug.trim().toLowerCase().startsWith(searchInput.trim().toLowerCase()))
+
+    },[searchInput, store?.agendas])
+
+
+    const totalPages = Math.ceil(filteredAgendas.length / PAGE_SIZE)
+
+
+    const agendas = useMemo(()=>{
+        
+        const start = (page - 1) * PAGE_SIZE
+        const end = start + PAGE_SIZE;
+
+        return filteredAgendas.slice(start, end)
+    
+        },[filteredAgendas, page])
+
+
+    let disabled = page >= totalPages
 
 
     useEffect(() => {
@@ -61,13 +89,13 @@ export const Agendas = () => {
                     </div>
                 </div>
                 
-              <SearchInput themeDark={true}/>
+              <SearchInput onChange={handleSearchInput} searchInput={searchInput} setSearchInput={setSearchInput} themeDark={true}/>
 
-                <div className="bg-slate-300 border-2 border-slate-900 mx-10 sm:mx-15 rounded-3xl flex justify-center ">
+                <div className="bg-slate-50 border-2 border-slate-900 mx-10 sm:mx-15 rounded-3xl flex justify-center ">
                     <div className="p-5 w-80 flex justify-center flex-col text-center gap-4">
                         <div className="h-140">
                             <ul className="flex flex-col">
-                                {Array.isArray(agendas) && agendas.map((agenda, index) => {
+                                {Array.isArray(agendas) && agendas.length > 0 ? Array.isArray(agendas) && agendas.map((agenda, index) => {
                                     return <li className=" py-4 border-b-2 border-slate-700 px-2" key={index}>
                                         <div className="relative group">
                                             <div
@@ -83,7 +111,12 @@ export const Agendas = () => {
                                             </div>
                                         </div>
                                     </li>
-                                })}
+                                })
+                            
+                            :
+
+                            <p className="text-xl mb-5 mt-3">No agendas found. Create one below to get started.</p>
+                            }
 
                                 {/* Boton para agregar una agenda */}
                                 <li className="py-4  px-2">

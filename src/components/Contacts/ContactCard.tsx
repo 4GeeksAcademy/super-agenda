@@ -31,8 +31,8 @@ export const ContactCard = ({item, agenda}:ContactCardType)=>{
 
 
     return (
-        <div className="col-span-12 lg:col-span-6 flex justify-center">
-           <div className="relative w-68 h-45 grid grid-cols-12 gap-1 p-3 bg-slate-50 rounded-2xl hover:shadow-2xl/100 transform hover:scale-105  transition hover:duration-300">
+        <div className="col-span-12 lg:col-span-6 flex flex-col items-center justify-center">
+           <div className="relative min-w-68 h-45 grid grid-cols-12 gap-1 p-3 bg-slate-50 rounded-2xl hover:shadow-2xl/100 transform hover:scale-105  transition hover:duration-300">
             <div className="absolute -top-7 -rotate-5 left-1/2 h-15 w-10  bg-blue-100 opacity-50 border-x-1 border-blue-200"></div>
                 <div className="col-span-4 row-span-3 bg-slate-300 rounded-xl"></div>
                 <div className="col-span-8 flex justify-end">

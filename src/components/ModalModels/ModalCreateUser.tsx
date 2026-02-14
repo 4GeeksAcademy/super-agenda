@@ -57,24 +57,23 @@ export const ModalCreateUser = ({ closeModal }: ModalModelType) => {
 
 
     return (
-        <div className="sm:w-100">
-            <div className="relative w-full md:w-full">
+        <div className="min-w-80 max-w-120">
+            <div className="relative" >
                 <div className="absolute top-0 right-0 p-1 ">
-                    <button className="transform hover:scale-110 transition duration-300 hover:cursor-pointer hover:text-slate-400 text-xl" onClick={() => closeModal()}>
+                    <button className=" hover:cursor-pointer hover:text-slate-700 text-xl" onClick={() => closeModal()}>
                         <i className="fa-solid fa-xmark"></i>
                     </button>
                 </div>
-                <div className="text-3xl p-4 bg-slate-200">
+                <div className="text-3xl p-4 bg-slate-400 text-slate-800">
                     <h3 >Create your agenda</h3>
                 </div>
             </div>
-            <form className="p-5" onSubmit={handleSubmit}>
-                <div className="mt-2 mb-8">
+            <form className="px-5 pb-5" onSubmit={handleSubmit}>
+                <div className="m-10 ml-2">
                     <label className="text-lg" htmlFor="name">Write your new agenda's name</label>
                     <input id="name" onChange={handleChange} value={userField} className="w-full h-10 border-1 border-slate-300 rounded-xl focus:bg-slate-100 focus:outline-none px-3 text-slate-600" type="text" />
                     {error && (
-
-                        <p className="text-red-500 py-1 px-1 mt-2 rounded-xl">{error}</p>
+                        <p className="text-orange-400 py-1 px-1 mt-2 rounded-xl">{error}</p>
                     )
                     }
                 </div>
@@ -84,7 +83,7 @@ export const ModalCreateUser = ({ closeModal }: ModalModelType) => {
                     {
                         formValid ?
                             <>
-                                <button className={`py-2 rounded-2xl mr-3 ${confirmDisabledClasses}`} disabled={true} >Created</button>
+                                <button className={`py-2 rounded-2xl mr-3 ${confirmDisabledClasses}`} disabled={true} >Create</button>
                                 <button className={`${btnClass} ${discardClasses}`} onClick={() => closeModal()} >Close</button>
                             </>
                             :

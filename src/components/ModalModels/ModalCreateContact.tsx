@@ -61,7 +61,7 @@ export const ModalCreateContact = ({ closeModal }: ModalModelType) => {
 
     return (
         <div className="relative">
-            <div className="p-5 bg-slate-200">
+            <div className="p-5 bg-slate-400 text-slate-700">
                 <h3 className="text-3xl">Create contact</h3></div>
             <form onSubmit={handleSubmit} className="grid grid-cols-12 gap-y-5 min-w-90 max-w-110 xl:max-w-160 p-5 ">
                 {fields.map((field) => {
@@ -76,7 +76,7 @@ export const ModalCreateContact = ({ closeModal }: ModalModelType) => {
             </form>
             <div className="absolute top-0 right-0 py-3 pr-2">
                 <button onClick={()=> closeModal()} className="hover:cursor-pointer">
-                <i className="text-2xl fa-solid fa-xmark"></i>
+                <i className="text-2xl fa-solid fa-xmark text-slate-700"></i>
                 </button>
                 </div>
         </div>
