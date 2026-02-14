@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router"
 import { Card } from "../components/Card"
 import { InteractiveButton } from "../components/InteractiveButton"
 import { ContactCard } from "../components/Contacts/ContactCard"
+import { SearchInput } from "../components/SearchInput"
 
 export const Contacts = () => {
 
@@ -35,6 +36,7 @@ export const Contacts = () => {
                             {store?.slug}'s Contacts
                         </h2>
                     </div>
+                  <SearchInput themeDark={false} />
                     <div className=" flex flex-col justify-between p-3 pb-15 rounded-4xl bg-slate-700 shadow-xl shadow-slate-400 ">
                         <div className="grid grid-cols-12 md:grid-rows-3 gap-y-15 gap-x-10 min-h-[750px] p-10 ">
                             <div className="col-span-12 lg:col-span-6 lg:block flex items-center justify-center ">

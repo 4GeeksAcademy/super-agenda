@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, type ChangeEvent } from "react"
 import { getAgenda, getAllAgendas, type GetAgendasErrorType } from "../services/agendaServices"
 import { InteractiveButton } from "../components/InteractiveButton"
 import { useContactReducer } from "../hooks/useContactReducer"
 import { Link, useNavigate } from "react-router"
+import { SearchInput } from "../components/SearchInput"
 
 export const saveAgenda = async (agenda: string, dispatch: any) => {
 
@@ -20,6 +21,11 @@ export const Agendas = () => {
     const { store, dispatch, openModal, loadAgendas } = useContactReducer()
     const [page, setPage] = useState(1)
     const navigate = useNavigate()
+    const [searchInput, setSearchInput] = useState("")
+
+    const handleSearchInput = (event: ChangeEvent<HTMLInputElement>)=>{
+
+    }
 
     const agendaHandleClick = async (agenda: string) => {
         await saveAgenda(agenda, dispatch)
@@ -32,7 +38,7 @@ export const Agendas = () => {
     }
 
     let agendas = Array.isArray(store?.agendas) && store?.agendas.slice(5 * page - 5, 5 * page)
-    let disabled = Array.isArray(store?.agendas) && store?.agendas.length / (5 * page ) <= 1
+    let disabled = Array.isArray(store?.agendas) && store?.agendas.length / (5 * page) <= 1
 
 
     useEffect(() => {
@@ -45,9 +51,8 @@ export const Agendas = () => {
             <div className="absolute inset-x-0 top-1/2 -bottom-12 z-0 bg-slate-900"></div>
             <div className="relative z-1  mx-auto w-full sm:w-[600px] lg:w-[700px]  py-10">
                 <div className="ml-3 sm:ml-6 p-1 flex">
-                 
-                        <button onClick={()=> navigate(-1)} className="pr-6 pl-3 py-3 bg-slate-200 rounded-full hover:cursor-pointer hover:bg-slate-100 active:bg-slate-300"><i className="fa-solid fa-angle-left pr-1"></i>Return</button>
-                  
+
+                    <button onClick={() => navigate(-1)} className="pr-6 pl-3 py-3 bg-slate-200 rounded-full hover:cursor-pointer hover:bg-slate-100 active:bg-slate-300"><i className="fa-solid fa-angle-left pr-1"></i>Return</button>
 
                 </div>
                 <div className="flex justify-center p-3">
@@ -55,9 +60,12 @@ export const Agendas = () => {
                         <h2 className="text-4xl sm:text-5xl py-5 text-slate-50 text-center px-10 sm:px-15">Choose a Contacts Agenda</h2>
                     </div>
                 </div>
-                <div className="bg-slate-50 border-2 border-slate-900 mx-10 sm:mx-15 rounded-3xl flex justify-center">
+                
+              <SearchInput themeDark={true}/>
+
+                <div className="bg-slate-300 border-2 border-slate-900 mx-10 sm:mx-15 rounded-3xl flex justify-center ">
                     <div className="p-5 w-80 flex justify-center flex-col text-center gap-4">
-                        <div className=" h-140 ">
+                        <div className="h-140">
                             <ul className="flex flex-col">
                                 {Array.isArray(agendas) && agendas.map((agenda, index) => {
                                     return <li className=" py-4 border-b-2 border-slate-700 px-2" key={index}>
