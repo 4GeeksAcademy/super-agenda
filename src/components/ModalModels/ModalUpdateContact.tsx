@@ -1,4 +1,4 @@
-import { useState, type ChangeEvent, type FormEvent } from "react"
+import { useEffect, useMemo, useState, type ChangeEvent, type FormEvent } from "react"
 import { fields, FormField } from "../FormField"
 import { InteractiveButton } from "../InteractiveButton"
 import type { ModalModelType } from "./ModalTypes"
@@ -7,28 +7,40 @@ import { updateContact } from "../../services/contactServices"
 import type { FormDataType } from "../../hooks/useContactReducer/store"
 import { validateField } from "./utilsModalCreateContact"
 import { InputFormCreateContact } from "./InputFormCreateContact"
+import isEqual from "lodash.isequal"
 
 export const ModalUpdateContact = ({ closeModal }: ModalModelType) => {
  
         const { store, loadAgenda } = useContactReducer()
-        const [formData, setFormData] = useState<FormDataType>(store?.modalFormData)
-        
+        const [formData, setFormData] = useState<FormDataType>(store?.modalFormData  ?? {
+                    name: "",
+                    phone: "",
+                    address: "",
+                    email: "",
+                    id: 1
+                })
 
+        
     
         const [errors, setErrors] = useState({
-            name: "Introduce at least 5 characters",
-            phone: "Introduce at least 5 characters",
-            address: "Introduce at least 5 characters",
-            email: "Introduce at least 5 characters"
-        })
+            name: "",
+            phone: "",
+            address: "",
+            email: ""
+        }) 
     
-   
+        const initialFormData = store?.modalFormData
+
+        const hasFormDataChanged = useMemo(()=>{
+            return !isEqual(formData, initialFormData)
+        },[formData])
     
         const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
             event.preventDefault()
     
             if(!isFormValid) return
     
+
             if(store?.slug){
     
                 const updated = await updateContact(store?.slug, formData)
@@ -42,8 +54,8 @@ export const ModalUpdateContact = ({ closeModal }: ModalModelType) => {
     
         const handleChange = (name: string, value: string) => {
             setFormData(prev => ({ ...prev, [name]: value }))
-            if (store) {
-                const error = validateField(name, value, store)
+            if (store && formData.id) {
+                const error = validateField(name, value, store, formData.id)
     
                 setErrors(prev => ({
                     ...prev, [name]: error
@@ -58,15 +70,15 @@ export const ModalUpdateContact = ({ closeModal }: ModalModelType) => {
     return (
     
          <div className="relative">
-            <button onClick={()=> console.log(store?.modalFormData)} >Ver store.modalFormData</button>
                     <div className="p-5 bg-slate-200">
-                        <h3 className="text-3xl">Create contact</h3></div>
+                        <h3 className="text-3xl">Edit your contact</h3></div>
                     <form onSubmit={handleSubmit} className="grid grid-cols-12 gap-y-5 min-w-90 max-w-110 xl:max-w-160 p-5 ">
                         {fields.map((field) => {
                             return <InputFormCreateContact name={field} value={formData[field]} error={errors[field]} onChange={handleChange} />
                         })}
+               
                         <div className="flex gap-10 mt-5">
-                            <button disabled={!isFormValid} type="submit" className={`text-orange-100 ${isFormValid ? "bg-orange-500 hover:bg-orange-400 active:bg-orange-600" : "bg-orange-200 "} 
+                            <button disabled={!isFormValid || !hasFormDataChanged} type="submit" className={`text-orange-100 ${isFormValid  && hasFormDataChanged ? "bg-orange-500 hover:bg-orange-400 active:bg-orange-600" : "bg-orange-200 "} 
                             px-10 py-2 ${isFormValid ? "hover:cursor-pointer" : "hover:cursor-default"} text-lg rounded-xl
                             `} >Save</button>
                             <button type="button" onClick={() => closeModal()} className=" hover:bg-slate-300 hover:cursor-pointer px-10 py-2 rounded-xl text-lg">Cancel</button>

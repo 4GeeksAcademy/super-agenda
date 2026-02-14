@@ -1,6 +1,6 @@
 import type { StoreType } from "../../hooks/useContactReducerTypes"
 
-export const validateField = (name:string, value:string, store: StoreType)=>{
+export const validateField = (name:string, value:string, store: StoreType, id: number)=>{
 
     if(value.trim().length < 5){
         return "Introduce at least 5 characters"
@@ -15,7 +15,7 @@ export const validateField = (name:string, value:string, store: StoreType)=>{
 
     if(name === "name" && store?.contacts){
         const exist = store.contacts.some(contact =>{
-            return contact.name.replace(" ", "").toLowerCase() === value.replace(" ", "").toLowerCase()
+            return contact.name.replace(" ", "").toLowerCase() === value.replace(" ", "").toLowerCase() && contact.id != id
         })
         if(exist){
             return "This contact already exists"
