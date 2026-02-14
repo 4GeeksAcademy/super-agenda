@@ -25,30 +25,31 @@ export const ModalDeleteUser = ({ closeModal }: ModalModelType) => {
 
         }
     }
-    const btnClass = "text-xl mt-5 py-2 rounded-2xl hover:cursor-pointer transform hover:scale-105 transition duration-300"
-    const deleteClasses = "hover:bg-red-400 active:bg-red-600 text-red-100  bg-red-500 px-4"
-    const cancelClasses = "hover:bg-slate-300 active:bg-slate-500 text-slate-100  bg-slate-400 px-4"
+       const btn = "text-xl mt-5 px-5 py-2 rounded-2xl transform hover:scale-105 transition hover:duration-300"
+    const deleteBtn = "bg-red-500 text-red-100 hover:bg-red-400 active:bg-red-600"
+    const cancelBtn = "text-slate-500 hover:bg-slate-100 active:bg-slate-50"
+
 
     return (
-        <div className="min-h-64 min-w-56 flex flex-col justify-between">
-            <div className="text-right">
-            <button className="hover:bg-slate-200 hover:cursor-pointer p-2 rounded-lg" onClick={() => closeModal()}>
-                    <i className="text-3xl fa-solid fa-xmark"></i>
-                </button>
+       <div className="min-w-80 md:min-w-100  text-center">
+            <div className="relative">
+                <div className="absolute right-0 top-0 p-1">
+                    <button className="hover:bg-slate-200 hover:cursor-pointer p-1 rounded-lg" onClick={() => closeModal()}>
+                        <i className="text-2xl fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <div className="p-3 bg-slate-300">
+                    <p className="text-3xl">Confirm action</p>
+                </div>
             </div>
-            <div className="flex justify-center">
-                <img className="w-20 md:w-30" src="https://cdn-icons-png.flaticon.com/512/4989/4989793.png" />
-            </div>
-            <div className="text-center mt-5 mb-7  py-2 md:px-2 ">
-                <h2 className="text-lg md:text-xl">You are about to delete <b>{store?.userToDelete}</b>'s agenda <br/>
-                Want to proceed?
-                </h2>
-            </div>
-            <div className="flex justify-center border-t-1 border-slate-400 ">
-                <div className="w-full flex justify-evenly">
-
-                <button className={`${btnClass} ${deleteClasses} mr-4`} onClick={handleDeleteAgendaBtn}>Confirm</button>
-                <button className={`${btnClass} ${cancelClasses}`}  onClick={() => closeModal()} >Cancel</button>
+            <div className="p-4">
+                <p className="text-lg md:text-lg my-3">
+                    You are about to delete <b>{store?.userToDelete}</b>'s agenda.<br />
+                    Want to proceed?
+                </p>
+                <div className="flex justify-center sm:justify-end gap-3">
+                    <button className={`${btn} ${cancelBtn}`} onClick={() => closeModal()}>Cancel</button>
+                    <button className={`${btn} ${deleteBtn} mr-3`} onClick={handleDeleteAgendaBtn}>Confirm</button>
                 </div>
             </div>
         </div>

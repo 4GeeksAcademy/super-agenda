@@ -1,6 +1,6 @@
 import type { StoreType } from "../../hooks/useContactReducerTypes"
 
-export const validateField = (name:string, value:string, store: StoreType, id: number)=>{
+export const validateField = (name:string, value:string, store?: StoreType, id?: number)=>{
 
     if(value.trim().length < 5){
         return "Introduce at least 5 characters"
