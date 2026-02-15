@@ -70,7 +70,7 @@ export const Contacts = () => {
                     </div>
                   <SearchInput onChange={handleSearchInput} searchInput={searchInput} setSearchInput={setSearchInput} themeDark={false}/>
                     <div className=" flex flex-col justify-between p-3 pb-15 rounded-4xl bg-slate-700 shadow-xl shadow-slate-400 ">
-                        <div className="grid grid-cols-12 lg:grid-rows-3 lg:gap-y-15 sm:gap-x-10 min-h-[750px] p-10 ">
+                        <div className="grid grid-cols-12 lg:grid-rows-3 gap-y-15 sm:gap-x-10 min-h-[750px] p-10 ">
                             
                             <div className={`flex flex-col items-center justify-center col-span-12 ${contacts.length === 0 ? "row-span-full gap-6" : "lg:col-span-6"}`}>
                                {contacts.length === 0 && <p className="text-slate-50 text-xl text-center max-w-100">No contacts found. Create one below to get started.</p>}  
@@ -87,7 +87,7 @@ export const Contacts = () => {
                         </div>
 
 
-                        <div className=" flex justify-center py-2">
+                        <div className="flex justify-center py-2">
                             <div className="w-35 flex justify-between text-slate-50 ">
                                 <button type="button" disabled={page == 1} onClick={(e) => {
                                     e.preventDefault()

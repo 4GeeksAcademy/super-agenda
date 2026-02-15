@@ -11,7 +11,7 @@ export const BannerSection = () => {
                       </div>
                     <div className="flex justify-center items-center h-full">
                         <Link to="/agendas">
-                            <button className="text-slate-800 bg-slate-50 px-5 py-3 rounded-full hover:bg-white active:bg-slate-100 hover:cursor-pointer transform hover:scale-120  transition hover:duration-500">
+                            <button className="text-orange-100 bg-orange-500 px-5 py-3 rounded-full hover:bg-orange-400 active:bg-orange-600 hover:cursor-pointer transform hover:scale-120  transition hover:duration-500">
                                 GET STARTED
                             </button>
                         </Link>

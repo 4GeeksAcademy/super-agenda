@@ -34,7 +34,6 @@ export const AboutMe = () => {
                         </div>
                         <div className="p-2">
                             <div>
-
                                 <a target="_blank" href="https://es.linkedin.com/in/facundoscrollini">
                                     <button className="px-4 py-2 bg-blue-500 hover:bg-blue-400 transform hover:scale-115 transition hover:duration-300 
                            active:bg-blue-500 text-blue-100
@@ -46,9 +45,10 @@ export const AboutMe = () => {
                         </div>
                     </div>
                 </div>
-                <div className="absolute w-140 top-15 px-10 min-h-100 z-1 bg-orange-400 shadow-2xl text-slate-50  left-1/2 
-                -translate-x-1/2 flex flex-col 
-                justify-end group-hover:translate-y-100
+                <div className="absolute min-w-110 sm:w-120 md:w-130 lg:w-140
+                top-9/10 md:top-15 px-10 min-h-100 z-1 bg-orange-400 shadow-2xl text-slate-50  left-1/2 
+               -translate-x-1/2 flex flex-col 
+                justify-end md:group-hover:translate-y-9/10
                 transition-transform
                 duration-1200
                 rounded-3xl
@@ -83,7 +83,10 @@ export const AboutMe = () => {
                         </div>
                     </div>
                 </div>
-                <div className="absolute z-2 w-140 bottom-20 bg-orange-900 h-20 left-1/2 -translate-x-1/2 bottom-3 translate-transformation duration-1200 group-hover:delay-200 group-hover:translate-y-30"></div>
+                <div className="absolute z-1
+                min-w-110 sm:w-120 md:w-130 lg:w-140
+                md:bottom-20  bg-gradient-to-b from-orange-900 to-orange-900/0 h-20 left-1/2 -translate-x-1/2 -bottom-15
+                 translate-transformation duration-1200 group-hover:delay-200 md:group-hover:translate-y-30"></div>
 
             </div>
         </div>

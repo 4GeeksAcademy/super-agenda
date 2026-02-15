@@ -70,7 +70,7 @@ export const ModalUpdateContact = ({ closeModal }: ModalModelType) => {
     return (
     
          <div className="relative">
-                    <div className="p-5 bg-slate-200">
+                    <div className="p-5 bg-slate-400 text-slate-700">
                         <h3 className="text-3xl">Edit your contact</h3></div>
                     <form onSubmit={handleSubmit} className="grid grid-cols-12 gap-y-5 min-w-90 max-w-110 xl:max-w-160 p-5 ">
                         {fields.map((field) => {

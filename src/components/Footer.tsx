@@ -55,7 +55,7 @@ export const Footer = () => {
 
                             <div className="col-span-12 my-3 flex justify-center">
                                 <Link to="/">
-                                    <img className="w-30" src="https://res.cloudinary.com/dra2cr3uw/image/upload/v1769100140/star-wars-png-46074_fq5ugx.png" alt="" />
+                                    <img className="w-30" src="https://res.cloudinary.com/dra2cr3uw/image/upload/v1771149871/ChatGPT_Image_15_feb_2026_10_46_23_eeo8xs.png" alt="" />
                                 </Link>
                             </div>
 
@@ -84,16 +84,14 @@ export const Footer = () => {
                             </div>
                             <div className="col-span-12 flex justify-center my-3">
                                 <Link to="/">
-                                    <img className="w-30" src="https://res.cloudinary.com/dra2cr3uw/image/upload/v1769100140/star-wars-png-46074_fq5ugx.png" alt="" />
+                                    <img className="w-30" src="https://res.cloudinary.com/dra2cr3uw/image/upload/v1771149871/ChatGPT_Image_15_feb_2026_10_46_23_eeo8xs.png" alt="" />
                                 </Link>
                             </div>
                             <div className="col-span-12  text-center">
-                                <p>1717 Harrison St, San Francisco, CA 94103, USA<br /> © 2022 Your Company.  All rights reserved.</p>
+                                <p>Valencia, Valencia, Spain<br /> © 2026 Super Agenda.  All rights reserved.</p>
                             </div>
                         </>
                     }
-
-
 
                 </div>
             </div>

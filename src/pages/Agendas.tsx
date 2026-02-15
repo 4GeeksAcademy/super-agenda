@@ -100,13 +100,13 @@ export const Agendas = () => {
                                         <div className="relative group">
                                             <div
                                                 onClick={() => agendaHandleClick(agenda.slug)}
-                                                className="relative z-2 text-orange-100 hover:bg-orange-300 active:bg-orange-500 bg-orange-400 w-full py-3 rounded-2xl
+                                                className="relative z-2 text-orange-100 hover:bg-orange-400 active:bg-orange-600 bg-orange-500 w-full py-3 rounded-2xl
                                      transform hover:scale-105 transition hover:duration-300 hover:cursor-pointer">
                                                 <button className="hover:cursor-pointer">{agenda.slug.toUpperCase()}</button>
                                             </div>
-                                            <div onClick={() => openModal({ type: "deleteUser", agenda: agenda.slug })} className="absolute bottom-0 right-1 transform group-hover:translate-x-1/2 z-1 w-20 transition group-hover:duration-400 text-right p-2
-                                        hover:bg-red-100 active:bg-red-300 bg-red-200
-                                        text-red-500 hover:cursor-pointer rounded-2xl">
+                                            <div title="Delete agenda" onClick={() => openModal({ type: "deleteUser", agenda: agenda.slug })} className="absolute bottom-0 -right-7 md:right-1 transform md:group-hover:translate-x-1/2 z-1 w-20 transition group-hover:duration-400 text-right p-2
+                                        hover:bg-orange-100 active:bg-orange-300 bg-orange-200
+                                        text-orange-500 hover:cursor-pointer rounded-2xl">
                                                 <i className="fa-solid fa-trash"></i>
                                             </div>
                                         </div>
@@ -120,7 +120,7 @@ export const Agendas = () => {
 
                                 {/* Boton para agregar una agenda */}
                                 <li className="py-4  px-2">
-                                    <button onClick={handleCreateUserBtn} className="text-orange-50 hover:bg-orange-100 active:bg-orange-300 bg-orange-200 w-full py-3 rounded-2xl
+                                    <button onClick={handleCreateUserBtn} className="text-orange-50 hover:bg-orange-400 active:bg-orange-200 bg-orange-300 w-full py-3 rounded-2xl
                                     transform hover:scale-115 transition hover:duration-300 hover:cursor-pointer">
                                         <i className="fa-solid fa-plus"></i>
                                     </button>
