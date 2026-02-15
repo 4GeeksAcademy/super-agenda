@@ -10,87 +10,121 @@ import { InputFormCreateContact } from "./InputFormCreateContact"
 import isEqual from "lodash.isequal"
 
 export const ModalUpdateContact = ({ closeModal }: ModalModelType) => {
- 
-        const { store, loadAgenda } = useContactReducer()
-        const [formData, setFormData] = useState<FormDataType>(store?.modalFormData  ?? {
-                    name: "",
-                    phone: "",
-                    address: "",
-                    email: "",
-                    id: 1
-                })
 
-        
     
-        const [errors, setErrors] = useState({
-            name: "",
-            phone: "",
-            address: "",
-            email: ""
-        }) 
+    const { store, loadAgenda } = useContactReducer()
+    const [photoInput, setPhotoInput] = useState("")
     
-        const initialFormData = store?.modalFormData
+    const [formData, setFormData] = useState<FormDataType>(store?.modalFormData ?? {
+        name: "",
+        phone: "",
+        address: "",
+        email: "",
+        id: 1
+    })
+    
+    const defaultImageUrl = formData.address.split("||")[1]
+    const [displayPhoto, setDisplayPhoto] = useState(defaultImageUrl)
 
-        const hasFormDataChanged = useMemo(()=>{
-            return !isEqual(formData, initialFormData)
-        },[formData])
-    
-        const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-            event.preventDefault()
-    
-            if(!isFormValid) return
-    
 
-            if(store?.slug){
-    
-                const updated = await updateContact(store?.slug, formData)
-                if(updated){
-                    loadAgenda(store.slug)
-                    closeModal()
-                }
+
+    const [errors, setErrors] = useState({
+        name: "",
+        phone: "",
+        address: "",
+        email: ""
+    })
+
+
+    useEffect(() => {
+        const img = new Image()
+        img.src = photoInput
+        img.onload = () => setDisplayPhoto(photoInput)
+        img.onerror = () => setDisplayPhoto(defaultImageUrl)
+
+    }, [photoInput])
+
+
+
+    const handleUrlPhoto = (event: ChangeEvent<HTMLInputElement>) => {
+        setPhotoInput(event.target.value)
+    }
+
+    const initialFormData = store?.modalFormData
+
+    const hasFormDataChanged = useMemo(() => {
+        return !isEqual(formData, initialFormData) || defaultImageUrl != displayPhoto
+    }, [formData, displayPhoto])
+
+    const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+        event.preventDefault()
+
+        if (!isFormValid) return
+
+
+        if (store?.slug) {
+
+            const clearAddress = formData.address.split("||")[0]
+            const fetchFormData = {...formData, address: clearAddress + "||" + displayPhoto}
+  
+            const updated = await updateContact(store?.slug, fetchFormData)
+            console.log(updated)
+            if (updated) {
+                loadAgenda(store.slug)
+                closeModal()
             }
-    
         }
-    
-        const handleChange = (name: string, value: string) => {
-            setFormData(prev => ({ ...prev, [name]: value }))
-            if (store && formData.id) {
-                const error = validateField(name, value, store, formData.id)
-    
-                setErrors(prev => ({
-                    ...prev, [name]: error
-                }))
-            }
+
+    }
+
+    const handleChange = (name: string, value: string) => {
+        setFormData(prev => ({ ...prev, [name]: value }))
+        if (store && formData.id) {
+            const error = validateField(name, value, store, formData.id)
+
+            setErrors(prev => ({
+                ...prev, [name]: error
+            }))
         }
-    
-        const isFormValid = Object.values(errors).every(error => error === "") && Object.values(formData).every(input => input != "") 
-        
-    
-    
+    }
+
+    const isFormValid = Object.values(errors).every(error => error === "") && Object.values(formData).every(input => input != "")
+
+
+
     return (
-    
-         <div className="relative">
-                    <div className="p-5 bg-slate-400 text-slate-700">
-                        <h3 className="text-3xl">Edit your contact</h3></div>
-                    <form onSubmit={handleSubmit} className="grid grid-cols-12 gap-y-5 min-w-90 max-w-110 xl:max-w-160 p-5 ">
-                        {fields.map((field) => {
-                            return <InputFormCreateContact name={field} value={formData[field]} error={errors[field]} onChange={handleChange} />
-                        })}
-               
-                        <div className="flex gap-10 mt-5">
-                            <button disabled={!isFormValid || !hasFormDataChanged} type="submit" className={`text-orange-100 ${isFormValid  && hasFormDataChanged ? "bg-orange-500 hover:bg-orange-400 active:bg-orange-600" : "bg-orange-200 "} 
+
+        <div className="relative">
+            <div className="p-5 bg-slate-400 text-slate-700">
+                <h3 className="text-3xl">Edit your contact</h3></div>
+            <form onSubmit={handleSubmit} className="grid grid-cols-12 gap-y-5 min-w-90 max-w-110 xl:max-w-160 p-5 ">
+                <div className="col-span-12 flex flex-col items-center justify-center">
+                    <div className="w-50 flex flex-col gap-5">
+                        <img className="w-full h-50 object-cover rounded-xl" src={displayPhoto || "https://res.cloudinary.com/dra2cr3uw/image/upload/v1771152229/Imagen_ejemplo_contacto_h0ymej.png"} />
+                        <div>
+                            <label >Enter your new image url</label>
+                            <input placeholder={defaultImageUrl} className="border-1 rounded-xl w-full h-10 pl-4 text-slate-600" value={photoInput} onChange={handleUrlPhoto} type="text"></input>
+                            </div>
+                    </div>
+                </div>
+                {fields.map((field) => {
+                    return <InputFormCreateContact name={field} value={formData[field]} error={errors[field]} onChange={handleChange} />
+                })}
+
+                <div className="flex gap-10 mt-5">
+                    <button disabled={!isFormValid || !hasFormDataChanged} type="submit" className={`text-orange-100 ${isFormValid && hasFormDataChanged ? "bg-orange-500 hover:bg-orange-400 active:bg-orange-600" : "bg-orange-200 "} 
                             px-10 py-2 ${isFormValid ? "hover:cursor-pointer" : "hover:cursor-default"} text-lg rounded-xl
                             `} >Save</button>
-                            <button type="button" onClick={() => closeModal()} className=" hover:bg-slate-300 hover:cursor-pointer px-10 py-2 rounded-xl text-lg">Cancel</button>
-                        </div>
-                    </form>
-                    <div className="absolute top-0 right-0 py-3 pr-2">
-                        <button onClick={()=> closeModal()} className="hover:cursor-pointer">
-                        <i className="text-2xl fa-solid fa-xmark"></i>
-                        </button>
-                        </div>
+                    <button type="button" onClick={() => closeModal()} className=" hover:bg-slate-300 hover:cursor-pointer px-10 py-2 rounded-xl text-lg">Cancel</button>
                 </div>
-      
+            </form>
+            <div className="absolute top-0 right-0 py-3 pr-2">
+                <button onClick={() => closeModal()} className="hover:cursor-pointer">
+                    <i className="text-2xl fa-solid fa-xmark"></i>
+                </button>
+            </div>
+        </div>
+
     )
 }
 
@@ -198,7 +232,7 @@ export const ModalUpdateContact = ({ closeModal }: ModalModelType) => {
 //             if(initialFormData){
 //                 if(formData[field] != initialFormData[field]){
 //                     changes += 1
-//                 }        
+//                 }
 //                 }
 //         }
 //         if(changes > 0){
@@ -226,24 +260,24 @@ export const ModalUpdateContact = ({ closeModal }: ModalModelType) => {
 //     })
 // }
 //     {fields.map((field, index) => {
-    //         return <FormField key={index} formData={formData} field={field} handleChange={handleChange} />
-    //     })}
-    //     {
-        //         updated ?
-        //             <p className="text-green-500">{fieldMessage}</p>
-        //             :
-        //             <p className="text-red-500">{fieldMessage}</p>
-                //     }
-                //     {
-                    //         updated ?
-                    //             <>
-                    //                 <InteractiveButton tone="disabled" color="green" text="Created" />
-                    //                 <InteractiveButton buttonType="button" tone="normal" color="slate" text="Close" onClick={() => closeModal()} />
-                    //             </>
-                    //             :
-                    //             <>
-                    //                 <InteractiveButton tone="normal" color="green" text="Create" />
-                    //                 <InteractiveButton buttonType="button"  tone="normal" color="slate" text="Cancel" onClick={() => closeModal()} />
-                    //             </>
-                    //     }
-            // </form>
+//         return <FormField key={index} formData={formData} field={field} handleChange={handleChange} />
+//     })}
+//     {
+//         updated ?
+//             <p className="text-green-500">{fieldMessage}</p>
+//             :
+//             <p className="text-red-500">{fieldMessage}</p>
+//     }
+//     {
+//         updated ?
+//             <>
+//                 <InteractiveButton tone="disabled" color="green" text="Created" />
+//                 <InteractiveButton buttonType="button" tone="normal" color="slate" text="Close" onClick={() => closeModal()} />
+//             </>
+//             :
+//             <>
+//                 <InteractiveButton tone="normal" color="green" text="Create" />
+//                 <InteractiveButton buttonType="button"  tone="normal" color="slate" text="Cancel" onClick={() => closeModal()} />
+//             </>
+//     }
+// </form>

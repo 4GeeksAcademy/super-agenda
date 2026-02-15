@@ -12,6 +12,10 @@ export const InputFormCreateContact = ({ name, value, error, onChange }: InputFo
 
     const label = name[0].toUpperCase() + name.slice(1)
 
+    if(name == "address"){
+        value = value.split("||")[0]
+    }
+
     return (
         <div className="col-span-12 xl:col-span-6 flex xl:justify-start justify-center">
             <div className="flex flex-col w-70">
