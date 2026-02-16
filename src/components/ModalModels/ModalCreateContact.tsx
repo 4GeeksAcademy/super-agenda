@@ -80,13 +80,22 @@ export const ModalCreateContact = ({ closeModal }: ModalModelType) => {
     type ImageUploadModeType = "url" | "upload" | "ai"
 
     const [imageUploadMode, setImageUploadMode] = useState<ImageUploadModeType>("url")
-
+    const [loadingImage, setLoadingImage] = useState(false)
     const handleUploadImage = async (event: ChangeEvent<HTMLInputElement>) => {
+        setLoadingImage(true)
         const file = event.target.files?.[0]
-        if (!file) return
+
+        if (!file) return setLoadingImage(false)
+
         const imageUrl = await uploadCloudinary(file)
         setDisplayPhoto(imageUrl)
+        setLoadingImage(false)
     }
+
+    useEffect(()=>{
+        setDisplayPhoto(defaultImageUrl)
+        setPhotoInput("")
+    },[imageUploadMode])
 
 
     return (
@@ -116,16 +125,16 @@ export const ModalCreateContact = ({ closeModal }: ModalModelType) => {
 
                             {/* Vista pestaña Upload */}
                             <div className={`${imageUploadMode === "upload" ? "flex" : "hidden"} flex flex-col gap-3 justify-center items-center`}>
-                                <div>
+                              
                                     <div className="relative h-50 w-full">
                                     <img className="w-full h-full object-cover rounded-xl" src={displayPhoto || "https://res.cloudinary.com/dra2cr3uw/image/upload/v1771152229/Imagen_ejemplo_contacto_h0ymej.png"} />
-                                    <div className="absolute top-1/2 -translate-y-1/2 bg-white/70  ">Cargando...</div>
+                                    <div className={`${loadingImage ? "absolute" : "hidden"} top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 bg-white/70 px-4 py-2 rounded-xl  `}>Loading...</div>
                                     </div>
                                     <div>
                                         <label className="px-4 py-2 bg-red-300 rounded-xl text-red-100 hover:cursor-pointer" htmlFor="uploadInput">Upload image</label>
                                         <input onChange={handleUploadImage} className="hidden" id="uploadInput" type="file"></input>
                                     </div>
-                                </div>
+                               
                             </div>
 
 
