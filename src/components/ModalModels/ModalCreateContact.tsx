@@ -97,6 +97,26 @@ export const ModalCreateContact = ({ closeModal }: ModalModelType) => {
         setPhotoInput("")
     },[imageUploadMode])
 
+    const handleBackTest = async() =>{
+        
+       setLoadingImage(true)
+
+        // const response = await fetch("http://localhost:3001/generate-image", {
+        //     method: "POST",
+        //     headers: {
+        //         "Content-Type": "application/json"
+        //     },
+        //     body: JSON.stringify({prompt: photoInput})
+        // })
+
+        // const data= await response.json()
+        // console.log(data)
+        // setDisplayPhoto(data.imageUrl)
+        setTimeout(()=> {
+            setLoadingImage(false)
+        },3000)
+        // setLoadingImage(false)
+    }
 
     return (
         <div className="relative">
@@ -140,10 +160,15 @@ export const ModalCreateContact = ({ closeModal }: ModalModelType) => {
 
                             {/* Vista pestaña AI */}
                             <div className={`${imageUploadMode === "ai" ? "flex" : "hidden"} flex flex-col`}>
+                                <div className="relative ">
+                                    <div className={`${loadingImage ? "opacity-100" : "opacity-0"} transition duration-1000 absolute inset-0 bg-white/70 flex justify-center items-center`}>
+                                    <p className="text-lg text-slate-900 animate-heartbeat">Generating image...</p></div>
                                 <img className="w-full h-50 object-cover rounded-xl" src={displayPhoto || "https://res.cloudinary.com/dra2cr3uw/image/upload/v1771152229/Imagen_ejemplo_contacto_h0ymej.png"} />
+                                </div>
                                 <div>
                                     <label>Enter your ai image</label>
                                     <input placeholder={defaultImageUrl} className="border-1 rounded-xl w-full h-10 pl-4 text-slate-600" value={photoInput} onChange={handleUrlPhoto} type="text"></input>
+                                    <button  onClick={handleBackTest} type="button" className="px-4 py-2 rounded-xl bg-blue-400 text-blue-100 hover:cursor-pointer m-3">Probar back</button>
                                 </div>
                             </div>
 
