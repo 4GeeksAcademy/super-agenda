@@ -5,8 +5,8 @@ import type { ModalModelType } from "./ModalTypes"
 import { createAgenda, getAllAgendas } from "../../services/agendaServices"
 import { useContactReducer } from "../../hooks/useContactReducer"
 import { useNavigate } from "react-router"
-import { validateField } from "./utilsModalCreateContact"
-import { validateAgendaField } from "./utilsModalCreateUser"
+import { validateField } from "./utilsModal"
+import { validateAgendaField } from "./utilsModal"
 
 
 export const ModalCreateUser = ({ closeModal }: ModalModelType) => {

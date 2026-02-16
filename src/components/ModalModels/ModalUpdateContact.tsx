@@ -5,7 +5,7 @@ import type { ModalModelType } from "./ModalTypes"
 import { useContactReducer } from "../../hooks/useContactReducer"
 import { updateContact } from "../../services/contactServices"
 import type { FormDataType } from "../../hooks/useContactReducer/store"
-import { validateField } from "./utilsModalCreateContact"
+import { validateField } from "./utilsModal"
 import { InputFormCreateContact } from "./InputFormCreateContact"
 import isEqual from "lodash.isequal"
 
