@@ -140,33 +140,37 @@ export const ModalUpdateContact = ({ closeModal }: ModalModelType) => {
                                 <label className="px-4 py-2 bg-slate-600 rounded-xl text-slate-100 hover:cursor-pointer hover:bg-slate-500 active:bg-slate-600" htmlFor="uploadInput">Select your image</label>
                                 <input onChange={handleUploadImage} className="hidden" id="uploadInput" type="file" />
                             </div>
-                            <div className={`${imageUploadMode === "ai" ? "flex" : "hidden"} transition duration-1200 flex flex-col gap-3`}>
-                                <div className="relative flex justify-center">
-                                    <div className={`${loadingImage ? "opacity-100" : "opacity-0"} transition duration-1000 absolute inset-0 bg-white/70 flex justify-center items-center`}>
-                                        <p className="text-lg text-slate-900 animate-heartbeat">Generating image...</p>
+                            <div className={`${imageUploadMode === "ai" ? "flex" : "hidden"} transition duration-1200 flex flex-col items-center gap-3 `}>
+                                    <div className="relative flex justify-center overflow-hidden  w-3/4 bg-pink-300 rounded-xl ">
+                                        <div className={`${loadingImage ? "opacity-100" : "opacity-0"} transition duration-1000 absolute inset-0 bg-white/70 flex justify-center items-center`}>
+                                            <p className="text-md text-slate-900 animate-heartbeat text-center">Generating image...</p>
+                                        </div>
+                                        <img className="w-full h-40 object-cover" src={displayPhoto || "https://res.cloudinary.com/dra2cr3uw/image/upload/v1771152229/Imagen_ejemplo_contacto_h0ymej.png"} />
                                     </div>
-                                    <img className="w-3/4 h-40 object-cover rounded-xl" src={displayPhoto} />
+                                    <div className="text-center">
+                                        <div className="flex">
+                                            <input placeholder="Enter 5~25 characters" className="border-1 border-slate-300 bg-slate-50 rounded-l-xl outline-slate-700  w-full h-10 px-2 text-slate-800" value={photoInput} onChange={handleUrlPhoto} type="text"></input>
+                                            <button title="Generate image" onClick={() => {
+                                                if (photoInput.length < 5) {
+                                                    setAiError("Enter at least 5 characters")
+                                                    setAiErrorShow(true)
+                                                    return
+                                                }
+                                                handleBackTest()
+
+                                            }} type="button" className="px-2 rounded-r-xl bg-slate-600 text-slate-100 hover:cursor-pointer
+                                        hover:bg-slate-500 active:bg-slate-600
+                                        ">
+                                                <i className="fa-solid fa-pen-clip text-sm"></i>
+                                            </button>
+                                        </div>
+
+
+                                        <div className={`${aiErrorShow ? "relative" : "hidden"} px-5 py-2 rounded-xl bg-red-200 border-1 border-red-400 text-red-400 text-sm`}>{aiError}
+                                            <div onClick={() => setAiErrorShow(false)} className="absolute top-0 right-2 hover:cursor-pointer">x</div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="text-center">
-                                    <div className="flex">
-                                        <input placeholder="Enter 5~25 characters" className="border-1 border-slate-300 bg-slate-50 rounded-l-xl outline-slate-700 w-full h-10 px-2 text-slate-800" value={photoInput} onChange={handleUrlPhoto} type="text" />
-                                        <button title="Generate image" onClick={() => {
-                                            if (photoInput.length < 5) {
-                                                setAiError("Enter at least 5 characters")
-                                                setAiErrorShow(true)
-                                                return
-                                            }
-                                            handleBackTest()
-                                        }} type="button" className="px-2 rounded-r-xl bg-slate-600 text-slate-100 hover:cursor-pointer hover:bg-slate-500 active:bg-slate-600">
-                                            <i className="fa-solid fa-pen-clip text-sm"></i>
-                                        </button>
-                                    </div>
-                                    <div className={`${aiErrorShow ? "relative" : "hidden"} px-5 py-2 rounded-xl bg-red-200 border-1 border-red-400 text-red-400 text-sm`}>
-                                        {aiError}
-                                        <div onClick={() => setAiErrorShow(false)} className="absolute top-0 right-2 hover:cursor-pointer">x</div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>

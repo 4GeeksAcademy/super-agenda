@@ -132,9 +132,10 @@ export const ModalCreateContact = ({ closeModal }: ModalModelType) => {
         } catch (error) {
             console.log("Connection error with server")
         } finally {
+       
 
-            setLoadingImage(false)
-        }
+        setLoadingImage(false)
+    }
 
     }
 
@@ -145,7 +146,7 @@ export const ModalCreateContact = ({ closeModal }: ModalModelType) => {
         <div className="relative">
             <div className="p-5 bg-slate-400 text-slate-700">
                 <h3 className="text-3xl">Create contact</h3></div>
-            <form onSubmit={handleSubmit} className="grid grid-cols-12 gap-y-5 min-w-90 max-w-110 xl:max-w-160 p-5  max-h-150 overflow-y-auto  ">
+            <form onSubmit={handleSubmit} className="grid grid-cols-12 gap-y-5 min-w-90 max-w-110 xl:max-w-160 p-5  ">
                 <div className="col-span-12">
                     <div className="flex flex-col items-center justify-center">
                         <NavImageMode setImageUploadMode={setImageUploadMode} imageUploadMode={imageUploadMode} />
@@ -169,43 +170,43 @@ export const ModalCreateContact = ({ closeModal }: ModalModelType) => {
                                         <img className="w-3/4 h-40 object-cover rounded-xl" src={displayPhoto || "https://res.cloudinary.com/dra2cr3uw/image/upload/v1771152229/Imagen_ejemplo_contacto_h0ymej.png"} />
                                         <div className={`${loadingImage ? "absolute" : "hidden"} transition duration-1200 top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 bg-white/70 px-4 py-2 rounded-xl  `}>Loading...</div>
                                     </div>
-                                    
-                                        <label className="px-4 py-2 bg-slate-600 rounded-xl text-slate-100 hover:cursor-pointer
+
+                                    <label className="px-4 py-2 bg-slate-600 rounded-xl text-slate-100 hover:cursor-pointer
                                         hover:bg-slate-500 active:bg-slate-600
                                         " htmlFor="uploadInput">Select your image</label>
-                                        <input onChange={handleUploadImage} className="hidden" id="uploadInput" type="file"></input>
-                                    
+                                    <input onChange={handleUploadImage} className="hidden" id="uploadInput" type="file"></input>
+
 
                                 </div>
 
 
                                 {/* Vista pestaña AI */}
-                                <div className={`${imageUploadMode === "ai" ? "flex" : "hidden"} transition duration-1200 flex flex-col gap-3`}>
-                                    <div className="relative flex justify-center ">
+                                <div className={`${imageUploadMode === "ai" ? "flex" : "hidden"} transition duration-1200 flex flex-col items-center gap-3 `}>
+                                    <div className="relative flex justify-center overflow-hidden  w-3/4 bg-pink-300 rounded-xl ">
                                         <div className={`${loadingImage ? "opacity-100" : "opacity-0"} transition duration-1000 absolute inset-0 bg-white/70 flex justify-center items-center`}>
-                                            <p className="text-lg text-slate-900 animate-heartbeat">Generating image...</p>
-                                            </div>
-                                        <img className="w-3/4 h-40 object-cover rounded-xl" src={displayPhoto || "https://res.cloudinary.com/dra2cr3uw/image/upload/v1771152229/Imagen_ejemplo_contacto_h0ymej.png"} />
+                                            <p className="text-md text-slate-900 animate-heartbeat text-center">Generating image...</p>
+                                        </div>
+                                        <img className="w-full h-40 object-cover" src={displayPhoto || "https://res.cloudinary.com/dra2cr3uw/image/upload/v1771152229/Imagen_ejemplo_contacto_h0ymej.png"} />
                                     </div>
                                     <div className="text-center">
                                         <div className="flex">
-                                        <input placeholder="Enter 5~25 characters" className="border-1 border-slate-300 bg-slate-50 rounded-l-xl outline-slate-700  w-full h-10 px-2 text-slate-800" value={photoInput} onChange={handleUrlPhoto} type="text"></input>
-                                        <button title="Generate image"onClick={() => {
-                                            if (photoInput.length < 5) {
-                                                setAiError("Enter at least 5 characters")
-                                                setAiErrorShow(true)
-                                                return
-                                            }
-                                            handleBackTest()
+                                            <input placeholder="Enter 5~25 characters" className="border-1 border-slate-300 bg-slate-50 rounded-l-xl outline-slate-700  w-full h-10 px-2 text-slate-800" value={photoInput} onChange={handleUrlPhoto} type="text"></input>
+                                            <button title="Generate image" onClick={() => {
+                                                if (photoInput.length < 5) {
+                                                    setAiError("Enter at least 5 characters")
+                                                    setAiErrorShow(true)
+                                                    return
+                                                }
+                                                handleBackTest()
 
-                                        }} type="button" className="px-2 rounded-r-xl bg-slate-600 text-slate-100 hover:cursor-pointer
+                                            }} type="button" className="px-2 rounded-r-xl bg-slate-600 text-slate-100 hover:cursor-pointer
                                         hover:bg-slate-500 active:bg-slate-600
                                         ">
-                                            <i className="fa-solid fa-pen-clip text-sm"></i>
-                                        </button>
+                                                <i className="fa-solid fa-pen-clip text-sm"></i>
+                                            </button>
                                         </div>
 
-                               
+
                                         <div className={`${aiErrorShow ? "relative" : "hidden"} px-5 py-2 rounded-xl bg-red-200 border-1 border-red-400 text-red-400 text-sm`}>{aiError}
                                             <div onClick={() => setAiErrorShow(false)} className="absolute top-0 right-2 hover:cursor-pointer">x</div>
                                         </div>
