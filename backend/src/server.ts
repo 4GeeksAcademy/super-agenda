@@ -4,6 +4,9 @@ import cors from 'cors';
 import dotenv from 'dotenv'
 import path from 'path'
 import fs from 'fs/promises'
+import { uploadCloudinary } from './uploadCloudinary';
+
+
 
 dotenv.config({path: path.resolve(__dirname, "../../.env")})
 
@@ -44,12 +47,15 @@ app.post("/generate-image", async(req:Request, res:Response)=>{
         })
     }
 
+    const planePrompt = prompt.toLowerCase()
+
+
     const cache = await readCache()
 
-    if(cache[prompt]){
+    if(cache[planePrompt]){
         return res.json({
             success: true,
-            imageUrl: cache[prompt],
+            imageUrl: cache[planePrompt],
             fromCache: true
         })
     }
@@ -58,14 +64,19 @@ app.post("/generate-image", async(req:Request, res:Response)=>{
 
         const response = await openai.images.generate({
             model: "dall-e-3",
-            prompt: prompt,
+            prompt: planePrompt,
             n:1,
             size: "1024x1024"
         })
         
         const imageUrl = response.data?.[0].url
         
-        cache[prompt] = imageUrl
+        if(!imageUrl) throw new Error("Undefined image url generated")
+
+        const permanentUrl = await uploadCloudinary(imageUrl)
+
+
+        cache[planePrompt] = permanentUrl
         
         await writeCache(cache)
         
@@ -73,14 +84,16 @@ app.post("/generate-image", async(req:Request, res:Response)=>{
         
         return res.json({
             success: true,
-            imageUrl: imageUrl,
+            imageUrl: permanentUrl,
             fromCache: false
         })
     }catch(error){
         
+        const message= error instanceof OpenAI.APIError ? error.error?.message : "Unknown error"
+
         return res.status(400).json({
             success:false,
-            error: error
+            error: message
         })
     }
     
