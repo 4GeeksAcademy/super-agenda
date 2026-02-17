@@ -17,13 +17,13 @@ export const InputFormCreateContact = ({ name, value, error, onChange }: InputFo
     }
 
     return (
-        <div className="col-span-12 xl:col-span-6 flex xl:justify-start justify-center">
+        <div className="col-span-12 xl:col-span-6 flex xl:justify-start justify-center ">
             <div className="flex flex-col w-70">
 
-                <label className="text-lg" htmlFor={name}>{label}</label>
-                <input className="border-1 rounded-xl w-full h-10 pl-4 text-slate-600" value={value} onChange={(event) => onChange(name, event.target.value)} id={name} name={name} type="text" />
+                <label className="text-sm md:text-lg" htmlFor={name}>{label}</label>
+                <input className="border-1 rounded-lg  md:rounded-xl w-full h-7 md:h-10 pl-4 text-slate-600" value={value} onChange={(event) => onChange(name, event.target.value)} id={name} name={name} type="text" />
                 {error && (
-                    <p className={`text-${value.length > 0 ? "red" : "slate"}-400`}>{error}</p>
+                    <p className={`text-${value.length > 0 ? "red" : "slate"}-400 md:text-lg text-sm`}>{error}</p>
                 )}
             </div>
         </div>

@@ -1,7 +1,5 @@
 @import "tailwindcss";
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+
 
 * {
    font-family: "SN Pro", sans-serif; 
@@ -9,4 +7,14 @@
 
 html {
    scroll-behavior: smooth;
+}
+
+@theme {
+   --animate-heartbeat: heartbeat 1.5s ease-in-out infinite;
+
+   @keyframes heartbeat {
+      0% {transform : scale(1);}
+      35%{transform: scale(1.05)}
+      70% {transform : scale(1);}
+   }
 }
