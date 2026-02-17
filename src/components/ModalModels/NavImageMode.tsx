@@ -34,7 +34,7 @@ export const NavImageMode = ({ setImageUploadMode, imageUploadMode }: NavImageMo
     return (<>
         <div className="relative bg-orange-400 m-2 px-4 py-2 rounded-full text-orange-800">
             {/* Botones para cambiar el tipo de metodo de subida */}
-            <div className="relative flex gap-3 z-2">
+            <div className="relative flex md:gap-3 z-2">
                 {buttonTypes.map((buttonType, index) => {
                     return (
                         <button
