@@ -93,7 +93,7 @@ export const ModalCreateContact = ({ closeModal }: ModalModelType) => {
 
     const handleUrlPhoto = (event: ChangeEvent<HTMLInputElement>) => {
 
-        console.log(imageUploadMode)
+      
 
         if (imageUploadMode == "ai" && event.target.value.length > 25) return
 
@@ -139,9 +139,7 @@ export const ModalCreateContact = ({ closeModal }: ModalModelType) => {
 
     }
 
-    useEffect(() => {
-        console.log("aiError es -->", aiError)
-    }, [aiError])
+  
     return (
         <div className="relative">
             <div className="p-5 bg-slate-400 text-slate-700">

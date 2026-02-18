@@ -17,7 +17,7 @@ export const Contacts = () => {
     const [searchInput, setSearchInput] = useState("")
         const handleSearchInput = (event: ChangeEvent<HTMLInputElement>) => {
             setSearchInput(event.target.value)
-            console.log(searchInput)
+
         }
 
     useEffect(() => {

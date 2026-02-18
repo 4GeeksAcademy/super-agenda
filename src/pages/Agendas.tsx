@@ -28,7 +28,6 @@ export const Agendas = () => {
     const [searchInput, setSearchInput] = useState("")
     const handleSearchInput = (event: ChangeEvent<HTMLInputElement>) => {
         setSearchInput(event.target.value)
-        console.log(searchInput)
     }
 
     const agendaHandleClick = async (agenda: string) => {

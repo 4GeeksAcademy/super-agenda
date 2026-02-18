@@ -30,7 +30,7 @@ export const Wrapper = ({ fontColor, darkTheme }: WrapperType) => {
         }}>
 
             <button className={`m-0 p-2 ${wrapperOpen ? "rounded-l-xl rounded-tr-xl" : "rounded-xl"} ${wrapperColors} hover:cursor-pointer`} onClick={() => setWrapperOpen(prev => !prev)} >
-                <i className='fa-solid fa-grip-lines'></i>
+                <i className='fa-solid fa-grip-lines text-2xl'></i>
             </button>
             <div className={`${wrapperOpen ? "absolute" : "hidden"} z-2 mt-2 right-0 rounded-l-2xl rounded-br-2xl text-center ${dropdownColors} p-4`}>
                 <ul>

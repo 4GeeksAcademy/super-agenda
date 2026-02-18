@@ -21,7 +21,6 @@ export const ModalCreateUser = ({ closeModal }: ModalModelType) => {
     }
 
     const error = useMemo(() => {
-        console.log("userField es -->", userField)
         return validateAgendaField(userField, store)
 
     }, [userField])

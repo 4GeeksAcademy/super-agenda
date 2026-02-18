@@ -19,13 +19,13 @@ export const SearchInput = ({themeDark, onChange, searchInput, setSearchInput}:S
   
 
     return (
-        <div className={`relative ${inputClass} my-5 p-2 py-3 rounded-full `}>
+        <div className={`relative ${inputClass} my-5 px-2 py-3 rounded-full `}>
             <div className="absolute right-6 top-1/2 transform -translate-y-1/2 hover:cursor-pointer">
             <button disabled={!searchInput} onClick={()=> setSearchInput("")}>
                 <i className={`text-xl fa-solid fa-${searchInput ? "xmark hover:cursor-pointer" : "search"}`}></i>
             </button>
             </div>
-            <div className="px-12">
+            <div className="px-5 md:px-12">
                 <input value={searchInput} onChange={onChange} placeholder={`Search your ${themeDark ? "agenda" : "contact"}`} className={`h-10 text-lg ${background} w-full outline-none`}></input>
             </div>
         </div>

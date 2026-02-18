@@ -33,7 +33,7 @@ export const ContactCard = ({item, agenda}:ContactCardType)=>{
         }
     }
 
-    console.log(photo)
+
 
     return (
         <div className="col-span-12 lg:col-span-6 flex flex-col items-center justify-center">

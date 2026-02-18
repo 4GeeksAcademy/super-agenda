@@ -19,7 +19,6 @@ export const NavImageMode = ({ setImageUploadMode, imageUploadMode }: NavImageMo
 
 
     useEffect(()=>{
-        console.log(buttonRefs)
         const activeIndex = buttonTypes.indexOf(imageUploadMode)
         const activeButton = buttonRefs.current[activeIndex]
 
