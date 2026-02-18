@@ -32,7 +32,7 @@ export const NavImageMode = ({ setImageUploadMode, imageUploadMode }: NavImageMo
     },[imageUploadMode])
 
     return (<>
-        <div className="relative bg-orange-400 m-2 px-4 py-2 rounded-full text-orange-800">
+        <div className="relative bg-orange-400 m-2 px-2 md:px-4 py-2 rounded-full text-orange-800">
             {/* Botones para cambiar el tipo de metodo de subida */}
             <div className="relative flex md:gap-3 z-2">
                 {buttonTypes.map((buttonType, index) => {
@@ -48,7 +48,7 @@ export const NavImageMode = ({ setImageUploadMode, imageUploadMode }: NavImageMo
                             {index === 1 ? buttonType[0].toUpperCase() + buttonType.slice(1) : buttonType.toUpperCase()}</button>
                     )
                 })}
-            <div ref={pillRef} className={`absolute z-2 rounded-full  transition duration-1200 h-full top-0 left-0 bg-white`}></div>
+            <div ref={pillRef} className={`absolute z-2 rounded-full  transition duration-500 h-full top-0 left-0 bg-white`}></div>
             </div>
 
 

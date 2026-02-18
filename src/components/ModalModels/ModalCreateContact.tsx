@@ -146,7 +146,7 @@ export const ModalCreateContact = ({ closeModal }: ModalModelType) => {
         <div className="relative">
             <div className="p-5 bg-slate-400 text-slate-700">
                 <h3 className="text-3xl">Create contact</h3></div>
-            <form onSubmit={handleSubmit} className="grid grid-cols-12 gap-y-5 min-w-90 max-w-110 xl:max-w-160 p-5  ">
+            <form onSubmit={handleSubmit} className="grid grid-cols-12 gap-y-5 min-w-90 max-w-110 xl:max-w-160 p-5  max-h-150 overflow-y-auto  ">
                 <div className="col-span-12">
                     <div className="flex flex-col items-center justify-center">
                         <NavImageMode setImageUploadMode={setImageUploadMode} imageUploadMode={imageUploadMode} />
