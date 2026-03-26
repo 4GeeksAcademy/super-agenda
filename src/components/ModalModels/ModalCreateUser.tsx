@@ -1,11 +1,10 @@
-import { useEffect, useMemo, useState, type ChangeEvent, type FormEvent } from "react"
-import { fields, FormField } from "../FormField"
-import { InteractiveButton } from "../InteractiveButton"
+import { useMemo, useState, type ChangeEvent, type FormEvent } from "react"
+
 import type { ModalModelType } from "./ModalTypes"
-import { createAgenda, getAllAgendas } from "../../services/agendaServices"
+import { createAgenda } from "../../services/agendaServices"
 import { useContactReducer } from "../../hooks/useContactReducer"
 import { useNavigate } from "react-router"
-import { validateField } from "./utilsModal"
+
 import { validateAgendaField } from "./utilsModal"
 
 

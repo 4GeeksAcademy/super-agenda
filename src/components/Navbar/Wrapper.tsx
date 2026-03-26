@@ -1,5 +1,4 @@
 import { Link } from "react-router"
-import { InteractiveButton } from "../InteractiveButton"
 import { UserBtn } from "./UserBtn"
 import { useContactReducer } from "../../hooks/useContactReducer"
 import { useState } from "react"

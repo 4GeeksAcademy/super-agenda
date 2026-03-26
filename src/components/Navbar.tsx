@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router"
-import { InteractiveButton } from "./InteractiveButton"
+
 import { useContactReducer } from "../hooks/useContactReducer"
 import { UserBtn } from "./Navbar/UserBtn"
 import { Wrapper } from "./Navbar/Wrapper"
@@ -9,9 +9,7 @@ export const Navbar = () => {
     const { store, openModal } = useContactReducer()
 
     const location = useLocation()
-
-
-    const path = location.pathname
+    
 
     const darkTheme = location.pathname.includes("agendas") || location.pathname == "/"
     
@@ -29,7 +27,7 @@ export const Navbar = () => {
                     <div>
                         {/* Imagen para boton con direccion al inicio */}
                         <Link to="/">
-                            <img className="w-30 transform hover:scale-120 transition hover:duaration-500 " src="https://res.cloudinary.com/dra2cr3uw/image/upload/v1771149871/ChatGPT_Image_15_feb_2026_10_46_23_eeo8xs.png" alt="" />
+                            <img className="pl-3 w-30 transform hover:scale-120 transition hover:duaration-500 " src="https://res.cloudinary.com/dra2cr3uw/image/upload/v1771149871/ChatGPT_Image_15_feb_2026_10_46_23_eeo8xs.png" alt="" />
                         </Link>
                     </div>
                     <div>

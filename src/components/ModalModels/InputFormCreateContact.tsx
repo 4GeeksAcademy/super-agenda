@@ -1,5 +1,3 @@
-import { useEffect, useState, type ChangeEvent } from "react"
-import { useContactReducer } from "../../hooks/useContactReducer"
 
 type InputFormCreateContactType = {
     name: string

@@ -22,12 +22,12 @@ type ErrorsType = {
 
 
 
-export const FieldCreateContact = ({ field, created, submitCount, setSubmitCount, setFormData, formData }: FieldCreateContactType) => {
+export const FieldCreateContact = ({ field, created, submitCount, setFormData, formData }: FieldCreateContactType) => {
 
     const capitalized = field[0].toUpperCase() + field.slice(1)
-    const [error, setError] = useState("")
+    const [error] = useState("")
     const [fieldValue, setFieldValue] = useState("")
-    const [textRequired, setTextRequired] = useState("Please enter at least 6 characters")
+    const [textRequired] = useState("Please enter at least 6 characters")
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         const name = event.target.name
         const value = event.target.value

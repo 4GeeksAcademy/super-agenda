@@ -1,4 +1,4 @@
-import { useState, type ChangeEvent, type ChangeEventHandler } from "react"
+import {type ChangeEventHandler } from "react"
 
 
 type SearchInputType = {

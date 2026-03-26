@@ -1,5 +1,3 @@
-import { Link } from 'react-router'
-import { InteractiveButton } from '../components/InteractiveButton'
 import { BannerSection } from '../components/Home/BannerSection'
 import { BenefitsSection } from '../components/Home/BenefitsSection'
 

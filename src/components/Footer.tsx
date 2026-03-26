@@ -1,5 +1,4 @@
 import { Link, useLocation } from "react-router"
-import { InteractiveButton } from "./InteractiveButton"
 import { useContactReducer } from "../hooks/useContactReducer"
 
 export const Footer = () => {

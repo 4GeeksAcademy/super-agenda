@@ -7,7 +7,6 @@ export const BannerSection = () => {
                 <div className=" flex flex-col justify-between gap-10 min-h-[30vh]">
                     <div>
                         <h1 className="mb-5 text-5xl sm:text-5xl md:text-6xl 2xl:text-7xl font-bold">All Your Contacts in One Place</h1>
-
                         <div><p className="px-13 text-sm sm:text-md md:text-lg 2xl:text-xl">Never lose touch! Each contact has a photo, name, address, phone, and email. Add, edit, or delete effortlessly and keep your contacts perfectly organized</p></div>
                     </div>
                     <div className="flex justify-center items-center h-full">
@@ -20,11 +19,10 @@ export const BannerSection = () => {
                     <div className="flex justify-center">
                         <a href="#benefits-section" className="mb-3 border-2 border-slate-50 text-slate-50 rounded-full w-15 h-15 flex items-center
                  justify-center hover:cursor-pointer transform hover:translate-y-3 transition hover:duration-500 
-                 animate-pulse">
+                  animate-heartbeat">
                             <i className="text-3xl fa-solid fa-angle-down"></i>
                         </a>
                     </div>
-
                 </div>
             </div>
         </div>

@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useState, type ChangeEvent } from "react"
-import { getAgenda, getAllAgendas, type GetAgendasErrorType } from "../services/agendaServices"
-import { InteractiveButton } from "../components/InteractiveButton"
+import { getAgenda} from "../services/agendaServices"
+
 import { useContactReducer } from "../hooks/useContactReducer"
-import { Link, useNavigate } from "react-router"
+import {  useNavigate } from "react-router"
 import { SearchInput } from "../components/SearchInput"
 
 export const saveAgenda = async (agenda: string, dispatch: any) => {

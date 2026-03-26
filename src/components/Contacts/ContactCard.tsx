@@ -13,7 +13,7 @@ type ContactCardType = {
     agenda: string
 }
 
-export const ContactCard = ({item, agenda}:ContactCardType)=>{
+export const ContactCard = ({item}:ContactCardType)=>{
     const {openModal} = useContactReducer()
     const {name, email, address, phone,id} = item
 

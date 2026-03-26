@@ -1,8 +1,6 @@
 import { useEffect, useMemo, useState, type ChangeEvent } from "react"
 import { useContactReducer } from "../hooks/useContactReducer"
-import { Link, useNavigate } from "react-router"
-import { Card } from "../components/Card"
-import { InteractiveButton } from "../components/InteractiveButton"
+import { useNavigate } from "react-router"
 import { ContactCard } from "../components/Contacts/ContactCard"
 import { SearchInput } from "../components/SearchInput"
 
